@@ -1,13 +1,23 @@
 # Welcome to the TUD-SUMO Wiki!
 <p align="center">
-  <img src="img/header.png" />
+  <img src="img/header.png"/>
   <br><br>
-  <a href="https://github.com/tud-sumo/tud_sumo" alt="GitHub">
-        <img src="https://img.shields.io/badge/v3.0.8-%2338A6D6?logo=github&link=https%3A%2F%2Fgithub.com%2Ftud-sumo%2Ftud_sumo
-        " /></a>
-  <a href="https://pypi.org/project/tud-sumo/" alt="PyPI">
-        <img src="https://img.shields.io/badge/PyPI-%2338A6D6?logo=pypi&logoColor=white&link=https%3A%2F%2Fgithub.com%2Ftud-sumo%2Ftud_sumo
-        " /></a>
+  <a href="https://pypi.org/project/tud-sumo/">
+    <img alt="PyPI" src="https://img.shields.io/pypi/v/tud-sumo?style=for-the-badge&logo=pypi&logoColor=%23FFFFFF&color=%2300A6D6"/>
+  </a>
+  <a href="https://github.com/tud-sumo/tud_sumo">
+    <img alt="GitHub Repo" src="https://img.shields.io/badge/GitHub-%2338A6D6?style=for-the-badge&logo=github&link=https%3A%2F%2Fgithub.com%2Ftud-sumo%2Ftud_sumo"/>
+  </a>
+  <a href="https://github.com/tud-sumo/tud_sumo/blob/main/LICENSE">
+      <img alt="PyPI - License" src="https://img.shields.io/pypi/l/tud-sumo?style=for-the-badge&color=%2300A6D6">
+  </a>
+  <br>
+  <a href="https://github.com/tud-sumo/tud_sumo">
+    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/tud-sumo/tud_sumo?style=for-the-badge&logo=github&color=%2300A6D6"/>
+  </a>
+  <a href="https://github.com/tud-sumo/tud_sumo">
+    <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/tud-sumo/tud_sumo?style=for-the-badge&logo=github&label=Commits&color=%2300A6D6"/>
+  </a>
 </p>
 
 This is the documentation for the TUD-SUMO package, a research-oriented wrapper for SUMO<sup>[1]</sup>, developed for the DAIMoND lab at the Technische Universiteit Delft (TUD), the Netherlands.
@@ -37,7 +47,9 @@ The main features of TUD-SUMO include:
 
 ## Latest Version
 
-The Latest version of TUD-SUMO is <i>v3.0.8</i>, and was released on 02/08/2024. The changenotes for this version are:
+The Latest version of TUD-SUMO is <i>v3.0.8</i>, and was released on 02/08/2024. All previous versions and their change notes can be found on [GitHub](https://github.com/tud-sumo/tud_sumo/releases) or [PyPI](https://pypi.org/project/tud-sumo/#history).
+
+The change notes for the latest version are:
 
 ### Paths & Vehicle Functions Update
 
@@ -63,7 +75,11 @@ The Latest version of TUD-SUMO is <i>v3.0.8</i>, and was released on 02/08/2024.
 
 ## Contact
 
-TUD-SUMO is developed by Callum Evans in the DIAMoND lab of TU Delft. For any questions, feedback or bug reports, please contact Callum Evans or submit a query using the form [here](https://forms.office.com/e/pMnGaheier).
+TUD-SUMO is developed in the DAIMoND lab of TU Delft. For any questions or feedback, please contact Callum Evans at <span class="highlight"><i>c.evans@tudelft.nl</i></span>. Bug reports can be created in the GitHub repository: [github.com/tud-sumo/tud_sumo](https://github.com/tud-sumo/tud_sumo/).
+
+## Acknowledgements
+
+TUD-SUMO is part of the research under the project "<i>AI in Network Management</i>," funded by Rijkswaterstaat, grant agreement nr. 31179439, under the label of ITS Edulab.
 
 ## Citations
 

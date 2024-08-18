@@ -1,11 +1,19 @@
 :root {
-    --md-primary-fg-color:        #00A6D6;
+    --md-primary-fg-color: #00A6D6;
     --md-primary-bg-color: #FFFFFF;
-    --md-accent-fg-color: #0076C2;
-    --md-typeset-a-color: #00B8C8;
+    --md-accent-fg-color: rgba(0, 166, 214, 0.6);
+    --md-typeset-a-color: rgba(0, 166, 214, 0.6);
   }
 
 [data-md-color-scheme="default"] {
     --md-default-bg-color: #F7F7F7;
     --md-code-bg-color: #EEEEEE;
 } 
+
+.highlight {
+  color: #00A6D6;
+}
+
+a:not(.md-nav__link) {
+  font-style: italic;
+}
