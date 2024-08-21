@@ -24,7 +24,7 @@ my_sim.add_tracked_junctions({"utsc":
                             })
 ```
 
-4. Set traffic signal phases for the signal with ID '<i>utsc</i>'. Here, there are 4 phases in the 60s cycle and the junction has 4 movements.
+4. Set traffic signal phases for the signal with ID '_utsc_'. Here, there are 4 phases in the 60s cycle and the junction has 4 movements.
 ```python
 my_sim.set_phases({"utsc":
                       {"phases": ["GGrr", "yyrr", "rrGG", "rryy"],
@@ -33,7 +33,7 @@ my_sim.set_phases({"utsc":
                  })
 ```
 
-5. Track the junction '<i>crooswijk_meter</i>', where there is an active ramp meter. Both meter and flow parameters are given to track meter specific variables (queue length, queue delay) and inflow/outflow.
+5. Track the junction '_crooswijk_meter_', where there is an active ramp meter. Both meter and flow parameters are given to track meter specific variables (queue length, queue delay) and inflow/outflow.
 ```python
 my_sim.add_tracked_junctions({"crooswijk_meter":
                                 {'meter_params':
@@ -49,7 +49,7 @@ my_sim.add_tracked_junctions({"crooswijk_meter":
                             })
 ```
 
-6. Add Route Guidance (RG) & Variable Speed Limit (VSL) controllers. A RG controller is placed on the detector '<i>rerouter_det</i>' and redirects drivers to the edge '<i>urban_out_w</i>'. The VSL controller is active on edges with IDs '<i>126729982</i>', '<i>126730069</i>' and '<i>126730059</i>'.
+6. Add Route Guidance (RG) & Variable Speed Limit (VSL) controllers. A RG controller is placed on the detector '_rerouter_det_' and redirects drivers to the edge '_urban_out_w_'. The VSL controller is active on edges with IDs '_126729982_', '_126730069_' and '_126730059_'.
 ```python
 my_sim.add_controllers({"rerouter":
                           {"type": "RG",
@@ -65,12 +65,12 @@ my_sim.add_controllers({"rerouter":
                       })
 ```
 
-7. Start tracking edges with IDs '<i>126730026</i>', '<i>1191885773</i>', '<i>1191885771</i>', '<i>126730171</i>' and '<i>1191885772</i>'.
+7. Start tracking edges with IDs '_126730026_', '_1191885773_', '_1191885771_', '_126730171_' and '_1191885772_'.
 ```python
 my_sim.add_tracked_edges(["126730026", "1191885773", "1191885771", "126730171", "1191885772"])
 ```
 
-8. Add scheduled events from an '<i>example_incident.json</i>' JSON file.
+8. Add scheduled events from an '_example_incident.json_' JSON file.
 ```python
 my_sim.add_events("example_scenario/example_incident.json")
 ```
@@ -93,7 +93,7 @@ while my_sim.curr_step < sim_dur:
     my_sim.step_through(n_steps=n, pbar_max_steps=sim_dur)
 ```
 
-12. Dynamically add new vehicles driving from '<i>urban_in_e</i>' to '<i>urban_out_w</i>'.
+12. Dynamically add new vehicles driving from '_urban_in_e_' to '_urban_out_w_'.
 ```python
     # Add new vehicles going from "urban_in_e" to "urban_out_w"
     if my_sim.curr_step % 50 / my_sim.step_length == 0:

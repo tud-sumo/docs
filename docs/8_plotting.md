@@ -7,7 +7,7 @@ TUD-SUMO aims to provide plotting functions with each feature. These are specifi
 The `Plotter` object is initialised with a corresponding active `Simulation` object or data file from previous runs. This is the only required parameter, although the other settings are:
 
   - `sim_label`: Adds a string as a label to the title of all plots.
-  - `time_unit`: Sets the time scale used for all plots, either '<i>steps</i>', '<i>s</i>' (seconds), '<i>m</i>' (minutes) or '<i>hr</i>' (hours).
+  - `time_unit`: Sets the time scale used for all plots, either '_steps_', '_s_' (seconds), '_m_' (minutes) or '_hr_' (hours).
   - `save_fig_loc`: Sets the location for all saved figures.
   - `save_fig_dpi`: Resolution for saved figures.
   - `overwrite_figs`: Denotes whether to overwrite old figures when saving.
@@ -43,7 +43,7 @@ plt.plot_trajectories(["edge_1", "edge_2", "edge_3"], save_fig="figs/trajectorie
 
 ### Common Parameters
 
-Whenever possible, all plotting functions include `time_range` and `show_events` parameters. By default, graphs are plotted for the data throughout the whole simulation. `time_range` can be used to plot a specific duration within the simulation, and is defined in <b>in plotter time units</b>, ie. hours or minutes. If `show_events` is set to true, graphs will display times with active events with a shaded region. Examples of these are shown below.
+Whenever possible, all plotting functions include `time_range` and `show_events` parameters. By default, graphs are plotted for the data throughout the whole simulation. `time_range` can be used to plot a specific duration within the simulation, and is defined in **in plotter time units**, ie. hours or minutes. If `show_events` is set to true, graphs will display times with active events with a shaded region. Examples of these are shown below.
 
 ![Time range/events example](img/plots/range_event_ex.png)
 

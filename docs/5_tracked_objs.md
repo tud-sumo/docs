@@ -9,9 +9,9 @@ Currently, only edges and junctions can be tracked, although this may change in 
 There are two types of tracked junctions; regular junctions and metered junctions. Most intersections will only need to be tracked as a regular junction, whilst metered junctions are a subclass of junction that include some extra tracking for motorway on-ramp metering.
 
 !!! tip
-    Note that traffic light/ramp meter control itself is not discussed here. <b>An adaptive traffic signal or ramp meter does not have to be tracked</b> and not all tracked junctions require some control. Tracking a junction with an adaptive traffic signal or ramp meter simply adds a level of data collection, however, <b>it is recommended</b> and makes evaluation of the controllers much easier.
+    Note that traffic light/ramp meter control itself is not discussed here. **An adaptive traffic signal or ramp meter does not have to be tracked** and not all tracked junctions require some control. Tracking a junction with an adaptive traffic signal or ramp meter simply adds a level of data collection, however, **it is recommended** and makes evaluation of the controllers much easier.
 
-All parameters to create a tracked junction are given as a dictionary and is done using the `Simulation.add_tracked_junctions()` function. This can be in code, or from a '<i>.json</i>' or '<i>.pkl</i>' file. Tracked junctions can also be included in the object parameters file when calling `Simulation.load_objects()`, under '<i>junctions</i>'. A tracked junction can be initialised at 3 different levels, depending on the amount of data collection required.
+All parameters to create a tracked junction are given as a dictionary and is done using the `Simulation.add_tracked_junctions()` function. This can be in code, or from a '_.json_' or '_.pkl_' file. Tracked junctions can also be included in the object parameters file when calling `Simulation.load_objects()`, under '_junctions_'. A tracked junction can be initialised at 3 different levels, depending on the amount of data collection required.
 
   1. Signal tracking only:
     - This is the lowest level of tracking, where only signal phases and average green/red times are tracked. Therefore, this level is only useful when the specified junction has a traffic light.
@@ -19,16 +19,16 @@ All parameters to create a tracked junction are given as a dictionary and is don
 
   2. Inflow/outflow tracking:
     - Traffic-flow related variables can be tracked by tracked junctions, however, it is necessary to define the detectors used to do so.
-    - Here, the input for `Simulation.add_tracked_junctions()` is a dictionary, where each junction has a '<i>flow_params</i>' value. This is a dictionary containing '<i>inflow_detectors</i>', '<i>outflow_detectors</i>' and '<i>vehicle_types</i>'. '<i>inflow_detectors</i>' and '<i>outflow_detectors</i>' are lists containing the detectors that will be used to register vehicles entering and exiting the junction, whilst '<i>vehicle_types</i>' is an optional parameter that lists the vehicle types that should be registered (defaults to all).
+    - Here, the input for `Simulation.add_tracked_junctions()` is a dictionary, where each junction has a '_flow_params_' value. This is a dictionary containing '_inflow_detectors_', '_outflow_detectors_' and '_vehicle_types_'. '_inflow_detectors_' and '_outflow_detectors_' are lists containing the detectors that will be used to register vehicles entering and exiting the junction, whilst '_vehicle_types_' is an optional parameter that lists the vehicle types that should be registered (defaults to all).
 
   3. Metered junctions:
     - Metered junctions adds options for tracking queuing variables; queue length, queue delay and spillback. This is primarily designed for use in ramp metering systems.
-    - Here, the input for `Simulation.add_tracked_junctions()` is a dictionary, where each junction has a 'meter_params' value. This is a dictionary containing '<i>min_rate</i>', '<i>max_rate</i>', '<i>init_rate</i>', '<i>queue_detector</i>' and '<i>ramp_edges</i>'. These are detailed below, however, flow can still be tracked as above.
-    - '<i>min_rate</i>' is a required parameter denoting the minimum allowed metering rate.
-    - '<i>max_rate</i>' is a required parameter denoting the maximum allowed metering rate.
-    - '<i>init_rate</i>' denotes the initial metering rate set after initialisation.
-    - '<i>queue_detector</i>' is the ID of a <b>multi-entry-exit detector</b> that should be placed on the on-ramp. The entry detector should be placed at the start of the on-ramp, and the exit detector just before the traffic light. If given, queue length and delay at each step is tracked automatically.
-    - If you would like to track vehicle spillback, provide the list of edge IDs that make up the ramp under the '<i>ramp_edges</i>' parameter. This can also be used instead of '<i>queue_detector</i>' to track queue length and delay, however, this approach is much slower. Tracking spillback in this way will only work when vehicles are inserted directly onto the on-ramp (ie. no urban roads connect to the on-ramp), and requires checking all unloaded vehicles of their insertion edge which can be slow.
+    - Here, the input for `Simulation.add_tracked_junctions()` is a dictionary, where each junction has a 'meter_params' value. This is a dictionary containing '_min_rate_', '_max_rate_', '_init_rate_', '_queue_detector_' and '_ramp_edges_'. These are detailed below, however, flow can still be tracked as above.
+    - '_min_rate_' is a required parameter denoting the minimum allowed metering rate.
+    - '_max_rate_' is a required parameter denoting the maximum allowed metering rate.
+    - '_init_rate_' denotes the initial metering rate set after initialisation.
+    - '_queue_detector_' is the ID of a **multi-entry-exit detector** that should be placed on the on-ramp. The entry detector should be placed at the start of the on-ramp, and the exit detector just before the traffic light. If given, queue length and delay at each step is tracked automatically.
+    - If you would like to track vehicle spillback, provide the list of edge IDs that make up the ramp under the '_ramp_edges_' parameter. This can also be used instead of '_queue_detector_' to track queue length and delay, however, this approach is much slower. Tracking spillback in this way will only work when vehicles are inserted directly onto the on-ramp (ie. no urban roads connect to the on-ramp), and requires checking all unloaded vehicles of their insertion edge which can be slow.
 
 Examples of these different levels are shown below.
 
@@ -58,7 +58,7 @@ my_sim.add_tracked_junctions({"ramp_meter":
                             })
 ```
 
-All data from tracked junctions is stored in the `sim_data` dictionary under '<i>data/junctions/{junction_id}</i>'. This will contain the junction's '<i>position</i>', '<i>init_time</i>' and '<i>curr_time</i>' (referring to the start and ent time of the data collection). Phase data is then stored under '<i>tl</i>', whilst flow and metering data are under '<i>flow</i>' and '<i>meter</i>' respectively.
+All data from tracked junctions is stored in the `sim_data` dictionary under '_data/junctions/{junction_id}_'. This will contain the junction's '_position_', '_incoming_edges_', '_outgoing_edges_', '_init_time_' and '_curr_time_' (referring to the start and end time of the data collection). Phase data is then stored under '_tl_', whilst flow and metering data are under '_flow_' and '_meter_' respectively.
 
 Data collection for tracked junctions can be reset using the function below, however, data collection is also reset when using `Simulation.reset_data()`.
 
@@ -78,7 +78,7 @@ my_sim.add_tracked_edges()
 my_sim.add_tracked_edges(["edge_1", "edge_2", "edge_3", "edge_4", "edge_5"])
 ```
 
-All data from tracked edges is stored in the `sim_data` dictionary under '<i>data/edges/{edge_id}</i>'. The main data collected is under '<i>data/edges/{edge_id}/step_vehicles</i>'. This includes the vehicle ID, position, speed and lane index for all vehicles on the edge at each step. This precise data is used to plot trajectories and space-time diagrams.
+All data from tracked edges is stored in the `sim_data` dictionary under '_data/edges/{edge_id}_'. The main data collected is under '_data/edges/{edge_id}/step_vehicles_'. This includes the vehicle ID, position, speed and lane index for all vehicles on the edge at each step. This precise data is used to plot trajectories and space-time diagrams.
 
 The step vehicle data is stored in a (4x1) array as follows:
 
@@ -87,7 +87,7 @@ The step vehicle data is stored in a (4x1) array as follows:
   3. Vehicle speed in `Simulation` class units
   4. Lane index [0 - no. lanes]
 
-Tracked edges collect average speed, flow and density at each time step and store these values in a list. Funamental diagrams can be plotted with `TrackedEdge` data using the `Plotter.plot_fundamental_diagram()` function, but it is possible to return the individual values. This data is stored in the `sim_data` dictionary under '<i>data/edges/{edge_id}/speeds</i>', '<i>data/edges/{edge_id}/flows</i>' and '<i>data/edges/{edge_id}/densities</i>', but can be fetched from the `TrackedEdge` object as below. A value of -1 denotes that there were no vehicles on the edge during the step.
+Tracked edges collect average speed, flow and density at each time step and store these values in a list. Funamental diagrams can be plotted with `TrackedEdge` data using the `Plotter.plot_fundamental_diagram()` function, but it is possible to return the individual values. This data is stored in the `sim_data` dictionary under '_data/edges/{edge_id}/speeds_', '_data/edges/{edge_id}/flows_' and '_data/edges/{edge_id}/densities_', but can be fetched from the `TrackedEdge` object as below. A value of -1 denotes that there were no vehicles on the edge during the step.
 
 ```python
 speeds    = my_sim.tracked_edges["edge_1"].speeds
@@ -95,7 +95,7 @@ flows     = my_sim.tracked_edges["edge_1"].flows
 densities = my_sim.tracked_edges["edge_1"].densities
 ```
 
-'<i>linestring</i>', '<i>length</i>', '<i>to_node</i>', '<i>from_node</i>', '<i>n_lanes</i>', '<i>init_time</i>' and '<i>curr_time</i>' are also stored for each edge.
+'_linestring_', '_length_', '_to_node_', '_from_node_', '_n_lanes_', '_init_time_' and '_curr_time_' are also stored for each edge.
 
 Data collection for specific tracked edges can be reset using the function below, however, data collection is also reset when using `Simulation.reset_data()`.
 

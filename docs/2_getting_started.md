@@ -2,6 +2,8 @@
 
 ## Requirements
 
+<img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/tud-sumo?style=for-the-badge&logo=python&logoColor=white&color=%2300A6D6">
+
 To run TUD-SUMO, first install SUMO. Platform-specific information on how to do this can be found in the SUMO documentation: [sumo.dlr.de/docs/Installing/](https://sumo.dlr.de/docs/Installing/)
 
 Once SUMO has been installed, ensure that the `SUMO_HOME` variable has been set in your environment. This should be set to the base directory of your SUMO installation. Information on how to do this can be found here: [sumo.dlr.de/docs/Basics/Basic_Computer_Skills.html](https://sumo.dlr.de/docs/Basics/Basic_Computer_Skills.html#configuring_path_settings)

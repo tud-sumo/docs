@@ -33,10 +33,10 @@ The most basic getter functions in the `Simulation` class return the IDs of obje
 |                Function                |                                      Return Value                                                           |
 |----------------------------------------|-------------------------------------------------------------------------------------------------------------|
 | `get_vehicle_ids(vehicle_types)`       | All vehicle IDs, or those of specific type(s).                                                              |
-| `get_detector_ids(detector_types)`     | All detector IDs, or those of specific type(s) - '<i>multientryexit</i>' or '<i>inductionloop</i>'.         |
-| `get_controller_ids(controller_types)` | All controller IDs, or those of specific type(s) - '<i>VSLController</i>' or '<i>RGController</i>'.         |
-| `get_event_ids(event_statuses)`        | All event IDs, or those of specific status(es) - '<i>scheduled</i>', '<i>active</i>' or '<i>completed</i>'. |
-| `get_geometry_ids(geometry_types)`     | All controller IDs, or those of specific type(s) - '<i>edge</i>' or '<i>lane</i>'.                          |
+| `get_detector_ids(detector_types)`     | All detector IDs, or those of specific type(s) - '_multientryexit_' or '_inductionloop_'.         |
+| `get_controller_ids(controller_types)` | All controller IDs, or those of specific type(s) - '_VSLController_' or '_RGController_'.         |
+| `get_event_ids(event_statuses)`        | All event IDs, or those of specific status(es) - '_scheduled_', '_active_' or '_completed_'. |
+| `get_geometry_ids(geometry_types)`     | All controller IDs, or those of specific type(s) - '_edge_' or '_lane_'.                          |
 | `get_tracked_edge_ids()`               | All tracked edge IDs.                                                                                       |
 | `get_junction_ids()`                   | All junction IDs.                                                                                           |
 | `get_tracked_junction_ids()`           | All tracked junction IDs.                                                                                   |
@@ -52,7 +52,7 @@ All data collected throughout the simulation is stored in the `sim_data` diction
   - `get_delay()`:
     - Returns total vehicle delay during the last simulation step (calculated as the number of vehicles where speed < 0.1m/s<sup>2</sup>, multiplied by the simulation step length).
   - `get_vehicle_data(vehicle_ids)`:
-    - Returns a dictionary containing all information on a vehicle. This is; '<i>type</i>', '<i>longitude</i>', '<i>latitude</i>', '<i>altitude</i>', '<i>heading</i>', '<i>speed</i>', '<i>acceleration</i>', '<i>stopped</i>', '<i>length</i>', '<i>departure</i>', '<i>destination</i>' and '<i>origin</i>'.
+    - Returns a dictionary containing all information on a vehicle. This is; '_type_', '_longitude_', '_latitude_', '_altitude_', '_heading_', '_speed_', '_acceleration_', '_stopped_', '_length_', '_departure_', '_destination_' and '_origin_'.
     - TUD-SUMO stores static information (route origin, vehicle length etc.) to avoid unnecessary repeated calls to TraCI. This is automatically done when calling `get_vehicle_data()` on a vehicle for the first time.
     - `vehicle_ids` can be a single vehicle ID (string), or a list of IDs (list/tuple). If multiple IDs are given, a dictionary is returned with each vehicle's data stored under its ID.
   - `get_all_vehicle_data(vehicle_types, all_dynamic_data):`
@@ -64,10 +64,14 @@ All data collected throughout the simulation is stored in the `sim_data` diction
   - `get_last_step_geometry_vehicles(geometry_ids, vehicle_types, flatten)`:
     - Returns the IDs of all vehicles on the specified geometry in the last simulation step.
     - `geometry_ids` and `vehicle_types` can either be a single value (string) or list of values (list/tuple). If multiple geometry IDs are given, IDs for all geometries can either be returned in a single list (`flatten = True`), or the IDs can be returned in a dictionary with lists of IDs separated by geometry (`flatten = False`).
-  - `get_interval_detector_data(detector_id, n_steps, data_keys, avg_vals)`:
-    - Returns data collected by a detector between during the time range (`curr_step - n_steps`, `curr_step`).
-    - `data_keys` can either be a single value (string) or a list of values (list/tuple). The valid keys are '<i>vehicle_counts</i>', '<i>speeds</i>' and '<i>occupancies</i>', although '<i>occupancies</i>' is only valid for induction loop detectors.
-    - If `avg_vals == True`, then values are returned averaged, otherwise, raw values are returned.
+  - `get_interval_detector_data(detector_ids, n_steps, data_keys, interval_end, avg_step_vals, avg_det_vals, unique_count)`:
+    - Returns data collected by one detector or multiple detectors between during the time range (`curr_step - n_steps - interval_end`, `curr_step - interval_end`).
+    - If multiple detector IDs are given, data is returned in a dictionary separated by detector (and data keys). If `avg_det_vals == True`, data is averaged (step-wise) for all detectors (ie. `{"det_1": [1, 2, 3], "det_2": [3, 2, 1]}` is averaged to `[2, 2, 2]`).
+    - If `avg_step_vals == True`, data is averaged across all steps (ie. `{"det_1": [1, 2, 3], "det_2": [3, 2, 1]}` is averaged to `{"det_1": 2, "det_2": 2}`).
+    - If multiple detector IDs are given and `avg_step_vals == avg_det_vals == True`, a single averaged value is returned (for all data keys) (ie. `{"det_1": [1, 2, 3], "det_2": [3, 2, 1]}` is averaged to `2`).
+    - `data_keys` can either be a single value (string) or a list of values (list/tuple). The valid keys are '_vehicle_counts_', '_flows_', '_densities_', '_speeds_' and '_occupancies_', although '_occupancies_' is only valid for induction loop detectors.
+    - If multiple data keys are given, each dataset is returned in a dictionary separated by its key (and detectors), such as `{"det_1": {"speeds": ..., "flows": ...}, "det_2": ...}`.
+    - `unique_count` denotes whether to calculate vehicle counts based on vehicle IDs, instead of the vehicle count values measured by each detector. This means that only vehicles are only counted once during the interval. This results in much lower counts, but is useful for calculating certain measures such as flow rates.
 
 To query routes and paths in the network, use the functions below.
 
@@ -106,55 +110,55 @@ If one data key is given, the raw value is returned, otherwise, a dictionary is 
 Subscriptions and static vehicle data are used whenever possible to reduce TraCI calls. The valid data keys for each function are listed below.
 
   - `get_vehicle_vals()`:
-    - '<i>type</i>': Vehicle type
-    - '<i>length</i>': Vehicle length
-    - '<i>speed</i>': Current vehicle speed
-    - '<i>is_stopped</i>': Bool denoting whether the vehicle is stopped
-    - '<i>max_speed</i>': Vehicle maximum speed
-    - '<i>acceleration</i>': Current vehicle acceleration
-    - '<i>position</i>': Current vehicle coordinates
-    - '<i>altitude</i>': Current vehicle altitude
-    - '<i>heading</i>': Current vehicle heading
-    - '<i>departure</i>': Vehicle departure time
-    - '<i>edge_id</i>': Current vehicle's edge ID
-    - '<i>lane_idx</i>': Index of the vehicle's current lane
-    - '<i>origin</i>': Departure edge ID of the vehicle
-    - '<i>destination</i>': Current destination edge ID of the vehicle
-    - '<i>route_id</i>': Current vehicle route ID
-    - '<i>route_idx</i>': The index of the vehicle's edge on its route
-    - '<i>route_edges</i>': The list of edges that the vehicle's route consists of
+    - '_type_': Vehicle type
+    - '_length_': Vehicle length
+    - '_speed_': Current vehicle speed
+    - '_is_stopped_': Bool denoting whether the vehicle is stopped
+    - '_max_speed_': Vehicle maximum speed
+    - '_acceleration_': Current vehicle acceleration
+    - '_position_': Current vehicle coordinates
+    - '_altitude_': Current vehicle altitude
+    - '_heading_': Current vehicle heading
+    - '_departure_': Vehicle departure time
+    - '_edge_id_': Current vehicle's edge ID
+    - '_lane_idx_': Index of the vehicle's current lane
+    - '_origin_': Departure edge ID of the vehicle
+    - '_destination_': Current destination edge ID of the vehicle
+    - '_route_id_': Current vehicle route ID
+    - '_route_idx_': The index of the vehicle's edge on its route
+    - '_route_edges_': The list of edges that the vehicle's route consists of
   - `get_detector_vals()`:
-    - '<i>type</i>': Detector type ('mutlientryexit' or 'inductionloop')
-    - '<i>position</i>': Detector coordinates
-    - '<i>vehicle_count</i>': Number of vehicles that passed over the detector in the last step
-    - '<i>vehicle_ids</i>': IDs of vehicles that passed over the detector in the last step
-    - '<i>lsm_speed</i>': Average speed of vehicles that passed over the detector in the last step
-    - '<i>halting_no</i>': Number of halting vehicles in the detector area <i>(multi-entry-exit only)</i>
-    - '<i>lsm_occupancy</i>': Average occupancy during the last step <i>(induction loop only)</i>
-    - '<i>last_detection</i>': Time since last detection <i>(induction loop only)</i>
+    - '_type_': Detector type ('mutlientryexit' or 'inductionloop')
+    - '_position_': Detector coordinates
+    - '_vehicle_count_': Number of vehicles that passed over the detector in the last step
+    - '_vehicle_ids_': IDs of vehicles that passed over the detector in the last step
+    - '_lsm_speed_': Average speed of vehicles that passed over the detector in the last step
+    - '_halting_no_': Number of halting vehicles in the detector area _(multi-entry-exit only)_
+    - '_lsm_occupancy_': Average occupancy during the last step _(induction loop only)_
+    - '_last_detection_': Time since last detection _(induction loop only)_
   - `get_geometry_vals()`:
-    - '<i>vehicle_count</i>': Number of vehicles on the edge/lane
-    - '<i>vehicle_ids</i>': IDs of vehicles on the edge/lane
-    - '<i>vehicle_speed</i>': Average speed of vehicles on the edge/lane
-    - '<i>halting_no</i>': Number of halting vehicles on the edge/lane
-    - '<i>vehicle_occupancy</i>': Vehicle occupancy of edge/lane
-    - '<i>curr_travel_time</i>': Estimated travel time (calculated using length and average speed)
-    - '<i>ff_travel_time</i>': Estimated free-flow travel time (calculated using length and maximum speed)
-    - '<i>emissions</i>': CO, CO<sub>2</sub>, HC, PMx and NOx emissions, stored in a dictionary
-    - '<i>length</i>': Length of the edge/lane
-    - '<i>max_speed</i>': Maxmimum speed (edge max_speed is the average of its lanes)
-    - '<i>connected_edges</i>': Dictionary containing 'incoming' and 'outgoing' edges <i>(edge only)</i>
-    - '<i>incoming_edges</i>': Incoming edges <i>(edge only)</i>
-    - '<i>outgoing_edges</i>': Outgoing edges <i>(edge only)</i>
-    - '<i>street_name</i>': Street name, defined in SUMO <i>(edge only)</i>
-    - '<i>n_lanes</i>': Number of lanes in the edge <i>(edge only)</i>
-    - '<i>lane_ids</i>': IDs of all lanes in the egde <i>(edge only)</i>
-    - '<i>edge_id</i>': Edge ID for the lane <i>(lane only)</i>
-    - '<i>n_links</i>': Number of linked lanes <i>(lane only)</i>
-    - '<i>allowed</i>': List containing allowed vehicle types <i>(lane only)</i>
-    - '<i>disallowed</i>': List containing all prohibited vehicle types <i>(lane only)</i>
-    - '<i>left_lc</i>': Bool denoting whether left lane changes are allowed <i>(lane only)</i>
-    - '<i>right_lc</i>': Bool denoting whether right lane changes are allowed <i>(lane only)</i>
+    - '_vehicle_count_': Number of vehicles on the edge/lane
+    - '_vehicle_ids_': IDs of vehicles on the edge/lane
+    - '_vehicle_speed_': Average speed of vehicles on the edge/lane
+    - '_halting_no_': Number of halting vehicles on the edge/lane
+    - '_vehicle_occupancy_': Vehicle occupancy of edge/lane
+    - '_curr_travel_time_': Estimated travel time (calculated using length and average speed)
+    - '_ff_travel_time_': Estimated free-flow travel time (calculated using length and maximum speed)
+    - '_emissions_': CO, CO<sub>2</sub>, HC, PMx and NOx emissions, stored in a dictionary
+    - '_length_': Length of the edge/lane
+    - '_max_speed_': Maxmimum speed (edge max_speed is the average of its lanes)
+    - '_connected_edges_': Dictionary containing 'incoming' and 'outgoing' edges _(edge only)_
+    - '_incoming_edges_': Incoming edges _(edge only)_
+    - '_outgoing_edges_': Outgoing edges _(edge only)_
+    - '_street_name_': Street name, defined in SUMO _(edge only)_
+    - '_n_lanes_': Number of lanes in the edge _(edge only)_
+    - '_lane_ids_': IDs of all lanes in the egde _(edge only)_
+    - '_edge_id_': Edge ID for the lane _(lane only)_
+    - '_n_links_': Number of linked lanes _(lane only)_
+    - '_allowed_': List containing allowed vehicle types _(lane only)_
+    - '_disallowed_': List containing all prohibited vehicle types _(lane only)_
+    - '_left_lc_': Bool denoting whether left lane changes are allowed _(lane only)_
+    - '_right_lc_': Bool denoting whether right lane changes are allowed _(lane only)_
 
 ## Setting Values
 
@@ -186,10 +190,10 @@ The valid data keys and their accepted data type are listed below. Note that the
     - `lc_safety_checks`: Indefinitely sets whether lane changing safety constraints are followed when changing lane - can be boolean to turn on/off all checks or [bitset](https://sumo.dlr.de/docs/TraCI/Change_Vehicle_State.html#speed_mode_0xb3) (boolean/int)
   - `set_geometry_vals()`:
     - `max_speed`: Set a new maximum speed/speed limit (lane or for all contained lanes) (integer or float)
-    - `allowed`: Set a new list of allowed vehicle types, with an empty list allowing all (list of strings) <i>(lane only)</i>
-    - `disallowed`: Set a new list of prohibited vehicle types (list of strings) <i>(lane only)</i>
-    - `left_lc`: Sets the list of vehicle types that are allowed to change to the left lane (list of strings) <i>(lane only)</i>
-    - `right_lc`: Sets the list of vehicle types that are allowed to change to the right lane (list of strings) <i>(lane only)</i>
+    - `allowed`: Set a new list of allowed vehicle types, with an empty list allowing all (list of strings) _(lane only)_
+    - `disallowed`: Set a new list of prohibited vehicle types (list of strings) _(lane only)_
+    - `left_lc`: Sets the list of vehicle types that are allowed to change to the left lane (list of strings) _(lane only)_
+    - `right_lc`: Sets the list of vehicle types that are allowed to change to the right lane (list of strings) _(lane only)_
 
 ## Subscriptions
 
@@ -205,32 +209,32 @@ Otherwise, depending on the use case, it may be necessary to subscribe/unsubscri
 The valid data keys for each object type and respective function are listed below. Note that individual objects have their own set of subscriptions, so if you would like to subscribe to collect all vehicles' edge ID at each step, you must call `add_vehicle_subscriptions()` for all vehicle IDs.
 
   - `add_vehicle_subscriptions()`/`remove_vehicle_subscriptions()`:
-    - '<i>speed</i>'
-    - '<i>is_stopped</i>'
-    - '<i>max_speed</i>'
-    - '<i>acceleration</i>'
-    - '<i>position</i>'
-    - '<i>altitude</i>'
-    - '<i>heading</i>'
-    - '<i>edge_id</i>'
-    - '<i>lane_idx</i>'
-    - '<i>route_id</i>'
-    - '<i>route_idx</i>'
+    - '_speed_'
+    - '_is_stopped_'
+    - '_max_speed_'
+    - '_acceleration_'
+    - '_position_'
+    - '_altitude_'
+    - '_heading_'
+    - '_edge_id_'
+    - '_lane_idx_'
+    - '_route_id_'
+    - '_route_idx_'
 
   - `add_detector_subscriptions()`/`remove_detector_subscriptions()`:
-    - '<i>vehicle_count</i>'
-    - '<i>vehicle_ids</i>'
-    - '<i>lsm_speed</i>'
-    - '<i>halting_no</i>'
-    - '<i>lsm_speed</i>'
-    - '<i>last_detection</i>'
+    - '_vehicle_count_'
+    - '_vehicle_ids_'
+    - '_lsm_speed_'
+    - '_halting_no_'
+    - '_lsm_speed_'
+    - '_last_detection_'
 
   - `add_geometry_subscriptions()`/`remove_geometry_subscriptions()`:
-    - '<i>vehicle_count</i>'
-    - '<i>vehicle_ids</i>'
-    - '<i>vehicle_speed</i>'
-    - '<i>halting_no</i>'
-    - '<i>occupancy</i>'
+    - '_vehicle_count_'
+    - '_vehicle_ids_'
+    - '_vehicle_speed_'
+    - '_halting_no_'
+    - '_occupancy_'
 
 ## Adding/removing Vehicles
 
@@ -240,8 +244,8 @@ Vehicles can be added to or removed from the simulation using the `Simulation.ad
     - `vehicle_id`: (Unique) ID for the new vehicle.
     - `vehicle_type`: Vehicle type.
     - `routing`: Denotes how the vehicle will route through the network (either route ID or (2x1) list of edge IDs for an OD pair).
-    - `initial_speed`: Initial speed of the vehicle at insertion, defaults to maximum (either '<i>max</i>', '<i>random</i>' or a number > 0).
-    - `origin_lane`: Lane for insertion at origin, defaults to best (either '<i>random</i>', '<i>free</i>', '<i>allowed</i>', '<i>best</i>', '<i>first</i>' or lane index).
+    - `initial_speed`: Initial speed of the vehicle at insertion, defaults to maximum (either '_max_', '_random_' or a number > 0).
+    - `origin_lane`: Lane for insertion at origin, defaults to best (either '_random_', '_free_', '_allowed_', '_best_', '_first_' or lane index).
   - `remove_vehicles()`:
     - `vehicle_ids`: A single vehicle ID (string) or list of IDs (list/tuple).
 
