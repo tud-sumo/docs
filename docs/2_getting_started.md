@@ -2,7 +2,9 @@
 
 ## Requirements
 
-<img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/tud-sumo?style=for-the-badge&logo=python&logoColor=white&color=%2300A6D6">
+<a href="https://www.python.org/downloads/">
+  <img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/tud-sumo?style=for-the-badge&logo=python&logoColor=white&color=%2300A6D6">
+</a>
 
 To run TUD-SUMO, first install SUMO. Platform-specific information on how to do this can be found in the SUMO documentation: [sumo.dlr.de/docs/Installing/](https://sumo.dlr.de/docs/Installing/)
 

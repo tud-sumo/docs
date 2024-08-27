@@ -1,8 +1,8 @@
 :root {
     --md-primary-fg-color: #00A6D6;
     --md-primary-bg-color: #FFFFFF;
-    --md-accent-fg-color: rgba(0, 166, 214, 0.6);
-    --md-typeset-a-color: rgba(0, 166, 214, 0.6);
+    --md-accent-fg-color: #00A6D6;
+    --md-typeset-a-color: #00A6D6;
   }
 
 [data-md-color-scheme="default"] {
@@ -14,6 +14,14 @@
   color: #00A6D6;
 }
 
+a {
+  transition: 0.2s !important;
+}
+
 a:not(.md-nav__link) {
   font-style: italic;
+}
+
+a:hover {
+  opacity: 0.6;
 }

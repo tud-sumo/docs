@@ -1,7 +1,8 @@
 # Welcome to the TUD-SUMO Wiki!
-<p align="center">
-  <img src="img/header.png"/>
-  <br><br>
+
+![logos](img/header.png)
+
+<p style="text-align: center;">
   <a href="https://pypi.org/project/tud-sumo/">
     <img alt="PyPI" src="https://img.shields.io/pypi/v/tud-sumo?style=for-the-badge&logo=pypi&logoColor=%23FFFFFF&color=%2300A6D6"/>
   </a>
@@ -12,10 +13,10 @@
       <img alt="PyPI - License" src="https://img.shields.io/pypi/l/tud-sumo?style=for-the-badge&color=%2300A6D6">
   </a>
   <br>
-  <a href="https://github.com/tud-sumo/tud_sumo">
-    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/tud-sumo/tud_sumo?style=for-the-badge&logo=github&color=%2300A6D6"/>
-  </a>
-  <a href="https://github.com/tud-sumo/tud_sumo">
+  
+  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/tud-sumo/tud_sumo?style=for-the-badge&logo=github&color=%2300A6D6"/>
+
+  <a href="https://github.com/tud-sumo/tud_sumo/commits/main/">
     <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/tud-sumo/tud_sumo?style=for-the-badge&logo=github&label=Commits&color=%2300A6D6"/>
   </a>
 </p>
