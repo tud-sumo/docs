@@ -48,25 +48,17 @@ The main features of TUD-SUMO include:
 
 ## Latest Version
 
-The Latest version of TUD-SUMO is _v3.0.9_, and was released on 21/08/2024. All previous versions and their change notes can be found on [GitHub](https://github.com/tud-sumo/tud_sumo/releases) or [PyPI](https://pypi.org/project/tud-sumo/#history).
+The Latest version of TUD-SUMO is _v3.0.10_, and was released on 28/08/2024. All previous versions and their change notes can be found on [GitHub](https://github.com/tud-sumo/tud_sumo/releases) or [PyPI](https://pypi.org/project/tud-sumo/#history).
 
 The change notes for the latest version are:
 
-### Interval Detector Data Improvements
+### Fundamental Diagrams and Occupancy Data
 
-#### Changes & Improvements
-
-  - Improved `Simulation.get_interval_detector_data()` (added 'flows', 'densities', `unique_count` and `interval_end` and allowing for multiple detectors).
-  - Improved README to match documentation.
-  - Setting metering rate multiple times in the same step now overwrites the rate (only one value per time step).
-  - Added incoming/outgoing edges to tracked junctions.
-  - Added missing `__str__` functions.
-
-#### Bug Fixes
-
-  - Fixed index error in `Plotter.plot_throughput()`.
-  - Removed occupancy showing as an empty list in sim_data for multi-entry-exit detectors.
-  - Corrected spelling in README.
+  - Improved `Plotter.plot_fundamental_diagram()` - added averaging and time range options.
+  - Added occupancy to tracked edge data.
+  - Added `suppress_pbar` option.
+  - Added `"avg_vehicle_length"` to `Simulation.get_[geometry|detector]_vals()`.
+  - Temporarily reverted `Simulation.get_interval_detector_data()` to v3.0.8 due to errors in calculations.
 
 ## Contact
 

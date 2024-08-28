@@ -87,7 +87,7 @@ The step vehicle data is stored in a (4x1) array as follows:
   3. Vehicle speed in `Simulation` class units
   4. Lane index [0 - no. lanes]
 
-Tracked edges collect average speed, flow and density at each time step and store these values in a list. Funamental diagrams can be plotted with `TrackedEdge` data using the `Plotter.plot_fundamental_diagram()` function, but it is possible to return the individual values. This data is stored in the `sim_data` dictionary under '_data/edges/{edge_id}/speeds_', '_data/edges/{edge_id}/flows_' and '_data/edges/{edge_id}/densities_', but can be fetched from the `TrackedEdge` object as below. A value of -1 denotes that there were no vehicles on the edge during the step.
+Tracked edges collect average speed, flow and density at each time step and store these values in a list. Funamental diagrams can be plotted with `TrackedEdge` data using the `Plotter.plot_fundamental_diagram()` function, but it is possible to return the individual values. This data is stored in the `sim_data` dictionary under '_data/edges/{edge_id}/speeds_', '_data/edges/{edge_id}/flows_' and '_data/edges/{edge_id}/densities_', but can be fetched from the `TrackedEdge` object as below. A value of -1 denotes that there were no vehicles on the edge during the step. Time occupancy is also collected and stored under '_data/edges/{edge_id}/occupancies_'.
 
 ```python
 speeds    = my_sim.tracked_edges["edge_1"].speeds

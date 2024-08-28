@@ -74,7 +74,7 @@ All (current) plotting functions are listed in the table below. Several graph ex
 | `plot_cumulative_curve()`      | Cumulative curve, either for network-wide data or for specific inflow and outflow detectors.                       |
 | `plot_space_time_diagram()`    | Space-time diagram based on `step_vehicles` data in tracked edges.                                                 |
 | `plot_trajectories()`          | Trajectories based on `step_vehicles` data in tracked edges. Use `lane_idx` to plot lane-specific data.            |
-| `plot_fundamental_diagram()`   | Fundamental diagram based on `step_vehicles` data in tracked edges.                                                |
+| `plot_fundamental_diagram()`   | Fundamental diagram based on tracked edge data.                                                                    |
 | `plot_rm_rate()`               | Metering rate for a ramp metering controller.                                                                      |
 | `plot_rm_queuing()`            | On-ramp queue length/spillback for a ramp meter, if tracked.                                                       |
 | `plot_rm_rate_queuing()`       | Metering rate and queue length/spillback for a ramp meter, if tracking queuing.                                    |

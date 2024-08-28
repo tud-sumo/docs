@@ -21,6 +21,7 @@ my_sim.start("example_scenario.sumocfg",
              gui=True,
              get_individual_vehicle_data=False,
              units="metric",
+             suppress_pbar=False,
              seed=1
             )
 ```
@@ -30,6 +31,8 @@ The `get_individual_vehicle_data` is an important parameter denoting whether to 
 3 unit settings are supported '_metric_' (km/kmph), '_imperial_' (mi/mph) and '_UK_' (km/mph). All data collected and saved are in these units, and this setting cannot be changed later.
 
 The `seed` parameter is optional and affects both the SUMO simulation and the `Simulation` class. Random seeds in SUMO primarily affects how vehicles are added into the simulation (more information can be found [here](https://sumo.dlr.de/docs/Simulation/Randomness.html)). The seed can be set to random either by not using the parameter or by setting it to '_random_'.
+
+By default, a progress bar is automatically created when simulating more than 10 steps at a time. This can be skipped by setting `suppress_pbar = False`. 
 
 Tracked junctions/edges, controllers etc. can be added at this point. These objects can be added individually, or if all parameters are saved in a dictionary or '_.json_' or '_.pkl_' file, these can be read using the `Simulation.load_objects()` function. More information on these objects can be found in their respective sections.
 
