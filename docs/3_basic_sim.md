@@ -42,7 +42,7 @@ my_sim.load_objects("parameters.json")
 
 ## Adding Demand
 
-There are two approaches to adding demand to a simulation. The default approach is to define demand with routes or by flow within a '_.rou.xml_' file, in which case, nothing else needs to be done. Alternatively, demand can be generated more dynamically within TUD-SUMO. This is done with either the `Simulation.load_demand()` or `Simulation.add_demand()` functions.
+There are two approaches to adding demand to a simulation. The default approach is to define demand with routes or by flow within a '_.rou.xml_' file, in which case, nothing else needs to be done. Alternatively, demand can be generated more dynamically within TUD-SUMO. This is done with either `Simulation.load_demand()`, `Simulation.add_demand()` or `Simulation.add_demand_function()`.
 
 !!! warning
 
