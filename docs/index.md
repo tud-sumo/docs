@@ -48,17 +48,18 @@ The main features of TUD-SUMO include:
 
 ## Latest Version
 
-The Latest version of TUD-SUMO is _v3.0.10_, and was released on 28/08/2024. All previous versions and their change notes can be found on [GitHub](https://github.com/tud-sumo/tud_sumo/releases) or [PyPI](https://pypi.org/project/tud-sumo/#history).
+The Latest version of TUD-SUMO is _v3.0.11_, and was released on 02/09/2024. All previous versions and their change notes can be found on [GitHub](https://github.com/tud-sumo/tud_sumo/releases) or [PyPI](https://pypi.org/project/tud-sumo/#history).
 
 The change notes for the latest version are:
 
-### Fundamental Diagrams and Occupancy Data
+### Fixed Interval Detector Data & Demand Functions
 
-  - Improved `Plotter.plot_fundamental_diagram()` - added averaging and time range options.
-  - Added occupancy to tracked edge data.
-  - Added `suppress_pbar` option.
-  - Added `"avg_vehicle_length"` to `Simulation.get_[geometry|detector]_vals()`.
-  - Temporarily reverted `Simulation.get_interval_detector_data()` to v3.0.8 due to errors in calculations.
+  - Updated & fixed `Simulation.get_interval_detector_data()`.
+  - Added `Simulation.add_demand_function()` to generate flow based on user-defined functions.
+  - Added `point_size` to `Plotter.plot_fundamental_diagram()`.
+  - Changed `Simulation.[add|remove]_vehicle_[in|out]_funcs()` to `Simulation.[add|remove]_vehicle_[in|out]_functions()`.
+  - Changed induction loop occupancy (%) values to floats [0-1] instead of [0-100].
+  - Updated README.
 
 ## Contact
 

@@ -64,10 +64,16 @@ All data collected throughout the simulation is stored in the `sim_data` diction
   - `get_last_step_geometry_vehicles(geometry_ids, vehicle_types, flatten)`:
     - Returns the IDs of all vehicles on the specified geometry in the last simulation step.
     - `geometry_ids` and `vehicle_types` can either be a single value (string) or list of values (list/tuple). If multiple geometry IDs are given, IDs for all geometries can either be returned in a single list (`flatten = True`), or the IDs can be returned in a dictionary with lists of IDs separated by geometry (`flatten = False`).
-  - `get_interval_detector_data(detector_id, n_steps, data_keys, avg_vals)`:
-    - Returns data collected by a detector between during the time range (`curr_step - n_steps`, `curr_step`).
-    - `data_keys` can either be a single value (string) or a list of values (list/tuple). The valid keys are '_vehicle_counts_', '_speeds_' and '_occupancies_', although '_occupancies_' is only valid for induction loop detectors.
-    - If `avg_vals == True`, then values are returned averaged, otherwise, raw values are returned.
+- `get_interval_detector_data(detector_ids, data_keys, n_steps, interval_end, avg_step_vals, avg_det_vals, sum_counts)`:
+    - Returns data collected by one detector or multiple detectors between during the time range (`curr_step - n_steps - interval_end`, `curr_step - interval_end`).
+    - If multiple detector IDs are given, data is returned in a dictionary separated by detector (and data keys). If `avg_det_vals == True`, data is averaged (step-wise) for all detectors (ie. `{"det_1": [1, 2, 3], "det_2": [3, 2, 1]}` is averaged to `[2, 2, 2]`).
+    - If `avg_step_vals == True`, data is averaged across all steps (ie. `{"det_1": [1, 2, 3], "det_2": [3, 2, 1]}` is averaged to `{"det_1": 2, "det_2": 2}`).
+    - If multiple detector IDs are given and `avg_step_vals == avg_det_vals == True`, a single averaged value is returned (for all data keys) (ie. `{"det_1": [1, 2, 3], "det_2": [3, 2, 1]}` is averaged to `2`).
+    - `data_keys` can either be a single value (string) or a list of values (list/tuple). The valid keys are '_no\_vehicles_', '_no\_unique\_vehicles_', '_flow_', '_density_', '_speeds_' and '_occupancies_', although '_occupancies_' is only valid for induction loop detectors.
+    - '_no\_vehicles_' returns the vehicle counts by the detector at each step, meaning vehicles may be counted multiple times across different steps. '_no\_unique\_vehicles_' instead returns the number of unique vehicles that passed over the detector during the specified interval, which is generally much lower than raw vehicle counts.
+    - '_flow_' and '_density_' always return the averaged value, instead of values for each step in the interval. These are calculated using the number of unique vehicles and average speeds.
+    - If multiple data keys are given, each dataset is returned in a dictionary separated by its key (and detectors), such as `{"det_1": {"speeds": ..., "flows": ...}, "det_2": ...}`.
+    - `sum_counts` denotes whether to return the sum of vehicle counts ('_no\_vehicles_' and '_no\_unique\_vehicles_') throughout the interval instead of their average values. `sum_counts` will override `avg_step_vals`.
 
 To query routes and paths in the network, use the functions below.
 

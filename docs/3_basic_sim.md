@@ -66,7 +66,7 @@ Two examples of the contents of a '_demand.csv_' file are shown below. It is pos
 |  route_1 |      0     |   1200   |   200  |      max      |      1      |      0.3     |
 |    ...   |     ...    |    ...   |   ...  |      ...      |     ...     |      ...     |
 
-Otherwise, demand can be added in code using the `Simulation.add_demand()` function. This uses the same set of parameters as the demand files above, except '_origin/destination/route_id_' is replaced by a single `routing` parameter, and `step_range` is used instead of '_start_time/end_time_' or '_start_step/end_step_'. Demand is also defined as a flow rate in vehicles/hour. Examples are shown below.
+Demand can also be added in code using the `Simulation.add_demand()` function. This uses the same set of parameters as the demand files above, except '_origin/destination/route_id_' is replaced by a single `routing` parameter, and `step_range` is used instead of '_start_time/end_time_' or '_start_step/end_step_'. Demand is also defined as a flow rate in vehicles/hour. Examples are shown below.
 
 ```python
 my_sim.add_demand(routing=("edge_1", "edge_10"),
@@ -83,6 +83,20 @@ my_sim.add_demand(routing="route_1",
                   origin_lane=1
                  )
 ```
+
+Lastly, demand can be added using a demand function that calculates demand based on the step number. This is done using the `Simulation.add_demand_function()` function, which again uses the same parameters as `Simulation.add_demand()`, except `demand` is replaced by `demand_function` and `parameters`. `demand_function` is a function that takes `step`, the step number, as a parameter and outputs a flow value based on this. Other parameters can be passed into the function using a `parameters` dictionary.
+
+An example of this is shown below, where a demand function `cos()` generates a demand profile using a cosine function.
+
+```python
+
+def cos(step, peak, end_step=2000):
+    return (peak / 2) * (1 - math.cos((2 * math.pi * step) / end_step))
+
+my_sim.add_demand_function(("E1", "E2"), (0, 2000), cos, {"peak": 2200}, vehicle_types="cars")
+```
+
+![Example Demand](img/plots/demand_example.png)
 
 !!! warning
 
