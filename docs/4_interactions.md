@@ -262,7 +262,7 @@ When repeatedly adding new vehicles, it may be useful to create a new route that
 
 ## Custom Vehicle Functions
 
-`Simulation.add_vehicle_in_funcs()` and `Simulation.add_vehicle_out_funcs()` can be used to easily add custom functions that are called with each vehicle that enters or leaves the simulation. An example of this is shown below. Multiple functions can be added and are called in the order in which they are added.
+`Simulation.add_vehicle_in_functions()` and `Simulation.add_vehicle_out_functions()` can be used to easily add custom functions that are called with each vehicle that enters or leaves the simulation. An example of this is shown below. Multiple functions can be added and are called in the order in which they are added.
 
 ```python
 def new_vehicle_1(vehicle_id, origin):
@@ -274,8 +274,8 @@ def new_vehicle_2(curr_step):
 def exiting_vehicle(vehicle_id, curr_step):
     print(vehicle_id, "left simulation at step", curr_step)
 
-my_sim.add_vehicle_in_funcs([new_vehicle_1, new_vehicle_2])
-my_sim.add_vehicle_out_funcs(exiting_vehicle)
+my_sim.add_vehicle_in_functions([new_vehicle_1, new_vehicle_2])
+my_sim.add_vehicle_out_functions(exiting_vehicle)
 
 while my_sim.is_running():
     my_sim.step_through()
@@ -295,6 +295,6 @@ car_1 left simulation at step 10
 car_2 left simulation at step 10
 ```
 
-Only specific parameters (`curr_step`, `vehicle_id`, `route_id`, `vehicle_type`, `departure`, `origin`, `destination`) can be used, although `add_vehicle_out_funcs()` only takes functions that use `curr_step` and/or `vehicle_id`.
+Only specific parameters (`curr_step`, `vehicle_id`, `route_id`, `vehicle_type`, `departure`, `origin`, `destination`) can be used, although `add_vehicle_out_functions()` only takes functions that use `curr_step` and/or `vehicle_id`.
 
-These functions can be removed using `Simulation.remove_vehicle_in_funcs()` and `Simulation.remove_vehicle_out_funcs()`.
+These functions can be removed using `Simulation.remove_vehicle_in_functions()` and `Simulation.remove_vehicle_out_functions()`.
