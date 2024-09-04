@@ -30,12 +30,12 @@ More information on "Simulation of Urban MObility" (SUMO) can be found in the SU
 The main features of TUD-SUMO include:
 
   - Automatic and standardised data collection.
-  - Simple interface to interact with and control the simulation.
+  - Simplified interface to interact with and control the simulation in complex ways.
   - Traffic signal control logic.
   - Extendable controllers already implemented (ramp metering, route guidance and variable speed limits).
   - An event system with dynamic or scheduled incidents.
   - Plotting functions for a wide range of applications.
-  - And _more in the future!_
+  - And _more in the future! ..._
 
 ![logos](img/logos.png)
 
