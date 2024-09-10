@@ -21,7 +21,7 @@
   </a>
 </p>
 
-This is the documentation for the TUD-SUMO package, a research-oriented wrapper for SUMO<sup>[1]</sup>, developed for the DAIMoND lab at the Technische Universiteit Delft (TUD), the Netherlands.
+This is the documentation for the TUD-SUMO package, a research-oriented wrapper for SUMO<sup>[1]</sup>, developed for the DAIMoND lab at the Technische Universiteit Delft (TUD), the Netherlands. 
 
 The main goal of TUD-SUMO is to act as a simplified framework for microscopic traffic simulation that allows researchers and students to focus on the important aspects of their projects; **their own work**, instead of simulation code. TUD-SUMO provides an easy and standardised way to simulate a wide range of scenarios whilst facilitating complex interactions. Resulting data can then be saved, summarised and visualised with minimal code.
 
@@ -48,18 +48,31 @@ The main features of TUD-SUMO include:
 
 ## Latest Version
 
-The Latest version of TUD-SUMO is _v3.0.11_, and was released on 02/09/2024. All previous versions and their change notes can be found on [GitHub](https://github.com/tud-sumo/tud_sumo/releases) or [PyPI](https://pypi.org/project/tud-sumo/#history).
+The Latest version of TUD-SUMO is _v3.0.12_, and was released on 10/09/2024. All previous versions and their change notes can be found on [GitHub](https://github.com/tud-sumo/tud_sumo/releases) or [PyPI](https://pypi.org/project/tud-sumo/#history). This documentation was last updated on {{ git.date.strftime("%d/%m/%Y") }}.
 
 The change notes for the latest version are:
 
-### Fixed Interval Detector Data & Demand Functions
+### Saving Object Parameters & Vehicle In/Out Function Improvements
 
-  - Updated & fixed `Simulation.get_interval_detector_data()`.
-  - Added `Simulation.add_demand_function()` to generate flow based on user-defined functions.
-  - Added `point_size` to `Plotter.plot_fundamental_diagram()`.
-  - Changed `Simulation.[add|remove]_vehicle_[in|out]_funcs()` to `Simulation.[add|remove]_vehicle_[in|out]_functions()`.
-  - Changed induction loop occupancy (%) values to floats [0-1] instead of [0-100].
-  - Updated README.
+#### Additions & Improvements
+
+  - Added `Simulation.save_objects()` to save object initialisation parameters.
+  - Added routes to object parameters in `Simulation.[save/load]_objects()`.
+  - Added `"simulation"` as a valid parameter in vehicle in/out functions, which will pass in the simulation object itself.
+  - Added ability to use extra (non-simulation) parameters in vehicle in/out functions. These are set when the function is added and can be updated using `Simulation.update_vehicle_function_parameters()`.
+  - Added `gui_file` to `Simulation.start()`.
+  - Added more comments to the `Simulation` class.
+
+#### Bug Fixes
+
+  - Fixed error in `Plotter.plot_junc_flows()` when plotting with active simulations.
+  - Fixed time range not working correctly in `Plotter.plot_tl_colours()`.
+  - Removed invalid edges/lanes from their respective lists.
+  - Corrected default vehicle type when adding demand - now set to '_DEFAULT_VEHTYPE_' when no type is specified.
+  - Fixed error when removing vehicles on tracked edges.
+  - Improved validation for phase inputs.
+  - Added more pathing validation when adding new vehicles/routes.
+  - Fixed error in `Simulation.cause_incident()` when defining specific `vehicle_ids`.
 
 ## Contact
 

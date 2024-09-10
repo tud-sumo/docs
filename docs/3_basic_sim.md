@@ -14,7 +14,7 @@ from tud_sumo.simulation import Simulation
 my_sim = Simulation(scenario_name="example", scenario_desc="Example simulation.")
 ```
 
-To then start the simulation and create the connection to SUMO through TraCI, use `Simulation.start()`. This can very easily be done using the '_.sumocfg_' file created by netedit, which links all to all other files, however, the `net_file`, `route_file` and `add_file` parameters can also be used to give each file individually. Whether or not to use the GUI is also set here, although note this cannot be changed throughout the simulation.
+To then start the simulation and create the connection to SUMO through TraCI, use `Simulation.start()`. This can very easily be done using the '_.sumocfg_' file created by netedit, which links all to all other files, however, the `net_file`, `route_file`, `add_file` and `gui_file` parameters can also be used to give each file individually. Whether or not to use the GUI is also set here, although note this cannot be changed throughout the simulation.
 
 ```python
 my_sim.start("example_scenario.sumocfg",
@@ -34,11 +34,25 @@ The `seed` parameter is optional and affects both the SUMO simulation and the `S
 
 By default, a progress bar is automatically created when simulating more than 10 steps at a time. This can be skipped by setting `suppress_pbar = False`. 
 
-Tracked junctions/edges, controllers etc. can be added at this point. These objects can be added individually, or if all parameters are saved in a dictionary or '_.json_' or '_.pkl_' file, these can be read using the `Simulation.load_objects()` function. More information on these objects can be found in their respective sections.
+Tracked junctions/edges, controllers etc. can be initialised at this point. These objects can be added individually, or if all of their parameters are saved in a dictionary or '_.json_' or '_.pkl_' file, these can be read using the `Simulation.load_objects()` function. This dictionary can be created manually, or can be saved with `Simulation.save_objects()` for ease of use. An example of this resulting file can be found [here](https://github.com/tud-sumo/example/blob/main/objects.json), otherwise, more information on the objects themselves can be found in their respective sections.
 
 ```python
-my_sim.load_objects("parameters.json")
+# Save object initialisation parameters
+my_sim.save_objects("objects.pkl")
+
+# Initialise objects using the same parameters
+my_sim.load_objects("objects.pkl")
 ```
+
+The following objects can be included in this dictionary:
+
+  - '_edges_': List of edge IDs for tracking.
+  - '_junctions_': [Tracked junction](5_tracked_objs.md/#tracked-junctions) initialisation parameters.
+  - '_phases_': Traffic light [phase dictionary](6_traffic_control.md/#traffic-signal-control).
+  - '_controllers_': Dictionary containing [VSL](6_traffic_control.md/#variable-speed-limits) and/or [RG](6_traffic_control.md/#dynamic-route-guidance) controller parameters.
+  - '_events_': Dictionary containing [scheduled event](7_events.md/#scheduled-events) parameters (previous dynamic events are saved in the resulting file).
+  - '_demand_': A '_.csv_' filename (or list of filenames) for OD matrices.
+  - '_routes_': A dictionary containing new routes by their ID and a (2x1) array representing the origin and destination.
 
 ## Adding Demand
 

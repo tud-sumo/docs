@@ -264,37 +264,49 @@ When repeatedly adding new vehicles, it may be useful to create a new route that
 
 `Simulation.add_vehicle_in_functions()` and `Simulation.add_vehicle_out_functions()` can be used to easily add custom functions that are called with each vehicle that enters or leaves the simulation. An example of this is shown below. Multiple functions can be added and are called in the order in which they are added.
 
+If certain parameters are included, their values will be automatically generated with each vehicle. These are:
+
+  - `simulation`: The simulation object itself.
+  - `curr_step`: The current simulation step.
+  - `vehicle_id`: Each vehicle ID.
+  - `route_id`: Route the vehicle will travel on.
+  - `vehicle_type`: Vehicle type ID.
+  - `departure`: Departure time of the vehicle.
+  - `origin`: Origin egde ID of the vehicle.
+  - `destination`: Destination edge ID of the vehicle.
+
 ```python
-def new_vehicle_1(vehicle_id, origin):
-    print(vehicle_id, "entered simulation from edge", origin)
+def recolour_vehicle(simulation, vehicle_id, new_colour="#FF0000"):
+    simulation.set_vehicle_vals(vehicle_id, colour=new_colour)
 
-def new_vehicle_2(curr_step):
-    print("new vehicle at step", curr_step, "\n")
+new_vehicles = []
+def register_vehicle(vehicle_id, curr_step, arr):
+    print(vehicle_id, "entered simulation at step", curr_step)
+    arr.append(vehicle_id)
 
-def exiting_vehicle(vehicle_id, curr_step):
+def exit_vehicle(vehicle_id, curr_step):
     print(vehicle_id, "left simulation at step", curr_step)
 
-my_sim.add_vehicle_in_functions([new_vehicle_1, new_vehicle_2])
-my_sim.add_vehicle_out_functions(exiting_vehicle)
+my_sim.add_vehicle_in_functions(functions=[recolour_vehicle, register_vehicle],
+                                parameters={"register_vehicle": {"arr": new_vehicles}})
+my_sim.add_vehicle_out_functions(exit_vehicle)
 
 while my_sim.is_running():
     my_sim.step_through()
 ```
 
-Running this example would therefore produce:
+Running this example would print the message below to the console. The `arr` list would also contain `['car_1', 'car_2', 'car_3']`.
 
 ```
 >>> run_sim.py
-car_1 entered simulation from edge west_1
-new vehicle at step 0
-
-car_2 entered simulation from edge west_1
-new vehicle at step 0
-
+car_1 entered simulation at step 0
+car_2 entered simulation at step 2
+car_3 entered simulation at step 4
 car_1 left simulation at step 10
-car_2 left simulation at step 10
+car_2 left simulation at step 12
+car_2 left simulation at step 14
 ```
 
-Only specific parameters (`curr_step`, `vehicle_id`, `route_id`, `vehicle_type`, `departure`, `origin`, `destination`) can be used, although `add_vehicle_out_functions()` only takes functions that use `curr_step` and/or `vehicle_id`.
+Only `simulation`, `curr_step` and `vehicle_id` can be used for both vehicle in **and** out functions. Trip-related variables cannot be used in vehicle out functions. Extra parameters can be used by passing in a parameters dictionary as below. These can later be updated using `Simulation.update_vehicle_function_parameters()`. Note that it is not necessary to include a `new_colour` parameter in the dictionary, as this already has a default value.
 
 These functions can be removed using `Simulation.remove_vehicle_in_functions()` and `Simulation.remove_vehicle_out_functions()`.

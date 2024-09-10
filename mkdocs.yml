@@ -19,8 +19,12 @@ theme:
   favicon: img/favicon.ico
   logo: img/logo.png
 extra_css:
-- stylesheets/extra.css
+  - stylesheets/extra.css
 markdown_extensions:
   - admonition
   - pymdownx.details
   - pymdownx.superfences
+plugins:
+  - search
+  - macros:
+      include_dir: ../tuds_example
