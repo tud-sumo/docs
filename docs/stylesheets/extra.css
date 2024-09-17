@@ -25,3 +25,9 @@ a:not(.md-nav__link) {
 a:hover {
   opacity: 0.6;
 }
+
+code {
+  margin: 20px 0 !important;
+  background-color: rgb(240, 240, 240) !important;
+  box-shadow: inset 0px 0px 2px 1px rgba(0, 0, 0, 0.1) !important;
+}

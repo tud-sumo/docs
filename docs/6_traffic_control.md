@@ -88,7 +88,8 @@ Ramp meters use the exact same logic and `phase_dict` as traffic signals to oper
   - `g_time`: Green time, defaults to 1s for a one-car-per-green policy.
   - `y_time`: Yellow time, defaults to 1s.
   - `min_red`: Minimum red time. If the flow would require a red time less than this, the meter is set to green for the duration of the control interval.
-  - `control_interval`: Control interval length in seconds (control interval % resulting cycle length = 0, ie. phases will loop seamlessly with each control interval).
+  - `vehs_per_cycle`: The number of vehicles released with each cycle. The network will affect how many vehicles pass the meter with each green light, so the phase calculations can be changed to reflect this. By default, `vehs_per_cycle` is set to the number of lanes on the ramp.
+  - `control_interval`: Control interval length in seconds. The cycle of the resulting phases will aim to loop seamlessly (where `control_interval % cycle_length == 0`), however, this may not be possible to achieve the desired metering rate.
 
 If the junction is tracked, all ramp metering data will be stored under '_data/junctions/{meter_id}/meter_', and will contain '_metering_rates_', '_rate_times_', '_queue_lengths_', '_queue_delays_', '_min_rate_' and '_max_rate_'.
 

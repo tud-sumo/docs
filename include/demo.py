@@ -16,7 +16,6 @@ if __name__ == "__main__":
     my_sim.start("example_scenario/a20.sumocfg", get_individual_vehicle_data=False, gui="-gui" in sys.argv,
                  seed=sim_seed, units="metric") # Units can either be metric (km,kmph)/imperial (mi,mph)/UK (km,mph). All data collected is in these units.
     
-
     # Add demand from a '.csv' file.
     # my_sim.load_demand("example_scenario/demand.csv")
 
@@ -55,13 +54,21 @@ if __name__ == "__main__":
     # Add a new route that vehicles can be assigned to.
     my_sim.add_route(("urban_in_e", "urban_out_w"), "new_route")
 
+    # These individual functions above can be replaced as below, where the 'parameters.json' file contains
+    # a dictionary of all necessary parameters (under 'edges', 'junctions', 'phases', 'controllers' and 'events')
+    # my_sim.load_objects("parameters.json")
+
+    # This file can either be created manually, or by saving objects in previous simulations. This is done
+    # using the save_objects function as below.
+    my_sim.save_objects("objects.json")
+
     # Add a function that is called on each new vehicle in the simulation. Simulation parameters are; curr_step,
     # vehicle_id, route_id, vehicle_type, departure, origin, destination. These values are filled automatically.
     # For other parameters, use a parameters dictionary as below. Use add_vehicle_out_funcs() for functions
     # called when vehicles exit the simulation (only with vehicle_id and/or curr_step). Vehicle in/out functions
     # can be removed using remove_vehicle_[in/out]_functions().
 
-    vehicle_ids = []
+    vehicle_ids, new_veh_idx = [], 0
     def add_to_vehicle_arr(simulation, vehicle_id, arr):
         """
         Append vehicle ID and initial speed to an array.
@@ -71,24 +78,20 @@ if __name__ == "__main__":
 
     my_sim.add_vehicle_in_functions(add_to_vehicle_arr, parameters={"arr": vehicle_ids})
 
-    # These individual functions above can be replaced as below, where the 'parameters.json' file contains
-    # a dictionary of all necessary parameters (under 'edges', 'junctions', 'phases', 'controllers' and 'events')
-    # my_sim.load_objects("parameters.json")
+    n, sim_dur, warmup = 1, 500 / my_sim.step_length, 0 / my_sim.step_length
+    
+    if warmup > 0:
+        my_sim.step_through(n_steps=warmup, pbar_max_steps=sim_dur+warmup, keep_data=False)
 
-    # This file can either be created manually, or by saving objects in previous simulations. This is done
-    # using the save_objects function as below.
-    # my_sim.save_objects("parameters.json")
-
-    n, sim_dur, new_veh_idx = 1 / my_sim.step_length, 500 / my_sim.step_length, 0
-    while my_sim.curr_step < sim_dur:
+    while my_sim.curr_step < sim_dur + warmup:
 
         # Set ramp metering rate.
         if my_sim.curr_step % 50 / my_sim.step_length == 0:
             my_sim.set_tl_metering_rate(rm_id="crooswijk_meter", metering_rate=randint(1200, 2000))
             my_sim.set_tl_metering_rate(rm_id="a13_meter", metering_rate=randint(1200, 2000))
         
-        # Step through n steps.
-        my_sim.step_through(n_steps=n, pbar_max_steps=sim_dur)
+        # Step through n seconds.
+        my_sim.step_through(n_seconds=n, pbar_max_steps=sim_dur+warmup)
 
         # Add new vehicles going from "urban_in_e" to "urban_out_w" (using previously defined route)
         if my_sim.curr_step % 50 / my_sim.step_length == 0:

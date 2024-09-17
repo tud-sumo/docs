@@ -66,7 +66,9 @@ There are two approaches to adding demand to a simulation. The default approach 
 
 If a flow value is given, vehicles are spawned throughout the demand period at this specified rate. Vehicles are inserted into the simulation using a Gaussian distribution with an average of '_demand_' vehicle per hour. '_insertion_sd_' is an optional float parameter that can be used to change the standard deviation of this distribution, and defaults to 1/3. Note that the actual standard deviation used is calculated using _demand * insertion_sd_. When the vehicles per step is below 1, vehicles are inserted at each step with this rate as a probability.
 
-The other parameters are optional. '_vehicle_types_' can be a list of vehicle type IDs or a single ID and can optionally be given with '_vehicle_type_dists_'. When adding demand of multiple potential vehicle types, this allows for the distribution of types to be defined. If '_vehicle_types_', the default vehicle type is used, and when '_vehicle_types_' is given without a '_vehicle_type_dists_', vehicle types have an equal distribution. '_initial_speed_' defines the initial speed of vehicles at insertion and can either be '_max_', '_random_' or a number > 0, but defaults to '_max_'. '_origin_lane_' defines which lane vehicles are inserted at. This can either be '_random_', '_free_', '_allowed_', '_best_', '_first_' or a specific lane index, but defaults to '_best_'.
+The other parameters are optional. '_vehicle_types_' can be a list of vehicle type IDs or a single ID and can optionally be given with '_vehicle_type_dists_'. When adding demand of multiple potential vehicle types, this allows for the distribution of types to be defined. If '_vehicle_types_', the default vehicle type is used, and when '_vehicle_types_' is given without a '_vehicle_type_dists_', vehicle types have an equal distribution. '_initial_speed_' defines the initial speed of vehicles at insertion and can either be '_max_', '_random_' or a number > 0, but defaults to '_max_'. '_origin_lane_' defines which lane vehicles are inserted at. This can either be '_random_', '_free_', '_allowed_', '_best_', '_first_' or a specific lane index, but defaults to '_best_'. '_origin_pos_' defines the longitudinal position on the lane vehicles are inserted at. This can either be '_random_', '_free_', '_random\_free_', '_last_', '_stop_', '_splitFront_' or a specific position, but defaults to '_base_'.
+
+More in-depth descriptions of the possible values can be found [here](https://sumo.dlr.de/docs/Definition_of_Vehicles%2C_Vehicle_Types%2C_and_Routes.html#a_vehicles_depart_and_arrival_parameter).
 
 Two examples of the contents of a '_demand.csv_' file are shown below. It is possible to link a demand file in an object parameters dictionary under '_demand_' when calling `Simulation.load_objects()`.
 
@@ -75,10 +77,10 @@ Two examples of the contents of a '_demand.csv_' file are shown below. It is pos
 | edge_1 |   edge_10   |      0     |    600   |  1200  | "cars,vans,lorries" |    "0.7,0.2,0.1"   |
 |   ...  |     ...     |     ...    |    ...   |   ...  |         ...         |         ...        |
 
-| route_id | start_step | end_step | number | initial_speed | origin_lane | insertion_sd |
-|:--------:|:----------:|:--------:|:------:|:-------------:|:-----------:|:------------:|
-|  route_1 |      0     |   1200   |   200  |      max      |      1      |      0.3     |
-|    ...   |     ...    |    ...   |   ...  |      ...      |     ...     |      ...     |
+| route_id | start_step | end_step | number | initial_speed | origin_lane | origin_pos | insertion_sd |
+|:--------:|:----------:|:--------:|:------:|:-------------:|:-----------:|:----------:|:------------:|
+|  route_1 |      0     |   1200   |   200  |      max      |      1      |   random   |      0.3     |
+|    ...   |     ...    |    ...   |   ...  |      ...      |     ...     |     ...    |      ...     |
 
 Demand can also be added in code using the `Simulation.add_demand()` function. This uses the same set of parameters as the demand files above, except '_origin/destination/route_id_' is replaced by a single `routing` parameter, and `step_range` is used instead of '_start_time/end_time_' or '_start_step/end_step_'. Demand is also defined as a flow rate in vehicles/hour. Examples are shown below.
 
@@ -145,6 +147,13 @@ while my_sim.curr_step < sim_dur:
 
     # Perform control
     # ...
+```
+
+To include a warmup period where no data is collected, set `keep_data = True`.
+
+```python
+warmup_length = 120
+my_sim.step_through(n_seconds=warmup_length, keep_data=True)
 ```
 
 ## Ending the Simulation

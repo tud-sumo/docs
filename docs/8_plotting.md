@@ -43,7 +43,22 @@ plt.plot_trajectories(["edge_1", "edge_2", "edge_3"], save_fig="figs/trajectorie
 
 ### Common Parameters
 
-Whenever possible, all plotting functions include `time_range` and `show_events` parameters. By default, graphs are plotted for the data throughout the whole simulation. `time_range` can be used to plot a specific duration within the simulation, and is defined in **in plotter time units**, ie. hours or minutes. If `show_events` is set to true, graphs will display times with active events with a shaded region. Examples of these are shown below.
+Whenever possible, all plotting functions include `time_range` and `show_events` parameters. By default, graphs are plotted for the data throughout the whole simulation. `time_range` can be used to plot a specific duration within the simulation, and is defined in **in plotter time units**, ie. hours or minutes. `show_events` can either be a single event ID, list of event IDs or an event status ('_scheduled_', '_active_' or '_completed_'), which will plot all events with this status. To plot all events, set `show_events = "all"`. By default, no events are plotted.
+
+Usage examples of `time_range` and `show_events`, as well as the resulting plots are shown below.
+
+```python
+plt = Plotter("example_data.pkl", time_unit="minutes")
+
+# Figure 1
+plt.plot_cumulative_curve()
+
+# Figure 2
+plt.plot_cumulative_curve(time_range=[3, 6])
+
+# Figure 3
+plt.plot_cumulative_curve(time_range=[3, 6], show_events="bottleneck")
+```
 
 ![Time range/events example](img/plots/range_event_ex.png)
 

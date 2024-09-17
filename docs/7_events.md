@@ -66,7 +66,7 @@ rp_parameters = {"bottleneck_reaction":
                 }
 ```
 
-Event data is stored in the `sim_data` dictionary under '_data/events/{status}/{event_id}_'. The status can either be '_scheduled_', '_active_' or '_completed_'. Each contains a list of events and their event parameters.
+Event parameters are stored in the `sim_data` dictionary under '_data/events/{status}/{event_id}_'. The status can either be '_scheduled_', '_active_' or '_completed_'.
 
 ## Dynamic Incidents
 
