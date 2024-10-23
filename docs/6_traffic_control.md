@@ -91,11 +91,13 @@ Ramp meters use the exact same logic and `phase_dict` as traffic signals to oper
   - `vehs_per_cycle`: The number of vehicles released with each cycle. The network will affect how many vehicles pass the meter with each green light, so the phase calculations can be changed to reflect this. By default, `vehs_per_cycle` is set to the number of lanes on the ramp.
   - `control_interval`: Control interval length in seconds. The cycle of the resulting phases will aim to loop seamlessly (where `control_interval % cycle_length == 0`), however, this may not be possible to achieve the desired metering rate.
 
+Note that there is a maximum possible flow determined by the green, red and yellow time parameters as well as the infrastructure of the on-ramp itself. For example, with a one lane on-ramp and a `g_time`, `y_time` and `min_red` of 1s, the meter cannot physically release more than 1200 vehicles/hour without reducing the minimum red time. So, when the desired metering rate is above this threshold, the meter is set to green for the whole control interval. This limit is increased as more lanes are added to the on-ramp (as more vehicles are released with each green cycle). Depending on the junction type defined in NETEDIT, some tuning of `vehs_per_cycle` may be required to reflect the actual amount of vehicles that are released with each cycle. 
+
 If the junction is tracked, all ramp metering data will be stored under '_data/junctions/{meter_id}/meter_', and will contain '_metering_rates_', '_rate_times_', '_queue_lengths_', '_queue_delays_', '_min_rate_' and '_max_rate_'.
 
 !!! warning
 
-    Note that as ramp meters use the same logic as adaptive traffic signals, it is possible to accidentally overwrite their settings when using `Simulation.set_phases()`.
+    Note that as ramp meters use the same logic as adaptive traffic signals, it is possible to accidentally overwrite their settings when using `Simulation.set_phases()`. To avoid this, set `overwrite` to `False`.
 
 ## Variable Speed Limits
 
