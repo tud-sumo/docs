@@ -20,6 +20,10 @@
   </a>
 </p>
 
+!!! Warning
+
+    TUD-SUMO has now migrated from the _tud-sumo GitHub_ to the [DAIMoND Lab GitHub](https://github.com/DAIMoNDLab). All new updates will occur on this new repository.
+
 This is the documentation for the TUD-SUMO package, a research-oriented wrapper for SUMO<sup>[1]</sup>, developed for the DAIMoND lab at the Technische Universiteit Delft (TUD), the Netherlands. 
 
 The main goal of TUD-SUMO is to act as a simplified framework for microscopic traffic simulation that allows researchers and students to focus on the important aspects of their projects; **their own work**, instead of simulation code. TUD-SUMO provides an easy and standardised way to simulate a wide range of scenarios whilst facilitating complex interactions. Resulting data can then be saved, summarised and visualised with minimal code.
@@ -47,29 +51,18 @@ The main features of TUD-SUMO include:
 
 ## Latest Version
 
-The Latest version of TUD-SUMO is _v3.1.0_, and was released on 17/09/2024. All previous versions and their change notes can be found on [GitHub](https://github.com/DAIMoNDLab/tud-sumo/releases) or [PyPI](https://pypi.org/project/tud-sumo/#history). This documentation was last updated on {{ git.date.strftime("%d/%m/%Y") }}.
+The Latest version of TUD-SUMO is _v3.1.1_, and was released on 24/10/2024. All previous versions and their change notes can be found on [GitHub](https://github.com/DAIMoNDLab/tud-sumo/releases) or [PyPI](https://pypi.org/project/tud-sumo/#history). This documentation was last updated on {{ git.date.strftime("%d/%m/%Y") }}.
 
 The change notes for the latest version are:
 
-### SPARKS Release
+### DAIMoND Lab Release
 
-#### Additions & Improvements
+#### Changes
 
-  - Improved `keep_data` option in `Simulation.step_through()` to speed up runtime when not storing data.
-  - Improved handling and error messages for string inputs.
-  - Changed `show_events` in `Plotter` functions:
-    - Events are no longer shown by default.
-    - `show_events` now takes a list of event IDs (or 'all') instead of a true/false value.
-  - Changed events in `sim_data` to save as a dictionary, not a list.
-  - Added `vehs_per_cycle` to `Simulation.set_tl_metering_rate()` & validated outputs.
-  - Added origin (departure) position to demand inputs.
-
-#### Bug Fixes
-
-  - Fixed `Plotter` handling of simulation data not starting at time step 0.
-  - Fixed errors in `Plotter.plot_throughput()` (index error and key error when plotting with removed vehicles).
-  - Fixed missing NumPy import.
-  - Removed scenario tools until they can be updated.
+  - Updated for migration to DAIMoNDLab repository.
+  - Added `Simulation.set_m_phases()` to set traffic phases by movement.
+  - Added Google-style standardised docstrings to all functions.
+  - Added `sumo_home` parameter to `Simulation.start()` to set the `$SUMO_HOME` environment variable.
 
 ## Contact
 
