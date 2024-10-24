@@ -34,7 +34,7 @@ The `seed` parameter is optional and affects both the SUMO simulation and the `S
 
 By default, a progress bar is automatically created when simulating more than 10 steps at a time. This can be skipped by setting `suppress_pbar = False`. 
 
-Tracked junctions/edges, controllers etc. can be initialised at this point. These objects can be added individually, or if all of their parameters are saved in a dictionary or '_.json_' or '_.pkl_' file, these can be read using the `Simulation.load_objects()` function. This dictionary can be created manually, or can be saved with `Simulation.save_objects()` for ease of use. An example of this resulting file can be found [here](https://github.com/tud-sumo/example/blob/main/objects.json), otherwise, more information on the objects themselves can be found in their respective sections.
+Tracked junctions/edges, controllers etc. can be initialised at this point. These objects can be added individually, or if all of their parameters are saved in a dictionary or '_.json_' or '_.pkl_' file, these can be read using the `Simulation.load_objects()` function. This dictionary can be created manually, or can be saved with `Simulation.save_objects()` for ease of use. An example of this resulting file can be found [here](https://github.com/DAIMoNDLab/tud-sumo-examples/blob/main/a20_example/objects.json), otherwise, more information on the objects themselves can be found in their respective sections.
 
 ```python
 # Save object initialisation parameters

@@ -4,7 +4,7 @@
 
 Below is a basic example that can be used to check that SUMO and TUD-SUMO are installed and run correctly. The network used is shown above, and is a simple ~300m stretch of road with a constant demand of 1800veh/hr.
 
-This example can be downloaded from the `basic_example` file at: [github.com/tud-sumo/example](https://github.com/tud-sumo/example)
+This example can be downloaded from the `basic_example` file on GitHub at: [DAIMoNDLab/tud-sumo-examples](https://github.com/DAIMoNDLab/tud-sumo-examples/tree/main/basic_example)
 
 ```python
 from tud_sumo.simulation import Simulation
@@ -40,7 +40,7 @@ if __name__ == "__main__":
 
 Below, the northern section of the motorway ringroad around Rotterdam, the A20 between Schiedam and the Kralingse Bos, is simulated. This scenario aims to demonstrate the full functionality of TUD-SUMO, with multiple ramp meters, variable speed limit and route guidance controllers, as well as several different events and interactions. The layout of the network itself is shown above.
 
-This example can be downloaded from the `a20_example` file at: [github.com/tud-sumo/example](https://github.com/tud-sumo/example)
+This example can be downloaded from the `a20_example` file on GitHub at: [DAIMoNDLab/tud-sumo-examples](https://github.com/DAIMoNDLab/tud-sumo-examples/tree/main/a20_example)
 
 ```python
 {% include 'demo.py' %}
