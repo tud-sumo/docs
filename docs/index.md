@@ -20,10 +20,6 @@
   </a>
 </p>
 
-!!! Warning
-
-    TUD-SUMO has now migrated from the _tud-sumo GitHub_ to the [DAIMoND Lab GitHub](https://github.com/DAIMoNDLab). All new updates will occur on this new repository.
-
 This is the documentation for the TUD-SUMO package, a research-oriented wrapper for SUMO<sup>[1]</sup>, developed for the DAIMoND lab at the Technische Universiteit Delft (TUD), the Netherlands. 
 
 The main goal of TUD-SUMO is to act as a simplified framework for microscopic traffic simulation that allows researchers and students to focus on the important aspects of their projects; **their own work**, instead of simulation code. TUD-SUMO provides an easy and standardised way to simulate a wide range of scenarios whilst facilitating complex interactions. Resulting data can then be saved, summarised and visualised with minimal code.
@@ -51,18 +47,26 @@ The main features of TUD-SUMO include:
 
 ## Latest Version
 
-The Latest version of TUD-SUMO is _v3.1.1_, and was released on 24/10/2024. All previous versions and their change notes can be found on [GitHub](https://github.com/DAIMoNDLab/tud-sumo/releases) or [PyPI](https://pypi.org/project/tud-sumo/#history). This documentation was last updated on {{ git.date.strftime("%d/%m/%Y") }}.
+The Latest version of TUD-SUMO is _v3.1.2_, and was released on 06/11/2024. All previous versions and their change notes can be found on [GitHub](https://github.com/DAIMoNDLab/tud-sumo/releases) or [PyPI](https://pypi.org/project/tud-sumo/#history). This documentation was last updated on {{ git.date.strftime("%d/%m/%Y") }}.
 
 The change notes for the latest version are:
 
-### DAIMoND Lab Release
+### Multi-Plotters & Improvements
 
-#### Changes
+#### Additions
 
-  - Updated for migration to DAIMoNDLab repository.
-  - Added `Simulation.set_m_phases()` to set traffic phases by movement.
-  - Added Google-style standardised docstrings to all functions.
-  - Added `sumo_home` parameter to `Simulation.start()` to set the `$SUMO_HOME` environment variable.
+  - Added `MultiPlotter` class to plot data from multiple simulations.
+  - Added `MultiPlotter.plot_[vehicle|detector|edge]_data()` for plotting tracked edge data.
+  - Added `MultiPlotter.plot_throughput()`.
+  - Added `Plotter.plot_edge_data()`.
+  - Added `Simulation.get_interval_vehicle_data()` function to get network-wide vehicle data over a specific time range.
+  - Added `Simulation.curr_time` attribute.
+
+#### Changes & Improvements
+  - Changed to allow for route/additional/GUI files not linked in the SUMO configuration file.
+  - Some visual improvements to progress bar.
+  - Text summaries are no longer printed if they are saved to a file.
+  - Fixed images for pip distribution description.
 
 ## Contact
 

@@ -140,7 +140,7 @@ A control loop can, therefore, be created as below. A progress bar is automatica
 
 ```python
 n, sim_dur = 100, 2500
-while my_sim.curr_step < sim_dur:
+while my_sim.curr_step < sim_dur: # or use my_sim.curr_time
 
     # Step through n steps.
     my_sim.step_through(n_steps=n, pbar_max_steps=sim_dur)

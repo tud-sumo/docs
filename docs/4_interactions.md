@@ -46,26 +46,30 @@ The most basic getter functions in the `Simulation` class return the IDs of obje
 All data collected throughout the simulation is stored in the `sim_data` dictionary, however, its data (and other dynamic vehicle data) can be fetched using the `Simulation.get_[x]()` functions below.
 
   - `get_no_vehicles()`:
-    - Returns the number of vehicles in the last step of the simulation.
+    - Returns the number of vehicles in the last step of the simulation.<br><br>
   - `get_tts()`:
-    - Returns the Total Time Spent (TTS) by vehicles in the simulation during the last step.
+    - Returns the Total Time Spent (TTS) by vehicles in the simulation during the last step.<br><br>
   - `get_delay()`:
-    - Returns total vehicle delay during the last simulation step (calculated as the number of vehicles where speed < 0.1m/s<sup>2</sup>, multiplied by the simulation step length).
+    - Returns total vehicle delay during the last simulation step (calculated as the number of vehicles where speed < 0.1m/s<sup>2</sup>, multiplied by the simulation step length).<br><br>
+  - `get_interval_network_data(data_keys, n_steps, interval_end, get_avg)`:
+    - Returns aggregated, network-wide vehicle data during the time range (`curr_step - n_steps - interval_end`, `curr_step - interval_end`). Supported data keys are '_no\_vehicles_', '_tts_' and '_delay_'.
+    - By default, all returned values are totalled over the interval. `get_avg` denotes whether to return the step average delay instead of the total.
+    - If multiple data keys are given, each dataset is returned in a dictionary separated by its key.<br><br>
   - `get_vehicle_data(vehicle_ids)`:
     - Returns a dictionary containing all information on a vehicle. This is; '_type_', '_longitude_', '_latitude_', '_altitude_', '_heading_', '_speed_', '_acceleration_', '_stopped_', '_length_', '_departure_', '_destination_' and '_origin_'.
     - TUD-SUMO stores static information (route origin, vehicle length etc.) to avoid unnecessary repeated calls to TraCI. This is automatically done when calling `get_vehicle_data()` on a vehicle for the first time.
-    - `vehicle_ids` can be a single vehicle ID (string), or a list of IDs (list/tuple). If multiple IDs are given, a dictionary is returned with each vehicle's data stored under its ID.
+    - `vehicle_ids` can be a single vehicle ID (string), or a list of IDs (list/tuple). If multiple IDs are given, a dictionary is returned with each vehicle's data stored under its ID.<br><br>
   - `get_all_vehicle_data(vehicle_types, all_dynamic_data):`
     - Returns the total number of vehicles in the simulation, the total number of waiting vehicles, and if `all_dynamic_data == True`, the static & dynamic data for all vehicles.
-    - If `all_dynamic_data == False`, an empty dictionary is returned as the last variable.
+    - If `all_dynamic_data == False`, an empty dictionary is returned as the last variable.<br><br>
   - `get_last_step_detector_vehicles(detector_ids, vehicle_types, flatten)`:
     - Returns the IDs of all vehicles who passed over the specified detector(s) in the last simulation step.
-    - `detector_ids` and `vehicle_types` can either be a single value (string) or list of values (list/tuple). If multiple detector IDs are given, IDs for all detectors can either be returned in a single list (`flatten = True`), or the IDs can be returned in a dictionary with lists of IDs separated by detector (`flatten = False`).
+    - `detector_ids` and `vehicle_types` can either be a single value (string) or list of values (list/tuple). If multiple detector IDs are given, IDs for all detectors can either be returned in a single list (`flatten = True`), or the IDs can be returned in a dictionary with lists of IDs separated by detector (`flatten = False`).<br><br>
   - `get_last_step_geometry_vehicles(geometry_ids, vehicle_types, flatten)`:
     - Returns the IDs of all vehicles on the specified geometry in the last simulation step.
-    - `geometry_ids` and `vehicle_types` can either be a single value (string) or list of values (list/tuple). If multiple geometry IDs are given, IDs for all geometries can either be returned in a single list (`flatten = True`), or the IDs can be returned in a dictionary with lists of IDs separated by geometry (`flatten = False`).
+    - `geometry_ids` and `vehicle_types` can either be a single value (string) or list of values (list/tuple). If multiple geometry IDs are given, IDs for all geometries can either be returned in a single list (`flatten = True`), or the IDs can be returned in a dictionary with lists of IDs separated by geometry (`flatten = False`).<br><br>
 - `get_interval_detector_data(detector_ids, data_keys, n_steps, interval_end, avg_step_vals, avg_det_vals, sum_counts)`:
-    - Returns data collected by one detector or multiple detectors between during the time range (`curr_step - n_steps - interval_end`, `curr_step - interval_end`).
+    - Returns data collected by one detector or multiple detectors during the time range (`curr_step - n_steps - interval_end`, `curr_step - interval_end`).
     - If multiple detector IDs are given, data is returned in a dictionary separated by detector (and data keys). If `avg_det_vals == True`, data is averaged (step-wise) for all detectors (ie. `{"det_1": [1, 2, 3], "det_2": [3, 2, 1]}` is averaged to `[2, 2, 2]`).
     - If `avg_step_vals == True`, data is averaged across all steps (ie. `{"det_1": [1, 2, 3], "det_2": [3, 2, 1]}` is averaged to `{"det_1": 2, "det_2": 2}`).
     - If multiple detector IDs are given and `avg_step_vals == avg_det_vals == True`, a single averaged value is returned (for all data keys) (ie. `{"det_1": [1, 2, 3], "det_2": [3, 2, 1]}` is averaged to `2`).
@@ -79,9 +83,9 @@ To query routes and paths in the network, use the functions below.
 
   - `is_valid_path(edge_ids)`:
     - Tests whether a list of edges is a valid path. This is determined by checking whether each edge connects to the subsequent edge in the list.
-    - Valid paths can be added as a route using the `Simulation.add_route()` function.
+    - Valid paths can be added as a route using the `Simulation.add_route()` function.<br><br>
   - `get_path_travel_time(edge_ids, curr_tt, unit)`:
-    - Calculate the travel time of a path (list of edges). If `curr_tt` is true, the travel time is calculated using current mean speed on edges. If `curr_tt` is false, the travel time is calculated using free-flow speed.
+    - Calculate the travel time of a path (list of edges). If `curr_tt` is true, the travel time is calculated using current mean speed on edges. If `curr_tt` is false, the travel time is calculated using free-flow speed.<br><br>
   - `get_path_edges(origin, destination, curr_optimal)`:
     - Uses the A* algorithm to find the optimal route between two edges (`origin` to `destination`).
     - If `curr_optimal` is true, the route is based on current conditions, using current mean speed on edges to find travel time. If `curr_optimal` is false, the route is calculated based on free-flow travel time.
