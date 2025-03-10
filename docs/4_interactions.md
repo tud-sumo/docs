@@ -47,12 +47,14 @@ All data collected throughout the simulation is stored in the `sim_data` diction
 
   - `get_no_vehicles()`:
     - Returns the number of vehicles in the last step of the simulation.<br><br>
+  - `get_no_waiting()`:
+    - Returns the number of waiting vehicles in the last step of the simulation.<br><br>
   - `get_tts()`:
     - Returns the Total Time Spent (TTS) by vehicles in the simulation during the last step.<br><br>
   - `get_delay()`:
     - Returns total vehicle delay during the last simulation step (calculated as the number of vehicles where speed < 0.1m/s<sup>2</sup>, multiplied by the simulation step length).<br><br>
   - `get_interval_network_data(data_keys, n_steps, interval_end, get_avg)`:
-    - Returns aggregated, network-wide vehicle data during the time range (`curr_step - n_steps - interval_end`, `curr_step - interval_end`). Supported data keys are '_no\_vehicles_', '_tts_' and '_delay_'.
+    - Returns aggregated, network-wide vehicle data during the time range (`curr_step - n_steps - interval_end`, `curr_step - interval_end`). Supported data keys are '_no\_vehicles_', '_no_waiting_', '_tts_' and '_delay_'.
     - By default, all returned values are totalled over the interval. `get_avg` denotes whether to return the step average delay instead of the total.
     - If multiple data keys are given, each dataset is returned in a dictionary separated by its key.<br><br>
   - `get_vehicle_data(vehicle_ids)`:
@@ -127,12 +129,16 @@ Subscriptions and static vehicle data are used whenever possible to reduce TraCI
     - '_heading_': Current vehicle heading
     - '_departure_': Vehicle departure time
     - '_edge_id_': Current vehicle's edge ID
+    - '_lane_id_': Current vehicle's lane ID
     - '_lane_idx_': Index of the vehicle's current lane
     - '_origin_': Departure edge ID of the vehicle
     - '_destination_': Current destination edge ID of the vehicle
     - '_route_id_': Current vehicle route ID
     - '_route_idx_': The index of the vehicle's edge on its route
     - '_route_edges_': The list of edges that the vehicle's route consists of
+    - '_allowed_speed_': Current vehicle's maximum allowed speed, based on its location & type
+    - '_leader_id_': Returns the ID of the leading vehicle (returns `None` if no leading vehicle within 100m)
+    - '_leader_dist_': Returns the distance to the leading vehicle (returns `None` if no leading vehicle within 100m)
   - `get_detector_vals()`:
     - '_type_': Detector type ('mutlientryexit' or 'inductionloop')
     - '_position_': Detector coordinates
@@ -185,6 +191,7 @@ For example:
 The valid data keys and their accepted data type are listed below. Note that the keys aim to be the same as those in the `get_[x]_vals()` functions (whenever possible).
 
   - `set_vehicle_vals()`:
+    - `type`: Changes the vehicle's type to another pre-existing type (string)
     - `colour`: Changes the vehicle's colour (either valid hex code or list of rgb(a) values)
     - `highlight`: Sets vehicle highlighting (boolean)
     - `speed`: Sets a new speed value for the vehicle (integer or float)

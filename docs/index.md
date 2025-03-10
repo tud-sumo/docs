@@ -47,26 +47,39 @@ The main features of TUD-SUMO include:
 
 ## Latest Version
 
-The Latest version of TUD-SUMO is _v3.1.2_, and was released on 06/11/2024. All previous versions and their change notes can be found on [GitHub](https://github.com/DAIMoNDLab/tud-sumo/releases) or [PyPI](https://pypi.org/project/tud-sumo/#history). This documentation was last updated on {{ git.date.strftime("%d/%m/%Y") }}.
+The Latest version of TUD-SUMO is _v3.2.1_, and was released on 10/03/2025. All previous versions and their change notes can be found on [GitHub](https://github.com/DAIMoNDLab/tud-sumo/releases) or [PyPI](https://pypi.org/project/tud-sumo/#history). This documentation was last updated on {{ git.date.strftime("%d/%m/%Y") }}.
 
-The change notes for the latest version are:
+The change notes for this latest version, and _v3.2.0_ (released on 28/02/2025) are:
 
-### Multi-Plotters & Improvements
+### Videos, Delays & Improvements
 
 #### Additions
 
-  - Added `MultiPlotter` class to plot data from multiple simulations.
-  - Added `MultiPlotter.plot_[vehicle|detector|edge]_data()` for plotting tracked edge data.
-  - Added `MultiPlotter.plot_throughput()`.
-  - Added `Plotter.plot_edge_data()`.
-  - Added `Simulation.get_interval_vehicle_data()` function to get network-wide vehicle data over a specific time range.
-  - Added `Simulation.curr_time` attribute.
+  - Added `Recorder` class & completed video recording features.
+  - Added `Simulation.set_view()` and `Simulation.gui_stop_tracking()` functions.
+  - Added `MultiPlotter.plot_statistics()` to plot final simulation statistics (TTS, TWT, delay).
+  - Added TWT and delay data to `Plotter.plot_vehicle_data()`.
+  - Added `MultiPlotter.plot_rm_rate()` to plot the average metering rate across simulations.
+  - Added `plot_groups` to `MultiPlotter` functions to only plot the data of specific groups.
+  - Added linestring coordinates to `Simulation.get_geometry_vals()`.
+  - Added `"lane_id"`, `"allowed_speed"`, `"leader_id"` and `"leader_dist"` to `Simulation.get_vehicle_vals()`.
+  - Added tracking of vehicles waiting to be inserted into the simulation.
+  - Added `"type"` to `Simulation.set_vehicle_vals()`.
 
 #### Changes & Improvements
-  - Changed to allow for route/additional/GUI files not linked in the SUMO configuration file.
-  - Some visual improvements to progress bar.
-  - Text summaries are no longer printed if they are saved to a file.
-  - Fixed images for pip distribution description.
+  - Improved delay calculation to be based on the current vehicle speed and ideal lane free-flow speed.
+  - Renamed previous delay data to Total Waiting Time (TWT).
+  - Added changing line styles into colour wheel for `Plotter` and `MultiPlotter`.
+  - Reduced sumolib calls for fetching network information.
+  - Updated docstrings (replaced '_None_' with '_optional_').
+  - Optimised `Simulation.get_vehicle_vals()` when fetching values that rely on the same API calls.
+  - Overhauled setup for TraCI constants/getter/setters with keys.
+  - Made units easier to handle throughout.
+  - Added MoviePy as a package requirement.
+
+#### Fixes
+  - Fixed AttributeError in `Simulation._add_v_func()`.
+  - Fixed `print_summary()` error when not saving the summary to a '_.txt_' file.
 
 ## Contact
 

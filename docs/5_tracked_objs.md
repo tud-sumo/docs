@@ -1,6 +1,6 @@
 # Tracked Objects
 
-Tracked objects are a useful way to include extra objects in the automatic data collection. Whilst all data from every detector is automatically included, specific scenarios may contain a large number of edges or junctions. Therefore, important edges or junctions can be tracked to automatically collect more specific information, such as inflow or average speeds. Tracked objects are also supported within the [plotter](8_plotting.md) class, so that phase signal diagrams or space-time diagrams can easily be plotted with significantly less effort.
+Tracked objects are a useful way to include extra objects in the automatic data collection. Whilst all data from every detector is automatically included, specific scenarios may contain a large number of edges or junctions. Therefore, important edges or junctions can be tracked to automatically collect more specific information, such as inflow or average speeds. Tracked objects are also supported within the [plotter](9_plotting.md) class, so that phase signal diagrams or space-time diagrams can easily be plotted with significantly less effort.
 
 Currently, only edges and junctions can be tracked, although this may change in the future.
 

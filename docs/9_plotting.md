@@ -80,7 +80,7 @@ All (current) plotting functions are listed in the table below. Several graph ex
 
 | Function                       | Plot                                                                                                               |
 |--------------------------------|--------------------------------------------------------------------------------------------------------------------|
-| `plot_vehicle_data()`          | Network-wide vehicle data, either number of vehicles, number of waiting vehicles, Total Time Spent (TTS) or delay. |
+| `plot_vehicle_data()`          | Network-wide vehicle data such as the number of vehicles, number of waiting vehicles, Total Waiting Time (TWT), Total Time Spent (TTS) or delay. |
 | `plot_detector_data()`         | Detector specific data, either speeds, vehicle counts or occupancies.                                              |
 | `plot_edge_data()`             | Tracked edge data, either flows, speeds, densities, vehicle counts or occupancies.                                 |
 | `plot_junc_flows()`            | Either junction inflow & outflow, or number of vehicles in an intersection.                                        |
@@ -170,9 +170,11 @@ mplt.add_simulations(["model4a.pkl", "model4b.pkl", "model5a.pkl", "model5b.pkl"
 
 ### Plotting Functions
 
-The available functions in the `MultiPlotter` class are listed below. These are `plot_vehicle_data()`, `plot_detector_data()`, `plot_edge_data()` and `plot_throughput()`, which all operate identically as in the `Plotter` class. The only additional parameter is `plot_range`, which denotes whether to plot the shaded region between the minimum and maximum values of groups. Examples are shown below.
+The available functions in the `MultiPlotter` class are listed below. All functions use 2 extra parameters than in the `Plotter` class; `plot_groups` and `plot_range`. `plot_groups` allows for only specific groups to be plotted by passing a list of dataset group IDs. By default, all groups are plotted. `plot_range` denotes whether to plot the shaded region between minimum and maximum values of groups on certain graphs.
 
 1. `mplt.plot_vehicle_data("tts")` ![Vehicle data](img/plots/mplt_vehicle_data.png)
 2. `mplt.plot_detector_data("upstream_i0", "speeds", aggregation_steps=10)` ![Detector data](img/plots/mplt_detector_data.png)
 3. `mplt.plot_edge_data("downstream_e1", "densities", aggregation_steps=10)` ![Edge data](img/plots/mplt_edge_data.png)
 4. `mplt.plot_throughput()` ![Throughput](img/plots/mplt_throughput.png)
+5. `mplt.plot_statistics("tts")` ![Statistics](img/plots/mplt_statistics.png)
+6. `mplt.plot_rm_rate("ramp_meter_id")` ![Metering Rate](img/plots/mplt_rm_rates.png)

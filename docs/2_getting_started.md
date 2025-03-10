@@ -19,10 +19,11 @@ Python 3.10 or later is required to run TUD-SUMO, otherwise, the required depend
   - `shapely`
   - `requests`
   - `tqdm`
+  - `moviepy`
 
 ## Creating an Environment
 
-It is recommended to use install the required packages in an environment, such as using [Anaconda](https://docs.anaconda.com/anaconda/install/) or [Miniconda](https://docs.anaconda.com/miniconda/). A conda environment ready for TUD-SUMO can be created using the following commands.
+Although not required, it is recommended to use install the required packages in an environment, such as using [Anaconda](https://docs.anaconda.com/anaconda/install/) or [Miniconda](https://docs.anaconda.com/miniconda/). A conda environment ready for TUD-SUMO can be created using the following commands.
 
 ```
 conda create --name tud-sumo

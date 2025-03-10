@@ -197,7 +197,7 @@ One of the major advantages of TUD-SUMO is the automatic data collection. This i
 
 Detectors will automatically collect vehicle speeds and counts for each time step, as well as the IDs of each vehicle that passed over it, whilst occupancies are also collected for mutli-entry-exit detectors. These will be stored under '_data/detectors/{detector_id}_', with '_type_', '_position_', '_speeds_', '_vehicle_counts_', '_vehicle_ids_' and '_occupancies_'.
 
-Vehicle data will include the number of vehicles at each step, '_tts_' (N. vehicles * step length) and '_delay_' (calculated as the time spent by vehicles waiting in each time step).
+Vehicle data will include the number of vehicles at each step, '_twt_' (No. waiting vehicles * step length), '_tts_' (N. vehicles * step length), '_delay_' (calculated based on vehicle speed and ideal free-flow speed) and '_to_depart_' (the number of vehicles waiting to be inserted at each time step).
 
 Demand is only included when dynamically adding demand, ie. not when demand is solely defined in the '_.rou.xml_' file. This dictionary will contain two objects; '_headers_' and a '_table_'. '_table_' will contain a (6 x n) sized array, with its headers listed under '_headers_'. Only demand added through `Simulation.load_demand()` and `Simulation.add_demand()` will be included here.
 
@@ -238,12 +238,12 @@ print_summary("data/example_data.pkl")
  |   Example traffic controllers, with 2 ramp meters, 1 VSL   | 
  |        controller and 1 route guidance controller.         | 
  *============================================================*
- |                 Simulation Run: 10/07/2024                 | 
- |               12:02:14 - 12:02:25 (0:00:11)                | 
+ |                 Simulation Run: 10/03/2025                 | 
+ |               13:07:20 - 13:08:11 (0:00:51)                | 
  *------------------------------------------------------------*
- | Number of Steps:                                       500 | 
- | Step Length:                                           1.0 | 
- | Avg. Step Duration:                                 0.022s | 
+ | Number of Steps:                               500 (0-500) | 
+ | Step Length:                                          1.0s | 
+ | Avg. Step Duration:                                 0.102s | 
  | Units Type:                              Metric (km, km/h) | 
  | Seed:                                                    1 | 
  *============================================================*
@@ -251,20 +251,35 @@ print_summary("data/example_data.pkl")
  *============================================================*
  |                        Vehicle Data                        | 
  *------------------------------------------------------------*
- | Avg. No. Vehicles:                                  774.66 | 
- | Peak No. Vehicles:                                    1277 | 
- | Avg. No. Waiting Vehicles:                           34.26 | 
- | Peak No. Waiting Vehicles:                             104 | 
- | Final No. Vehicles:                                   1277 | 
- | Individual Data:                                        No | 
+ |                       No. Vehicles:                        | 
+ | Average:                                            736.24 | 
+ | Peak:                                                 1211 | 
+ | Final:                                                1211 | 
+ | Overall TTS:                                       368118s | 
  * ---------------------------------------------------------- *
- | Total TTS:                                       387332.0s | 
- | Total Delay:                                      17132.0s | 
+ |                   No. Waiting Vehicles:                    | 
+ | Average:                                             23.43 | 
+ | Peak:                                                   69 | 
+ | Final:                                                  55 | 
+ | Overall TWT:                                        11713s | 
+ * ---------------------------------------------------------- *
+ |                       Vehicle Delay:                       | 
+ | Average:                                           392.71s | 
+ | Peak:                                              788.69s | 
+ | Final:                                              783.1s | 
+ | Cumulative Delay:                               196352.73s | 
+ * ---------------------------------------------------------- *
+ |                    Vehicles to Depart:                     | 
+ | Average:                                           1063.27 | 
+ | Peak:                                                 2227 | 
+ | Final:                                                2227 | 
+ * ---------------------------------------------------------- *
+ | Individual Data:                                        No | 
  *------------------------------------------------------------*
  |                         Trip Data                          | 
  *------------------------------------------------------------*
- | Incomplete Trips:                             1281 (67.2%) | 
- | Completed Trips:                               625 (32.8%) | 
+ | Incomplete Trips:                            1213 (65.18%) | 
+ | Completed Trips:                               648 (34.8%) | 
  *------------------------------------------------------------*
  |                         Detectors                          | 
  *------------------------------------------------------------*
@@ -303,6 +318,7 @@ print_summary("data/example_data.pkl")
  |                 Active: incident_response                  | 
  |             Completed: incident_1, bottleneck              | 
  *------------------------------------------------------------*
+
 ```
 
 The structure of a simulation data file can also be printed using the `Simulation.print_sim_data_struct()` or `print_sim_data_struct()` functions. This will print the structure of the `sim_data` dictionary as a tree, allowing you to see the exact keys and data types used in the data. An example of the output of `print_sim_data_struct()` is shown below.
@@ -326,14 +342,13 @@ A20_ITCS:
   |     |     ├─- a13_ramp_queue:
   |     |     |     ├─- type: str
   |     |     |     ├─- position:
-  |     |     |     |     ├─- entry_lanes: list (1x1)
-  |     |     |     |     ├─- exit_lanes: list (1x1)
-  |     |     |     |     ├─- entry_positions: list (1x1)
-  |     |     |     |     └─- exit_positions: list (1x1)
+  |     |     |     |     ├─- entry_lanes: tuple (1x1)
+  |     |     |     |     ├─- exit_lanes: tuple (1x1)
+  |     |     |     |     ├─- entry_positions: tuple (1x1)
+  |     |     |     |     └─- exit_positions: tuple (1x1)
   |     |     |     ├─- speeds: list (1x500)
   |     |     |     ├─- vehicle_counts: list (1x500)
-  |     |     |     ├─- vehicle_ids: list (500x27*)
-  |     |     |     └─- occupancies: list (1x0)
+  |     |     |     └─- vehicle_ids: list (500x28*)
   .     .     .
   .     .     .
   .     .     .
@@ -341,14 +356,12 @@ A20_ITCS:
   |     |     ├─- no_vehicles: list (1x500)
   |     |     ├─- no_waiting: list (1x500)
   |     |     ├─- tts: list (1x500)
-  |     |     └─- delay: list (1x500)
-  |     ├─- trips:
-  |     |     ├─- incomplete: dict (1x1311)
-  |     |     └─- completed: dict (1x601)
-  |     └─- events:
-  |           ├─- scheduled: list (1x1)
-  |           ├─- active: list (1x1)
-  |           └─- completed: list (1x1)
+  |     |     ├─- twt: list (1x500)
+  |     |     ├─- delay: list (1x500)
+  |     |     └─- to_depart: list (1x500)
+  |     └─- trips:
+  |           ├─- incomplete: dict (1x1213)
+  |           └─- completed: dict (1x648)
   ├─- start: int
   ├─- end: int
   ├─- step_len: float
