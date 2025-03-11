@@ -273,7 +273,6 @@ Vehicles can be added to or removed from the simulation using the `Simulation.ad
     Error! Vehicle 'vehicle_0' is not known.
     ```
 
-
 When repeatedly adding new vehicles, it may be useful to create a new route that vehicles can be assigned to. This can be done using `Simulation.add_route()`, which is detailed below.
 
   - `add_route()`:

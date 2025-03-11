@@ -84,7 +84,7 @@ For random incidents, it is still required to set the location through the `geom
 
     With a high `n_vehicles` value, the algorithm may not be able to find enough vehicles, particularly with a high `vehicle_separation`. If `assert_n_vehicles` is set to `True`, an error will be thrown when this is the case, otherwise, the simulation will continue and `cause_incidents()` will return `False`.
 
-Below is an example of a dynamic incident. Here, 4 cars on edges '_edge_1_' and '_edge_2_' are stopped on the road for 100s, whilst the edges have their speed reduced to 20kmph. Each incident is added to the simulation as an event, meaning it will show in saved data and on plots as an event. By default, the incident will be defined a unique ID '_incident_[x]_', however, an ID can be assigned manually as below.
+Below is an example of a dynamic incident. Here, 4 cars on edges '_edge_1_' and '_edge_2_' are stopped on the road for 100s, whilst the edges have their speed reduced to 20kmph. Each incident is added to the simulation as an event, meaning it will show in saved data and on plots as an event. By default, the incident will be defined a unique ID '_incident\_[x]_', however, an ID can be assigned manually as below.
 
 ```python
 success = my_sim.cause_incident(duration=100,
@@ -97,3 +97,12 @@ success = my_sim.cause_incident(duration=100,
                                 incident_id="pileup"
                                )
 ```
+
+!!! Warning
+
+    At the end of the incident, the vehicles are removed from the simulation which causes a SUMO error to be printed to the console, an example of which is shown below. This has no impacts on the simulation and can be safely ignored. 
+
+    ```
+    Error: Answered with error to command 0xa4: Vehicle 'vehicle_0' is not known.
+    Error! Vehicle 'vehicle_0' is not known.
+    ```
