@@ -264,6 +264,16 @@ Vehicles can be added to or removed from the simulation using the `Simulation.ad
   - `remove_vehicles()`:
     - `vehicle_ids`: A single vehicle ID (string) or list of IDs (list/tuple).
 
+!!! Warning
+
+    Removing vehicles causes a SUMO error to be printed to the console, an example of which is shown below. This has no impacts on the simulation and can be safely ignored. 
+
+    ```
+    Error: Answered with error to command 0xa4: Vehicle 'vehicle_0' is not known.
+    Error! Vehicle 'vehicle_0' is not known.
+    ```
+
+
 When repeatedly adding new vehicles, it may be useful to create a new route that vehicles can be assigned to. This can be done using `Simulation.add_route()`, which is detailed below.
 
   - `add_route()`:
