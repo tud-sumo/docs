@@ -3,13 +3,14 @@ nav:
   - Home: index.md
   - Getting Started: 2_getting_started.md
   - Basic Simulations: 3_basic_sim.md
-  - Interacting with the Simulation: 4_interactions.md
-  - Tracked Objects: 5_tracked_objs.md
-  - Traffic Control: 6_traffic_control.md
-  - Events: 7_events.md
-  - GUI & Videos: 8_gui.md
-  - Plotting Data: 9_plotting.md
-  - Examples: 10_examples.md
+  - Traffic Demand: 4_demand.md
+  - Interacting with the Simulation: 5_interactions.md
+  - Tracked Objects: 6_tracked_objs.md
+  - Traffic Control: 7_traffic_control.md
+  - Events: 8_events.md
+  - GUI & Videos: 9_gui.md
+  - Plotting Data: 10_plotting.md
+  - Examples: 11_examples.md
 theme:
   name: material
   font:

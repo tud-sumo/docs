@@ -47,39 +47,36 @@ The main features of TUD-SUMO include:
 
 ## Latest Version
 
-The Latest version of TUD-SUMO is _v3.2.1_, and was released on 10/03/2025. All previous versions and their change notes can be found on [GitHub](https://github.com/DAIMoNDLab/tud-sumo/releases) or [PyPI](https://pypi.org/project/tud-sumo/#history). This documentation was last updated on {{ git.date.strftime("%d/%m/%Y") }}.
+The Latest version of TUD-SUMO is _v3.2.2_, and was released on 25/03/2025. All previous versions and their change notes can be found on [GitHub](https://github.com/DAIMoNDLab/tud-sumo/releases) or [PyPI](https://pypi.org/project/tud-sumo/#history). This documentation was last updated on {{ git.date.strftime("%d/%m/%Y") }}.
 
-The change notes for this latest version, and _v3.2.0_ (released on 28/02/2025) are:
+The change notes for this latest version are:
 
-### Videos, Delays & Improvements
+### Demand Profiles & Plotting Improvements
 
 #### Additions
 
-  - Added `Recorder` class & completed video recording features.
-  - Added `Simulation.set_view()` and `Simulation.gui_stop_tracking()` functions.
-  - Added `MultiPlotter.plot_statistics()` to plot final simulation statistics (TTS, TWT, delay).
-  - Added TWT and delay data to `Plotter.plot_vehicle_data()`.
-  - Added `MultiPlotter.plot_rm_rate()` to plot the average metering rate across simulations.
-  - Added `plot_groups` to `MultiPlotter` functions to only plot the data of specific groups.
-  - Added linestring coordinates to `Simulation.get_geometry_vals()`.
-  - Added `"lane_id"`, `"allowed_speed"`, `"leader_id"` and `"leader_dist"` to `Simulation.get_vehicle_vals()`.
-  - Added tracking of vehicles waiting to be inserted into the simulation.
-  - Added `"type"` to `Simulation.set_vehicle_vals()`.
+  - Added `DemandProfile` class.
+  - Added ability to save profiles with `DemandProfiles.save()` and added to `Simulation.save_objects()`.
+  - Added ability to load profiles with `Simulation.load_demand_profiles()` and `Simulation.load_objects()`.
+  - Added `Simulation.gui_is_tracking()` to return whether a GUI view is tracking a vehicle.
+  - Added `Simulation.get_[twt|to_depart]()` functions.
+  - Added `"twt"` and `"to_depart"` to `Simulation.get_interval_network_data()`.
+  - Added several view functions (`[add|remove]_gui_view()`, `get_gui_views()`, `get_view_[boundaries|zoom]()`)
+  - Added verbose option to Simulation initialisation.
+  - Added ability to plot regression line on fundamental diagrams.
+  - Added ability to plot labels at specific distances along trajectory diagrams and space-time diagrams.
+  - Added `MultiPlotter.plot_rm_queue_length()`
 
 #### Changes & Improvements
-  - Improved delay calculation to be based on the current vehicle speed and ideal lane free-flow speed.
-  - Renamed previous delay data to Total Waiting Time (TWT).
-  - Added changing line styles into colour wheel for `Plotter` and `MultiPlotter`.
-  - Reduced sumolib calls for fetching network information.
-  - Updated docstrings (replaced '_None_' with '_optional_').
-  - Optimised `Simulation.get_vehicle_vals()` when fetching values that rely on the same API calls.
-  - Overhauled setup for TraCI constants/getter/setters with keys.
-  - Made units easier to handle throughout.
-  - Added MoviePy as a package requirement.
-
-#### Fixes
-  - Fixed AttributeError in `Simulation._add_v_func()`.
-  - Fixed `print_summary()` error when not saving the summary to a '_.txt_' file.
+  - Added version to simulation start/data.
+  - Changed `recording_name` to `recording_id`.
+  - Can now create mp4/avi/gif files.
+  - Allowed for `video_filename` to be defined separately to `recording_id` in `Recorder.record_[network|vehicle]()`.
+  - Changed all GUI functions to use the main view ("View #0") by default.
+  - `Simulation.gui_stop_tracking()` will now throw an error if the view is not tracking a vehicle.
+  - Removed traCI calls from `Recorder` class.
+  - Changed `Recorder.save_recording()` to only save single recordings (not by a list of IDs).
+  - Replaced `Plotter.plot_od_demand()` with updated `Plotter.plot_demand()` that works with `DemandProfile` objects.
 
 ## Contact
 
