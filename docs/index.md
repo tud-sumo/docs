@@ -47,9 +47,9 @@ The main features of TUD-SUMO include:
 
 ## Latest Version
 
-The Latest version of TUD-SUMO is _v3.2.2_, and was released on 25/03/2025. All previous versions and their change notes can be found on [GitHub](https://github.com/DAIMoNDLab/tud-sumo/releases) or [PyPI](https://pypi.org/project/tud-sumo/#history). This documentation was last updated on {{ git.date.strftime("%d/%m/%Y") }}.
+The Latest version of TUD-SUMO is _v3.2.3_, and was released on 30/04/2025. All previous versions and their change notes can be found on [GitHub](https://github.com/DAIMoNDLab/tud-sumo/releases) or [PyPI](https://pypi.org/project/tud-sumo/#history). This documentation was last updated on {{ git.date.strftime("%d/%m/%Y") }}.
 
-The change notes for this latest version are:
+The most recent change notes are:
 
 ### Demand Profiles & Plotting Improvements
 

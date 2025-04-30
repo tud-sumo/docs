@@ -286,7 +286,7 @@ When repeatedly adding new vehicles, it may be useful to create a new route that
 
 ## Custom Vehicle Types
 
-Instead of solely using vehicle types defined in netedit and '_.rou.xml_' files, new vehicle types can be created dynamically using the `Simulation.add_vehicle_type()` function. Its parameters are shown below, with more information in the [SUMO documentation](https://sumo.dlr.de/docs/Definition_of_Vehicles%2C_Vehicle_Types%2C_and_Routes.html#available_vehicle_attributes). If not specified, new vehicle types will use the default values of their vehicle class.
+Instead of solely using vehicle types defined in netedit and '_.rou.xml_' files, new vehicle types can be created dynamically using the `Simulation.add_vehicle_type()` function. Its parameters are shown below, with more information in the [SUMO documentation](https://sumo.dlr.de/docs/Definition_of_Vehicles%2C_Vehicle_Types%2C_and_Routes.html#available_vehicle_attributes).
 
   - `vehicle_type_id`: ID for the new vehicle type.
   - `vehicle_class`: Vehicle class (defaults to passenger).
