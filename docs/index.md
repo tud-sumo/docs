@@ -53,6 +53,10 @@ The most recent change notes are:
 
 ### Demand Profiles & Plotting Improvements
 
+!!! Warning
+    
+    Replacing v3.2.2 release due to error at import.
+
 #### Additions
 
   - Added `DemandProfile` class.
@@ -66,6 +70,9 @@ The most recent change notes are:
   - Added ability to plot regression line on fundamental diagrams.
   - Added ability to plot labels at specific distances along trajectory diagrams and space-time diagrams.
   - Added `MultiPlotter.plot_rm_queue_length()`
+  - Added `"max_queue"` to metered junctions.
+  - Added ability to plot queue length as a percent of capacity in `Plotter.plot_rm_queuing()`.
+  - Added `Simulation.[get|set]_vehicle_type_vals()` to get and change vehicle type characteristics.
 
 #### Changes & Improvements
   - Added version to simulation start/data.
@@ -77,6 +84,17 @@ The most recent change notes are:
   - Removed traCI calls from `Recorder` class.
   - Changed `Recorder.save_recording()` to only save single recordings (not by a list of IDs).
   - Replaced `Plotter.plot_od_demand()` with updated `Plotter.plot_demand()` that works with `DemandProfile` objects.
+  - Updated ramp meter queue calculation to only include stopped vehicles.
+  - Updated ramp meter delay calculation to be based on vehicle speed and free-flow speed - similarly to network statistics (now also requires `ramp_edges` and not `queue_detector`).
+  - Maximum queue length added to `Plotter.plot_rm_queuing()`.
+  - Removed ability to measure queue spill back.
+  - (Temporarily) removed mass from custom vehicle types.
+  - `Simulation.add_tracked_junctions()` now returns `TrackedJunction` object(s).
+
+#### Bug Fixes
+  - Fixed major error in v3.2.2 causing syntax error at import.
+  - Fixed error when getting current travel time in `Simulation.get_geometry_vals()` (divide by zero error when average speed == 0).
+  - Fixed `Simulation.is_running()` not returning false if no demand profiles have been added.
 
 ## Contact
 
