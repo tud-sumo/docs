@@ -34,6 +34,7 @@ The main features of TUD-SUMO include:
   - Extendable controllers already implemented (ramp metering, route guidance and variable speed limits).
   - An event system with dynamic or scheduled incidents.
   - Plotting functions for a wide range of applications.
+  - Videos for recording the network or specific vehicles during the simulation.
   - And _more in the future! ..._
 
 ![logos](img/logos.png)
