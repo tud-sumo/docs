@@ -1,0 +1,862 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+        <link rel="next" href="2_getting_started/">
+      
+      
+      <link rel="icon" href="img/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>TUD-SUMO Wiki</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Open Sans";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="stylesheets/extra.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#welcome-to-the-tud-sumo-wiki" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="TUD-SUMO Wiki" class="md-header__button md-logo" aria-label="TUD-SUMO Wiki" data-md-component="logo">
+      
+  <img src="img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TUD-SUMO Wiki
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Home
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="TUD-SUMO Wiki" class="md-nav__button md-logo" aria-label="TUD-SUMO Wiki" data-md-component="logo">
+      
+  <img src="img/logo.png" alt="logo">
+
+    </a>
+    TUD-SUMO Wiki
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#links" class="md-nav__link">
+    <span class="md-ellipsis">
+      Links
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#latest-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      Latest Version
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Latest Version">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#demand-profiles-plotting-improvements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Demand Profiles &amp; Plotting Improvements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Demand Profiles &amp; Plotting Improvements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#additions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Additions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changes-improvements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changes &amp; Improvements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bug-fixes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bug Fixes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contact" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contact
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acknowledgements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Acknowledgements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#citations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Citations
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2_getting_started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3_basic_sim/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic Simulations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4_demand/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Traffic Demand
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="5_interactions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interacting with the Simulation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="6_tracked_objs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tracked Objects
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="7_traffic_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Traffic Control
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="8_events/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Events
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="9_gui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GUI & Videos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="10_plotting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Plotting Data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="11_examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examples
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#links" class="md-nav__link">
+    <span class="md-ellipsis">
+      Links
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#latest-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      Latest Version
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Latest Version">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#demand-profiles-plotting-improvements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Demand Profiles &amp; Plotting Improvements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Demand Profiles &amp; Plotting Improvements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#additions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Additions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changes-improvements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changes &amp; Improvements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bug-fixes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bug Fixes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contact" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contact
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acknowledgements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Acknowledgements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#citations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Citations
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="welcome-to-the-tud-sumo-wiki">Welcome to the TUD-SUMO Wiki!</h1>
+<p><img alt="logos" src="img/header.png" /></p>
+<p align="center">
+  <a href="https://pypi.org/project/tud-sumo/">
+    <img alt="PyPI" src="https://img.shields.io/pypi/v/tud-sumo?style=for-the-badge&logo=pypi&logoColor=%23FFFFFF&color=%2300A6D6"/>
+  </a>
+  <a href="https://github.com/DAIMoNDLab/tud-sumo">
+    <img alt="GitHub Repo" src="https://img.shields.io/badge/GitHub-%2338A6D6?style=for-the-badge&logo=github&link=https%3A%2F%2Fgithub.com%2FDAIMoNDLab%2Ftud_sumo"/>
+  </a>
+  <a href="https://github.com/DAIMoNDLab/tud-sumo/blob/main/LICENSE">
+      <img alt="PyPI - License" src="https://img.shields.io/pypi/l/tud-sumo?style=for-the-badge&color=%2300A6D6">
+  </a>
+</p>
+<p align="center">
+  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/DAIMoNDLab/tud-sumo?style=for-the-badge&logo=github&color=%2300A6D6"/>
+  <a href="https://github.com/DAIMoNDLab/tud-sumo/commits/main/">
+    <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/DAIMoNDLab/tud-sumo?style=for-the-badge&logo=github&label=Commits&color=%2300A6D6"/>
+  </a>
+</p>
+
+<p>This is the documentation for the TUD-SUMO package, a research-oriented wrapper for SUMO<sup>[1]</sup>, developed for the DAIMoND lab at the Technische Universiteit Delft (TUD), the Netherlands. </p>
+<p>The main goal of TUD-SUMO is to act as a simplified framework for microscopic traffic simulation that allows researchers and students to focus on the important aspects of their projects; <strong>their own work</strong>, instead of simulation code. TUD-SUMO provides an easy and standardised way to simulate a wide range of scenarios whilst facilitating complex interactions. Resulting data can then be saved, summarised and visualised with minimal code.</p>
+<p>More information on "Simulation of Urban MObility" (SUMO) can be found in the SUMO documentation, here: <a href="https://sumo.dlr.de/docs/">sumo.dlr.de/docs/</a></p>
+<p>The main features of TUD-SUMO include:</p>
+<ul>
+<li>Automatic and standardised data collection.</li>
+<li>Simplified interface to interact with and control the simulation in complex ways.</li>
+<li>Traffic signal control logic.</li>
+<li>Extendable controllers already implemented (ramp metering, route guidance and variable speed limits).</li>
+<li>An event system with dynamic or scheduled incidents.</li>
+<li>Plotting functions for a wide range of applications.</li>
+<li>Videos for recording the network or specific vehicles during the simulation.</li>
+<li>And <em>more in the future! ...</em></li>
+</ul>
+<p><img alt="logos" src="img/logos.png" /></p>
+<h2 id="links">Links</h2>
+<ol>
+<li>Simulation of Urban MObility (SUMO) documentation: <a href="https://sumo.dlr.de/docs/">sumo.dlr.de/docs</a></li>
+<li>TUD-SUMO source code (GitHub): <a href="https://github.com/DAIMoNDLab/tud-sumo">DAIMoNDLab/tud-sumo</a></li>
+<li>TUD-SUMO PyPI distribution: <a href="https://pypi.org/project/tud-sumo/">project/tud-sumo</a></li>
+<li>TUD-SUMO example (GitHub): <a href="https://github.com/DAIMoNDLab/tud-sumo-examples">DAIMoNDLab/tud-sumo-examples</a></li>
+</ol>
+<h2 id="latest-version">Latest Version</h2>
+<p>The Latest version of TUD-SUMO is <em>v3.2.3</em>, and was released on 30/04/2025. All previous versions and their change notes can be found on <a href="https://github.com/DAIMoNDLab/tud-sumo/releases">GitHub</a> or <a href="https://pypi.org/project/tud-sumo/#history">PyPI</a>. This documentation was last updated on 13/06/2025.</p>
+<p>The most recent change notes are:</p>
+<h3 id="demand-profiles-plotting-improvements">Demand Profiles &amp; Plotting Improvements</h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Replacing v3.2.2 release due to error at import.</p>
+</div>
+<h4 id="additions">Additions</h4>
+<ul>
+<li>Added <code>DemandProfile</code> class.</li>
+<li>Added ability to save profiles with <code>DemandProfiles.save()</code> and added to <code>Simulation.save_objects()</code>.</li>
+<li>Added ability to load profiles with <code>Simulation.load_demand_profiles()</code> and <code>Simulation.load_objects()</code>.</li>
+<li>Added <code>Simulation.gui_is_tracking()</code> to return whether a GUI view is tracking a vehicle.</li>
+<li>Added <code>Simulation.get_[twt|to_depart]()</code> functions.</li>
+<li>Added <code>"twt"</code> and <code>"to_depart"</code> to <code>Simulation.get_interval_network_data()</code>.</li>
+<li>Added several view functions (<code>[add|remove]_gui_view()</code>, <code>get_gui_views()</code>, <code>get_view_[boundaries|zoom]()</code>)</li>
+<li>Added verbose option to Simulation initialisation.</li>
+<li>Added ability to plot regression line on fundamental diagrams.</li>
+<li>Added ability to plot labels at specific distances along trajectory diagrams and space-time diagrams.</li>
+<li>Added <code>MultiPlotter.plot_rm_queue_length()</code></li>
+<li>Added <code>"max_queue"</code> to metered junctions.</li>
+<li>Added ability to plot queue length as a percent of capacity in <code>Plotter.plot_rm_queuing()</code>.</li>
+<li>Added <code>Simulation.[get|set]_vehicle_type_vals()</code> to get and change vehicle type characteristics.</li>
+</ul>
+<h4 id="changes-improvements">Changes &amp; Improvements</h4>
+<ul>
+<li>Added version to simulation start/data.</li>
+<li>Changed <code>recording_name</code> to <code>recording_id</code>.</li>
+<li>Can now create mp4/avi/gif files.</li>
+<li>Allowed for <code>video_filename</code> to be defined separately to <code>recording_id</code> in <code>Recorder.record_[network|vehicle]()</code>.</li>
+<li>Changed all GUI functions to use the main view ("View #0") by default.</li>
+<li><code>Simulation.gui_stop_tracking()</code> will now throw an error if the view is not tracking a vehicle.</li>
+<li>Removed traCI calls from <code>Recorder</code> class.</li>
+<li>Changed <code>Recorder.save_recording()</code> to only save single recordings (not by a list of IDs).</li>
+<li>Replaced <code>Plotter.plot_od_demand()</code> with updated <code>Plotter.plot_demand()</code> that works with <code>DemandProfile</code> objects.</li>
+<li>Updated ramp meter queue calculation to only include stopped vehicles.</li>
+<li>Updated ramp meter delay calculation to be based on vehicle speed and free-flow speed - similarly to network statistics (now also requires <code>ramp_edges</code> and not <code>queue_detector</code>).</li>
+<li>Maximum queue length added to <code>Plotter.plot_rm_queuing()</code>.</li>
+<li>Removed ability to measure queue spill back.</li>
+<li>(Temporarily) removed mass from custom vehicle types.</li>
+<li><code>Simulation.add_tracked_junctions()</code> now returns <code>TrackedJunction</code> object(s).</li>
+</ul>
+<h4 id="bug-fixes">Bug Fixes</h4>
+<ul>
+<li>Fixed major error in v3.2.2 causing syntax error at import.</li>
+<li>Fixed error when getting current travel time in <code>Simulation.get_geometry_vals()</code> (divide by zero error when average speed == 0).</li>
+<li>Fixed <code>Simulation.is_running()</code> not returning false if no demand profiles have been added.</li>
+</ul>
+<h2 id="contact">Contact</h2>
+<p>TUD-SUMO is developed in the DAIMoND lab of TU Delft. For any questions or feedback, please contact Callum Evans at <span class="highlight"><em>c.evans@tudelft.nl</em></span>. Bug reports can be created in the GitHub repository: <a href="https://github.com/DAIMoNDLab/tud-sumo/">github.com/DAIMoNDLab/tud-sumo</a>.</p>
+<h2 id="acknowledgements">Acknowledgements</h2>
+<p>TUD-SUMO is part of the research under the project "<em>AI in Network Management</em>," funded by Rijkswaterstaat, grant agreement nr. 31179439, under the label of ITS Edulab.</p>
+<h2 id="citations">Citations</h2>
+<ol>
+<li>"<em>Microscopic Traffic Simulation using SUMO</em>"; Pablo Alvarez Lopez, Michael Behrisch, Laura Bieker-Walz, Jakob Erdmann, Yun-Pang Flötteröd, Robert Hilbrich, Leonhard Lücken, Johannes Rummel, Peter Wagner, and Evamarie Wießner. <em>IEEE Intelligent Transportation Systems Conference (ITSC)</em>, 2018.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

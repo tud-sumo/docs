@@ -1,0 +1,1288 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../4_demand/">
+      
+      
+        <link rel="next" href="../6_tracked_objs/">
+      
+      
+      <link rel="icon" href="../img/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Interacting with the Simulation - TUD-SUMO Wiki</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Open Sans";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#interacting-with-the-simulation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="TUD-SUMO Wiki" class="md-header__button md-logo" aria-label="TUD-SUMO Wiki" data-md-component="logo">
+      
+  <img src="../img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TUD-SUMO Wiki
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Interacting with the Simulation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="TUD-SUMO Wiki" class="md-nav__button md-logo" aria-label="TUD-SUMO Wiki" data-md-component="logo">
+      
+  <img src="../img/logo.png" alt="logo">
+
+    </a>
+    TUD-SUMO Wiki
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_getting_started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_basic_sim/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic Simulations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_demand/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Traffic Demand
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Interacting with the Simulation
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interacting with the Simulation
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#testing-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing Values
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testing Values">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vehicles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vehicles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      Other Objects
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting Values
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting Values">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#object-ids" class="md-nav__link">
+    <span class="md-ellipsis">
+      Object IDs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Other Data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-getters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Getters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting Values
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#subscriptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Subscriptions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#addingremoving-vehicles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding/removing Vehicles
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-vehicle-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Vehicle Types
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-vehicle-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Vehicle Functions
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6_tracked_objs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tracked Objects
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7_traffic_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Traffic Control
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8_events/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Events
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../9_gui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GUI & Videos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_plotting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Plotting Data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examples
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#testing-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing Values
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testing Values">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vehicles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vehicles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      Other Objects
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting Values
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting Values">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#object-ids" class="md-nav__link">
+    <span class="md-ellipsis">
+      Object IDs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Other Data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-getters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Getters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting Values
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#subscriptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Subscriptions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#addingremoving-vehicles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding/removing Vehicles
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-vehicle-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Vehicle Types
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-vehicle-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Vehicle Functions
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="interacting-with-the-simulation">Interacting with the Simulation</h1>
+<h2 id="testing-values">Testing Values</h2>
+<p>Several functions exist to check values in the simulation, primarily to check wether objects exist and get their type or status. All of these are within the <code>Simulation</code> class, and are:</p>
+<h3 id="vehicles">Vehicles</h3>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Return Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>vehicle_exists(ID)</code></td>
+<td>Whether or not a vehicle with the given ID exists in the simulation.</td>
+</tr>
+<tr>
+<td><code>vehicle_loaded(ID)</code></td>
+<td>Whether or not a vehicle has been scheduled to enter (or is already in) the simulation.</td>
+</tr>
+<tr>
+<td><code>vehicle_to_depart(ID)</code></td>
+<td>Whether or not a vehicle has been scheduled to enter (but is not in) the simulation.</td>
+</tr>
+<tr>
+<td><code>vehicle_type_exists(ID)</code></td>
+<td>Whether or not a vehicle type with the given ID exists.</td>
+</tr>
+<tr>
+<td><code>route_exists(ID)</code></td>
+<td>Route edges if the ID exists, else returns None.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="other-objects">Other Objects</h3>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Return Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detector_exists(ID)</code></td>
+<td>Detector type if the ID exists, else returns None.</td>
+</tr>
+<tr>
+<td><code>controller_exists(ID)</code></td>
+<td>Whether a controller with the ID exists.</td>
+</tr>
+<tr>
+<td><code>event_exists(ID)</code></td>
+<td>Event status if the ID exists, else returns None.</td>
+</tr>
+<tr>
+<td><code>geometry_exists(ID)</code></td>
+<td>Geometry type if ID exists (lane/edge), else returns None.</td>
+</tr>
+<tr>
+<td><code>tracked_edge_exists(ID)</code></td>
+<td>Whether a tracked edge with the ID exists.</td>
+</tr>
+<tr>
+<td><code>junction_exists(ID)</code></td>
+<td>Whether a junction with the ID exists.</td>
+</tr>
+<tr>
+<td><code>tracked_junction_exists(ID)</code></td>
+<td>Whether a tracked junction with the ID exists.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="getting-values">Getting Values</h2>
+<h3 id="object-ids">Object IDs</h3>
+<p>The most basic getter functions in the <code>Simulation</code> class return the IDs of objects within the simulation. These are:</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Return Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>get_vehicle_ids(vehicle_types)</code></td>
+<td>All vehicle IDs, or those of specific type(s).</td>
+</tr>
+<tr>
+<td><code>get_detector_ids(detector_types)</code></td>
+<td>All detector IDs, or those of specific type(s) - '<em>multientryexit</em>' or '<em>inductionloop</em>'.</td>
+</tr>
+<tr>
+<td><code>get_controller_ids(controller_types)</code></td>
+<td>All controller IDs, or those of specific type(s) - '<em>VSLController</em>' or '<em>RGController</em>'.</td>
+</tr>
+<tr>
+<td><code>get_event_ids(event_statuses)</code></td>
+<td>All event IDs, or those of specific status(es) - '<em>scheduled</em>', '<em>active</em>' or '<em>completed</em>'.</td>
+</tr>
+<tr>
+<td><code>get_geometry_ids(geometry_types)</code></td>
+<td>All controller IDs, or those of specific type(s) - '<em>edge</em>' or '<em>lane</em>'.</td>
+</tr>
+<tr>
+<td><code>get_tracked_edge_ids()</code></td>
+<td>All tracked edge IDs.</td>
+</tr>
+<tr>
+<td><code>get_junction_ids()</code></td>
+<td>All junction IDs.</td>
+</tr>
+<tr>
+<td><code>get_tracked_junction_ids()</code></td>
+<td>All tracked junction IDs.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="other-data">Other Data</h3>
+<p>All data collected throughout the simulation is stored in the <code>sim_data</code> dictionary, however, its data (and other dynamic vehicle data) can be fetched using the <code>Simulation.get_[x]()</code> functions below.</p>
+<ul>
+<li><code>get_no_vehicles()</code>:<ul>
+<li>Returns the number of vehicles in the last step of the simulation.<br><br></li>
+</ul>
+</li>
+<li><code>get_no_waiting()</code>:<ul>
+<li>Returns the number of waiting vehicles in the last step of the simulation.<br><br></li>
+</ul>
+</li>
+<li><code>get_tts()</code>:<ul>
+<li>Returns the Total Time Spent (TTS) by vehicles in the simulation during the last step (in seconds).<br><br></li>
+</ul>
+</li>
+<li><code>get_twt()</code>:<ul>
+<li>Returns the Total Waiting Time (TWT) by vehicles in the simulation during the last step, where waiting vehicles are those with a speed less than 0.1<sup>2</sup> (in seconds).<br><br></li>
+</ul>
+</li>
+<li><code>get_to_depart()</code>:<ul>
+<li>Returns total number of vehicles waiting to enter the simulation during the last step.<br><br></li>
+</ul>
+</li>
+<li><code>get_delay()</code>:<ul>
+<li>Returns total vehicle delay in seconds during the last simulation step (calculated using current vehicle speeds and maximum allowed speed on network lanes).<br><br></li>
+</ul>
+</li>
+<li><code>get_interval_network_data(data_keys, n_steps, interval_end, get_avg)</code>:<ul>
+<li>Returns aggregated, network-wide vehicle data during the time range (<code>curr_step - n_steps - interval_end</code>, <code>curr_step - interval_end</code>). Supported data keys are '<em>no_vehicles</em>', '<em>no_waiting</em>', '<em>tts</em>', '<em>twt</em>', '<em>to_depart</em>' and '<em>delay</em>'.</li>
+<li>By default, all returned values are totalled over the interval. <code>get_avg</code> denotes whether to return the step average delay instead of the total.</li>
+<li>If multiple data keys are given, each dataset is returned in a dictionary separated by its key.<br><br></li>
+</ul>
+</li>
+<li><code>get_vehicle_data(vehicle_ids)</code>:<ul>
+<li>Returns a dictionary containing all information on a vehicle. This is; '<em>type</em>', '<em>longitude</em>', '<em>latitude</em>', '<em>altitude</em>', '<em>heading</em>', '<em>speed</em>', '<em>acceleration</em>', '<em>stopped</em>', '<em>length</em>', '<em>departure</em>', '<em>destination</em>' and '<em>origin</em>'.</li>
+<li>TUD-SUMO stores static information (route origin, vehicle length etc.) to avoid unnecessary repeated calls to TraCI. This is automatically done when calling <code>get_vehicle_data()</code> on a vehicle for the first time.</li>
+<li><code>vehicle_ids</code> can be a single vehicle ID (string), or a list of IDs (list/tuple). If multiple IDs are given, a dictionary is returned with each vehicle's data stored under its ID.<br><br></li>
+</ul>
+</li>
+<li><code>get_all_vehicle_data(vehicle_types, all_dynamic_data):</code><ul>
+<li>Returns the total number of vehicles in the simulation, the total number of waiting vehicles, and if <code>all_dynamic_data == True</code>, the static &amp; dynamic data for all vehicles.</li>
+<li>If <code>all_dynamic_data == False</code>, an empty dictionary is returned as the last variable.<br><br></li>
+</ul>
+</li>
+<li><code>get_last_step_detector_vehicles(detector_ids, vehicle_types, flatten)</code>:<ul>
+<li>Returns the IDs of all vehicles who passed over the specified detector(s) in the last simulation step.</li>
+<li><code>detector_ids</code> and <code>vehicle_types</code> can either be a single value (string) or list of values (list/tuple). If multiple detector IDs are given, IDs for all detectors can either be returned in a single list (<code>flatten = True</code>), or the IDs can be returned in a dictionary with lists of IDs separated by detector (<code>flatten = False</code>).<br><br></li>
+</ul>
+</li>
+<li><code>get_last_step_geometry_vehicles(geometry_ids, vehicle_types, flatten)</code>:<ul>
+<li>Returns the IDs of all vehicles on the specified geometry in the last simulation step.</li>
+<li><code>geometry_ids</code> and <code>vehicle_types</code> can either be a single value (string) or list of values (list/tuple). If multiple geometry IDs are given, IDs for all geometries can either be returned in a single list (<code>flatten = True</code>), or the IDs can be returned in a dictionary with lists of IDs separated by geometry (<code>flatten = False</code>).<br><br></li>
+</ul>
+</li>
+<li><code>get_interval_detector_data(detector_ids, data_keys, n_steps, interval_end, avg_step_vals, avg_det_vals, sum_counts)</code>:<ul>
+<li>Returns data collected by one detector or multiple detectors during the time range (<code>curr_step - n_steps - interval_end</code>, <code>curr_step - interval_end</code>).</li>
+<li>If multiple detector IDs are given, data is returned in a dictionary separated by detector (and data keys). If <code>avg_det_vals == True</code>, data is averaged (step-wise) for all detectors (ie. <code>{"det_1": [1, 2, 3], "det_2": [3, 2, 1]}</code> is averaged to <code>[2, 2, 2]</code>).</li>
+<li>If <code>avg_step_vals == True</code>, data is averaged across all steps (ie. <code>{"det_1": [1, 2, 3], "det_2": [3, 2, 1]}</code> is averaged to <code>{"det_1": 2, "det_2": 2}</code>).</li>
+<li>If multiple detector IDs are given and <code>avg_step_vals == avg_det_vals == True</code>, a single averaged value is returned (for all data keys) (ie. <code>{"det_1": [1, 2, 3], "det_2": [3, 2, 1]}</code> is averaged to <code>2</code>).</li>
+<li><code>data_keys</code> can either be a single value (string) or a list of values (list/tuple). The valid keys are '<em>no_vehicles</em>', '<em>no_unique_vehicles</em>', '<em>flow</em>', '<em>density</em>', '<em>speeds</em>' and '<em>occupancies</em>', although '<em>occupancies</em>' is only valid for induction loop detectors.</li>
+<li>'<em>no_vehicles</em>' returns the vehicle counts by the detector at each step, meaning vehicles may be counted multiple times across different steps. '<em>no_unique_vehicles</em>' instead returns the number of unique vehicles that passed over the detector during the specified interval, which is generally much lower than raw vehicle counts.</li>
+<li>'<em>flow</em>' and '<em>density</em>' always return the averaged value, instead of values for each step in the interval. These are calculated using the number of unique vehicles and average speeds.</li>
+<li>If multiple data keys are given, each dataset is returned in a dictionary separated by its key (and detectors), such as <code>{"det_1": {"speeds": ..., "flows": ...}, "det_2": ...}</code>.</li>
+<li><code>sum_counts</code> denotes whether to return the sum of vehicle counts ('<em>no_vehicles</em>' and '<em>no_unique_vehicles</em>') throughout the interval instead of their average values. <code>sum_counts</code> will override <code>avg_step_vals</code>.</li>
+</ul>
+</li>
+</ul>
+<p>To query routes and paths in the network, use the functions below.</p>
+<ul>
+<li><code>is_valid_path(edge_ids)</code>:<ul>
+<li>Tests whether a list of edges is a valid path. This is determined by checking whether each edge connects to the subsequent edge in the list.</li>
+<li>Valid paths can be added as a route using the <code>Simulation.add_route()</code> function.<br><br></li>
+</ul>
+</li>
+<li><code>get_path_travel_time(edge_ids, curr_tt, unit)</code>:<ul>
+<li>Calculate the travel time of a path (list of edges). If <code>curr_tt</code> is true, the travel time is calculated using current mean speed on edges. If <code>curr_tt</code> is false, the travel time is calculated using free-flow speed.<br><br></li>
+</ul>
+</li>
+<li><code>get_path_edges(origin, destination, curr_optimal)</code>:<ul>
+<li>Uses the A* algorithm to find the optimal route between two edges (<code>origin</code> to <code>destination</code>).</li>
+<li>If <code>curr_optimal</code> is true, the route is based on current conditions, using current mean speed on edges to find travel time. If <code>curr_optimal</code> is false, the route is calculated based on free-flow travel time.</li>
+</ul>
+</li>
+</ul>
+<h3 id="advanced-getters">Advanced Getters</h3>
+<p>Vehicles, detectors and geometries all use a <code>Simulation.get_[x]_vals()</code> function, which allow you to very easily get a set of values for multiple objects. All 3 use the same structure, with the same type of parameters:</p>
+<ol>
+<li><code>vehicle_ids</code>/<code>detector_ids</code>/<code>geometry_ids</code>: A single ID (string) or list of IDs (list/tuple)</li>
+<li><code>data_keys</code>: A single data key (string) or list of data keys (list/tuple)</li>
+</ol>
+<p>If one data key is given, the raw value is returned, otherwise, a dictionary is returned containing the values separated by data key. Similarly, if one object ID is given, the raw data value/dictionary is returned, otherwise, a dictionary is returned containing the data separated by vehicle ID. For example:</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">my_sim</span><span class="o">.</span><span class="n">get_vehicle_vals</span><span class="p">(</span><span class="s2">&quot;vehicle_1&quot;</span><span class="p">,</span> <span class="s2">&quot;speed&quot;</span><span class="p">)</span>
+<span class="mi">25</span>
+
+<span class="o">&gt;&gt;&gt;</span>  <span class="n">my_sim</span><span class="o">.</span><span class="n">get_vehicle_vals</span><span class="p">(</span><span class="s2">&quot;vehicle_1&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;speed&quot;</span><span class="p">,</span> <span class="s2">&quot;acceleration&quot;</span><span class="p">))</span>
+<span class="p">{</span><span class="s2">&quot;speed&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="s2">&quot;acceleration&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">}</span>
+
+<span class="o">&gt;&gt;&gt;</span>  <span class="n">my_sim</span><span class="o">.</span><span class="n">get_vehicle_vals</span><span class="p">((</span><span class="s2">&quot;vehicle_1&quot;</span><span class="p">,</span> <span class="s2">&quot;vehicle_2&quot;</span><span class="p">),</span> <span class="s2">&quot;speed&quot;</span><span class="p">)</span>
+<span class="p">{</span><span class="s2">&quot;vehicle_1&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="s2">&quot;vehicle_2&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">}</span>
+
+<span class="o">&gt;&gt;&gt;</span>  <span class="n">my_sim</span><span class="o">.</span><span class="n">get_vehicle_vals</span><span class="p">((</span><span class="s2">&quot;vehicle_1&quot;</span><span class="p">,</span> <span class="s2">&quot;vehicle_2&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;speed&quot;</span><span class="p">,</span> <span class="s2">&quot;acceleration&quot;</span><span class="p">))</span>
+<span class="p">{</span><span class="s2">&quot;vehicle_1&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;speed&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="s2">&quot;acceleration&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">},</span> <span class="s2">&quot;vehicle_2&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;speed&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="s2">&quot;acceleration&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}}</span>
+</code></pre></div>
+<p>Subscriptions and static vehicle data are used whenever possible to reduce TraCI calls. The valid data keys for each function are listed below.</p>
+<ul>
+<li><code>get_vehicle_vals()</code>:<ul>
+<li>'<em>type</em>': Vehicle type</li>
+<li>'<em>length</em>': Vehicle length</li>
+<li>'<em>speed</em>': Current vehicle speed</li>
+<li>'<em>is_stopped</em>': Bool denoting whether the vehicle is stopped</li>
+<li>'<em>max_speed</em>': Vehicle maximum speed</li>
+<li>'<em>acceleration</em>': Current vehicle acceleration</li>
+<li>'<em>position</em>': Current vehicle coordinates</li>
+<li>'<em>altitude</em>': Current vehicle altitude</li>
+<li>'<em>heading</em>': Current vehicle heading</li>
+<li>'<em>departure</em>': Vehicle departure time</li>
+<li>'<em>edge_id</em>': Current vehicle's edge ID</li>
+<li>'<em>lane_id</em>': Current vehicle's lane ID</li>
+<li>'<em>lane_idx</em>': Index of the vehicle's current lane</li>
+<li>'<em>origin</em>': Departure edge ID of the vehicle</li>
+<li>'<em>destination</em>': Current destination edge ID of the vehicle</li>
+<li>'<em>route_id</em>': Current vehicle route ID</li>
+<li>'<em>route_idx</em>': The index of the vehicle's edge on its route</li>
+<li>'<em>route_edges</em>': The list of edges that the vehicle's route consists of</li>
+<li>'<em>allowed_speed</em>': Current vehicle's maximum allowed speed, based on its location &amp; type</li>
+<li>'<em>leader_id</em>': Returns the ID of the leading vehicle (returns <code>None</code> if no leading vehicle within 100m)</li>
+<li>'<em>leader_dist</em>': Returns the distance to the leading vehicle (returns <code>None</code> if no leading vehicle within 100m)</li>
+</ul>
+</li>
+<li><code>get_detector_vals()</code>:<ul>
+<li>'<em>type</em>': Detector type ('mutlientryexit' or 'inductionloop')</li>
+<li>'<em>position</em>': Detector coordinates</li>
+<li>'<em>vehicle_count</em>': Number of vehicles that passed over the detector in the last step</li>
+<li>'<em>vehicle_ids</em>': IDs of vehicles that passed over the detector in the last step</li>
+<li>'<em>lsm_speed</em>': Average speed of vehicles that passed over the detector in the last step</li>
+<li>'<em>halting_no</em>': Number of halting vehicles in the detector area <em>(multi-entry-exit only)</em></li>
+<li>'<em>lsm_occupancy</em>': Average occupancy during the last step <em>(induction loop only)</em></li>
+<li>'<em>last_detection</em>': Time since last detection <em>(induction loop only)</em></li>
+<li>'<em>avg_vehicle_length</em>': Average length of vehicles that passed over the detector in the last step <em>(induction loop only)</em></li>
+</ul>
+</li>
+<li><code>get_geometry_vals()</code>:<ul>
+<li>'<em>vehicle_count</em>': Number of vehicles on the edge/lane</li>
+<li>'<em>vehicle_ids</em>': IDs of vehicles on the edge/lane</li>
+<li>'<em>vehicle_speed</em>': Average speed of vehicles on the edge/lane</li>
+<li>'<em>avg_vehicle_length</em>': Average length of vehicles on the edge/lane in the last step.</li>
+<li>'<em>halting_no</em>': Number of halting vehicles on the edge/lane</li>
+<li>'<em>vehicle_occupancy</em>': Vehicle occupancy of edge/lane</li>
+<li>'<em>curr_travel_time</em>': Estimated travel time (calculated using length and average speed)</li>
+<li>'<em>ff_travel_time</em>': Estimated free-flow travel time (calculated using length and maximum speed)</li>
+<li>'<em>emissions</em>': CO, CO<sub>2</sub>, HC, PMx and NOx emissions, stored in a dictionary</li>
+<li>'<em>length</em>': Length of the edge/lane</li>
+<li>'<em>max_speed</em>': Maxmimum speed (edge max_speed is the average of its lanes)</li>
+<li>'<em>connected_edges</em>': Dictionary containing 'incoming' and 'outgoing' edges <em>(edge only)</em></li>
+<li>'<em>incoming_edges</em>': Incoming edges <em>(edge only)</em></li>
+<li>'<em>outgoing_edges</em>': Outgoing edges <em>(edge only)</em></li>
+<li>'<em>street_name</em>': Street name, defined in SUMO <em>(edge only)</em></li>
+<li>'<em>n_lanes</em>': Number of lanes in the edge <em>(edge only)</em></li>
+<li>'<em>lane_ids</em>': IDs of all lanes in the egde <em>(edge only)</em></li>
+<li>'<em>edge_id</em>': Edge ID for the lane <em>(lane only)</em></li>
+<li>'<em>n_links</em>': Number of linked lanes <em>(lane only)</em></li>
+<li>'<em>allowed</em>': List containing allowed vehicle types <em>(lane only)</em></li>
+<li>'<em>disallowed</em>': List containing all prohibited vehicle types <em>(lane only)</em></li>
+<li>'<em>left_lc</em>': Bool denoting whether left lane changes are allowed <em>(lane only)</em></li>
+<li>'<em>right_lc</em>': Bool denoting whether right lane changes are allowed <em>(lane only)</em></li>
+</ul>
+</li>
+</ul>
+<h2 id="setting-values">Setting Values</h2>
+<p>Both vehicle and geometries (edges/lanes) also allow for dynamically setting variables with the <code>Simulation.set_vehicle_vals()</code> and <code>Simulation.set_geometry_vals()</code> functions. Both use the same types of parameters:</p>
+<ol>
+<li><code>vehicle_ids</code>/<code>geometry_ids</code>: A single ID (string) or list of IDs (list/tuple). If multiple IDs are given, the values are set for all objects.</li>
+<li><code>data_keys</code>: Unlike the <code>get_[x]_vals()</code> functions, data_keys are used as arguments. There is no limit on the number of data keys given.</li>
+</ol>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">my_sim</span><span class="o">.</span><span class="n">set_geometry_vals</span><span class="p">(</span><span class="s2">&quot;edge_1&quot;</span><span class="p">,</span> <span class="n">max_speed</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">my_sim</span><span class="o">.</span><span class="n">set_vehicle_vals</span><span class="p">((</span><span class="s2">&quot;vehicle_1&quot;</span><span class="p">,</span> <span class="s2">&quot;vehicle_2&quot;</span><span class="p">),</span> <span class="n">max_speed</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">highlight</span><span class="o">=</span><span class="s2">&quot;#FF0000&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>The valid data keys and their accepted data type are listed below. Note that the keys aim to be the same as those in the <code>get_[x]_vals()</code> functions (whenever possible).</p>
+<ul>
+<li><code>set_vehicle_vals()</code>:<ul>
+<li><code>type</code>: Changes the vehicle's type to another pre-existing type (string)</li>
+<li><code>colour</code>: Changes the vehicle's colour (either valid hex code or list of rgb(a) values)</li>
+<li><code>highlight</code>: Sets vehicle highlighting (boolean)</li>
+<li><code>speed</code>: Sets a new speed value for the vehicle (integer or float)</li>
+<li><code>max_speed</code>: Sets a new maximum speed for the vehicle (integer or float)</li>
+<li><code>acceleration</code>: Sets a new acceleration for a given duration (list/tuple containing speed value and duration)</li>
+<li><code>lane_idx</code>: Sets a vehicle to try and change lane index for a given duration (list/tuple containing lane index and duration)</li>
+<li><code>destination</code>: Sets a new destination by edge ID (string)</li>
+<li><code>route_id</code>: Sets the vehicle to another route by its ID (string)</li>
+<li><code>route_edges</code>: Sets the vehicle to a new route by edge IDs (list of strings)</li>
+<li><code>speed_safety_checks</code>: Indefinitely sets whether speed/acceleration safety constraints are followed when setting speed - can be boolean to turn on/off all checks or <a href="https://sumo.dlr.de/docs/TraCI/Change_Vehicle_State.html#lane_change_mode_0xb6">bitset</a> (boolean/int)</li>
+<li><code>lc_safety_checks</code>: Indefinitely sets whether lane changing safety constraints are followed when changing lane - can be boolean to turn on/off all checks or <a href="https://sumo.dlr.de/docs/TraCI/Change_Vehicle_State.html#speed_mode_0xb3">bitset</a> (boolean/int)</li>
+</ul>
+</li>
+<li><code>set_geometry_vals()</code>:<ul>
+<li><code>max_speed</code>: Set a new maximum speed/speed limit (lane or for all contained lanes) (integer or float)</li>
+<li><code>allowed</code>: Set a new list of allowed vehicle types, with an empty list allowing all (list of strings) <em>(lane only)</em></li>
+<li><code>disallowed</code>: Set a new list of prohibited vehicle types (list of strings) <em>(lane only)</em></li>
+<li><code>left_lc</code>: Sets the list of vehicle types that are allowed to change to the left lane (list of strings) <em>(lane only)</em></li>
+<li><code>right_lc</code>: Sets the list of vehicle types that are allowed to change to the right lane (list of strings) <em>(lane only)</em></li>
+</ul>
+</li>
+</ul>
+<h2 id="subscriptions">Subscriptions</h2>
+<p>Subscriptions are a useful tool in TraCI that aim to reduce runtime by limiting the amount of API calls. This can be particularly effective when data needs to be collected at each simulation step. TUD-SUMO automatically adds vehicle subscriptions for basic variables including position, speed and acceleration as these are already used within the automatic data collection and are necessary for calculating vehicle delay at each step. Tracked edges will also automatically subcribe to vehicle IDs, as this is needed to collect step vehicle data.</p>
+<p>It is possible to disable automatic vehicle subscriptions by setting <code>automatic_subscriptions = False</code> in <code>Simulation.start()</code>. However, this is most likely unncessary and not recommened, particularly for applications where a lot of data needs to be repeatedly collected from the simulation.</p>
+<p>Otherwise, depending on the use case, it may be necessary to subscribe/unsubscribe to other variables. This can be done using the functions below. These use the same structure as the <code>get_[x]_vals()</code> functions with two parameters:</p>
+<ol>
+<li><code>vehicle_ids</code>/<code>detector_ids</code>/<code>geometry_ids</code>: A single ID (string) or list of IDs (list/tuple). Note that individual objects have their own set of subscriptions.</li>
+<li><code>data_key</code>: A single data key (string) or list of data keys (list/tuple).</li>
+</ol>
+<p>The valid data keys for each object type and respective function are listed below. Note that individual objects have their own set of subscriptions, so if you would like to subscribe to collect all vehicles' edge ID at each step, you must call <code>add_vehicle_subscriptions()</code> for all vehicle IDs.</p>
+<ul>
+<li>
+<p><code>add_vehicle_subscriptions()</code>/<code>remove_vehicle_subscriptions()</code>:</p>
+<ul>
+<li>'<em>speed</em>'</li>
+<li>'<em>is_stopped</em>'</li>
+<li>'<em>max_speed</em>'</li>
+<li>'<em>acceleration</em>'</li>
+<li>'<em>position</em>'</li>
+<li>'<em>altitude</em>'</li>
+<li>'<em>heading</em>'</li>
+<li>'<em>edge_id</em>'</li>
+<li>'<em>lane_idx</em>'</li>
+<li>'<em>route_id</em>'</li>
+<li>'<em>route_idx</em>'</li>
+</ul>
+</li>
+<li>
+<p><code>add_detector_subscriptions()</code>/<code>remove_detector_subscriptions()</code>:</p>
+<ul>
+<li>'<em>vehicle_count</em>'</li>
+<li>'<em>vehicle_ids</em>'</li>
+<li>'<em>lsm_speed</em>'</li>
+<li>'<em>halting_no</em>'</li>
+<li>'<em>lsm_speed</em>'</li>
+<li>'<em>last_detection</em>'</li>
+</ul>
+</li>
+<li>
+<p><code>add_geometry_subscriptions()</code>/<code>remove_geometry_subscriptions()</code>:</p>
+<ul>
+<li>'<em>vehicle_count</em>'</li>
+<li>'<em>vehicle_ids</em>'</li>
+<li>'<em>vehicle_speed</em>'</li>
+<li>'<em>halting_no</em>'</li>
+<li>'<em>occupancy</em>'</li>
+</ul>
+</li>
+</ul>
+<h2 id="addingremoving-vehicles">Adding/removing Vehicles</h2>
+<p>Vehicles can be added to or removed from the simulation using the <code>Simulation.add_vehicle()</code> and <code>Simulation.remove_vehicles()</code> functions respectively. These functions and their parameters are detailed below.</p>
+<ul>
+<li><code>add_vehicle()</code>:<ul>
+<li><code>vehicle_id</code>: (Unique) ID for the new vehicle.</li>
+<li><code>vehicle_type</code>: Vehicle type.</li>
+<li><code>routing</code>: Denotes how the vehicle will route through the network (either route ID or (2x1) list of edge IDs for an OD pair).</li>
+<li><code>initial_speed</code>: Initial speed of the vehicle at insertion, defaults to maximum (either '<em>max</em>', '<em>random</em>' or a number &gt; 0).</li>
+<li><code>origin_lane</code>: Lane for insertion at origin, defaults to best (either '<em>random</em>', '<em>free</em>', '<em>allowed</em>', '<em>best</em>', '<em>first</em>' or lane index).</li>
+</ul>
+</li>
+<li><code>remove_vehicles()</code>:<ul>
+<li><code>vehicle_ids</code>: A single vehicle ID (string) or list of IDs (list/tuple).</li>
+</ul>
+</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Removing vehicles causes a SUMO error to be printed to the console, an example of which is shown below. This has no impacts on the simulation and can be safely ignored. </p>
+<div class="highlight"><pre><span></span><code>Error: Answered with error to command 0xa4: Vehicle &#39;vehicle_0&#39; is not known.
+Error! Vehicle &#39;vehicle_0&#39; is not known.
+</code></pre></div>
+</div>
+<p>When repeatedly adding new vehicles, it may be useful to create a new route that vehicles can be assigned to. This can be done using <code>Simulation.add_route()</code>, which is detailed below.</p>
+<ul>
+<li><code>add_route()</code>:<ul>
+<li><code>routing</code>: List of edge IDs. If 2 disconnected edges are given, vehicles calculate an optimal path at insertion.</li>
+<li><code>route_id</code>: (Unique) route ID. If this is not given, the ID is generated using the origin and destination edge IDs.</li>
+<li><code>assert_new_id</code>: If true, an error is thrown for duplicate route IDs.</li>
+</ul>
+</li>
+</ul>
+<h2 id="custom-vehicle-types">Custom Vehicle Types</h2>
+<p>Instead of solely using vehicle types defined in netedit and '<em>.rou.xml</em>' files, new vehicle types can be created dynamically using the <code>Simulation.add_vehicle_type()</code> function. Its parameters are shown below, with more information in the <a href="https://sumo.dlr.de/docs/Definition_of_Vehicles%2C_Vehicle_Types%2C_and_Routes.html#available_vehicle_attributes">SUMO documentation</a>.</p>
+<ul>
+<li><code>vehicle_type_id</code>: ID for the new vehicle type.</li>
+<li><code>vehicle_class</code>: Vehicle class (defaults to passenger).</li>
+<li><code>colour</code>: Vehicle type colour, either hex code, list of rgb/rgba values or valid SUMO colour string.</li>
+<li><code>length</code>: Length of vehicle in metres/feet.</li>
+<li><code>width</code>: Width of vehicle in metres/feet.</li>
+<li><code>height</code>: Height of vehicle in metres/feet.</li>
+<li><code>mass</code>: Mass of vehicle in kilograms.</li>
+<li><code>speed_factor</code>: Vehicle type multiplier for lane speed limits.</li>
+<li><code>speed_dev</code>: Vehicle type deviation of the speed factor.</li>
+<li><code>min_gap</code>: Minimum gap after leader (<em>m</em>).</li>
+<li><code>acceleration</code>: Vehicle type acceleration ability (<em>m/s<sup>2</sup></em>).</li>
+<li><code>deceleration</code>: Vehicle type deceleration ability (<em>m/s<sup>2</sup></em>).</li>
+<li><code>tau</code>: Car following model parameter.</li>
+<li><code>max_lateral_speed</code>: Maximum lateral speed (<em>m/s</em>).</li>
+<li><code>gui_shape</code>: Vehicle shape in GUI (defaults to vehicle class name).</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># Add a custom green &#39;cars&#39; vehicle type with faster acceleration of 3m/s^2</span>
+<span class="n">my_sim</span><span class="o">.</span><span class="n">add_vehicle_type</span><span class="p">(</span><span class="s2">&quot;cars&quot;</span><span class="p">,</span> <span class="n">colour</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">acceleration</span><span class="o">=</span><span class="mf">3.0</span><span class="p">)</span>
+
+<span class="c1"># Add a custom white &#39;vans&#39; vehicle type with a short minimum gap of 0.5m</span>
+<span class="n">my_sim</span><span class="o">.</span><span class="n">add_vehicle_type</span><span class="p">(</span><span class="s2">&quot;vans&quot;</span><span class="p">,</span> <span class="s2">&quot;delivery&quot;</span><span class="p">,</span> <span class="n">colour</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">min_gap</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="custom-vehicle-functions">Custom Vehicle Functions</h2>
+<p><code>Simulation.add_vehicle_in_functions()</code> and <code>Simulation.add_vehicle_out_functions()</code> can be used to easily add custom functions that are called with each vehicle that enters or leaves the simulation. An example of this is shown below. Multiple functions can be added and are called in the order in which they are added.</p>
+<p>If certain parameters are included, their values will be automatically generated with each vehicle. These are:</p>
+<ul>
+<li><code>simulation</code>: The simulation object itself.</li>
+<li><code>curr_step</code>: The current simulation step.</li>
+<li><code>vehicle_id</code>: Each vehicle ID.</li>
+<li><code>route_id</code>: Route the vehicle will travel on.</li>
+<li><code>vehicle_type</code>: Vehicle type ID.</li>
+<li><code>departure</code>: Departure time of the vehicle.</li>
+<li><code>origin</code>: Origin egde ID of the vehicle.</li>
+<li><code>destination</code>: Destination edge ID of the vehicle.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">recolour_vehicle</span><span class="p">(</span><span class="n">simulation</span><span class="p">,</span> <span class="n">vehicle_id</span><span class="p">,</span> <span class="n">new_colour</span><span class="o">=</span><span class="s2">&quot;#FF0000&quot;</span><span class="p">):</span>
+    <span class="n">simulation</span><span class="o">.</span><span class="n">set_vehicle_vals</span><span class="p">(</span><span class="n">vehicle_id</span><span class="p">,</span> <span class="n">colour</span><span class="o">=</span><span class="n">new_colour</span><span class="p">)</span>
+
+<span class="n">new_vehicles</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">register_vehicle</span><span class="p">(</span><span class="n">vehicle_id</span><span class="p">,</span> <span class="n">curr_step</span><span class="p">,</span> <span class="n">arr</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">vehicle_id</span><span class="p">,</span> <span class="s2">&quot;entered simulation at step&quot;</span><span class="p">,</span> <span class="n">curr_step</span><span class="p">)</span>
+    <span class="n">arr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vehicle_id</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">exit_vehicle</span><span class="p">(</span><span class="n">vehicle_id</span><span class="p">,</span> <span class="n">curr_step</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">vehicle_id</span><span class="p">,</span> <span class="s2">&quot;left simulation at step&quot;</span><span class="p">,</span> <span class="n">curr_step</span><span class="p">)</span>
+
+<span class="n">my_sim</span><span class="o">.</span><span class="n">add_vehicle_in_functions</span><span class="p">(</span><span class="n">functions</span><span class="o">=</span><span class="p">[</span><span class="n">recolour_vehicle</span><span class="p">,</span> <span class="n">register_vehicle</span><span class="p">],</span>
+                                <span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;register_vehicle&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;arr&quot;</span><span class="p">:</span> <span class="n">new_vehicles</span><span class="p">}})</span>
+<span class="n">my_sim</span><span class="o">.</span><span class="n">add_vehicle_out_functions</span><span class="p">(</span><span class="n">exit_vehicle</span><span class="p">)</span>
+
+<span class="k">while</span> <span class="n">my_sim</span><span class="o">.</span><span class="n">is_running</span><span class="p">():</span>
+    <span class="n">my_sim</span><span class="o">.</span><span class="n">step_through</span><span class="p">()</span>
+</code></pre></div>
+<p>Running this example would print the message below to the console. The <code>arr</code> list would also contain <code>['car_1', 'car_2', 'car_3']</code>.</p>
+<div class="highlight"><pre><span></span><code>&gt;&gt;&gt; run_sim.py
+car_1 entered simulation at step 0
+car_2 entered simulation at step 2
+car_3 entered simulation at step 4
+car_1 left simulation at step 10
+car_2 left simulation at step 12
+car_2 left simulation at step 14
+</code></pre></div>
+<p>Only <code>simulation</code>, <code>curr_step</code> and <code>vehicle_id</code> can be used for both vehicle in <strong>and</strong> out functions. Trip-related variables cannot be used in vehicle out functions. Extra parameters can be used by passing in a parameters dictionary as below. These can later be updated using <code>Simulation.update_vehicle_function_parameters()</code>. Note that it is not necessary to include a <code>new_colour</code> parameter in the dictionary, as this already has a default value.</p>
+<p>These functions can be removed using <code>Simulation.remove_vehicle_in_functions()</code> and <code>Simulation.remove_vehicle_out_functions()</code>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

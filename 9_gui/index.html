@@ -1,0 +1,746 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../8_events/">
+      
+      
+        <link rel="next" href="../10_plotting/">
+      
+      
+      <link rel="icon" href="../img/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>GUI & Videos - TUD-SUMO Wiki</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Open Sans";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#gui-videos" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="TUD-SUMO Wiki" class="md-header__button md-logo" aria-label="TUD-SUMO Wiki" data-md-component="logo">
+      
+  <img src="../img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TUD-SUMO Wiki
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              GUI & Videos
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="TUD-SUMO Wiki" class="md-nav__button md-logo" aria-label="TUD-SUMO Wiki" data-md-component="logo">
+      
+  <img src="../img/logo.png" alt="logo">
+
+    </a>
+    TUD-SUMO Wiki
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_getting_started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_basic_sim/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic Simulations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_demand/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Traffic Demand
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_interactions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interacting with the Simulation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6_tracked_objs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tracked Objects
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7_traffic_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Traffic Control
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8_events/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Events
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    GUI & Videos
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    GUI & Videos
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#gui-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      GUI Functions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recording-videos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recording Videos
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_plotting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Plotting Data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examples
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#gui-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      GUI Functions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recording-videos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recording Videos
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="gui-videos">GUI &amp; Videos</h1>
+<h2 id="gui-functions">GUI Functions</h2>
+<p>Several functions are provided specifically for controlling the Graphical User Interface (GUI). More general information on using the SUMO GUI can be found at <a href="https://sumo.dlr.de/docs/sumo-gui.html">sumo.dlr.de/docs/sumo-gui.html</a>. In order to run a simulation with the GUI active using TUD-SUMO, use:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">tud_sumo.simulation</span><span class="w"> </span><span class="kn">import</span> <span class="n">Simulation</span>
+
+<span class="n">my_sim</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span><span class="n">scenario_name</span><span class="o">=</span><span class="s2">&quot;example&quot;</span><span class="p">,</span> <span class="n">scenario_desc</span><span class="o">=</span><span class="s2">&quot;Example simulation.&quot;</span><span class="p">)</span>
+<span class="n">my_sim</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s2">&quot;example_scenario.sumocfg&quot;</span><span class="p">,</span> <span class="n">gui</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+<p>The several functions used for interacting with the SUMO GUI are listed below. The GUI itself can have multiple different views, or windows, but the default/main view is called '<em>View #0</em>'. Unless new views have been manually added, GUI functions will operate on this default view.</p>
+<ul>
+<li><code>set_view()</code>:<ul>
+<li>Sets a view's bounds and/or zoom level.</li>
+<li>Bounds use a tuple of two coordinates to define the new view, as in (lower-left point, upper-right point).</li>
+<li>The zoom level is defined in percent.<br><br></li>
+</ul>
+</li>
+<li><code>take_screenshot()</code>:<ul>
+<li>Takes a screenshot of a view in the next time step and saves the result to a file.</li>
+<li>If the bounds and/or zoom is not specified, the current view is used.<br><br></li>
+</ul>
+</li>
+<li><code>gui_is_tracking()</code>:<ul>
+<li>Returns whether a specific view is tracking a vehicle.<br><br></li>
+</ul>
+</li>
+<li><code>gui_track_vehicle()</code>:<ul>
+<li>Sets a view to follow a vehicle through the network, either until it leaves the network or the tracking is manually stopped.</li>
+<li>The vehicle is tracked by its ID, and can be highlighted if <code>highlight</code> is set to <code>True</code>.</li>
+<li>By default, the main/default view is used. An example of vehicle tracking is shown below.<br><br></li>
+</ul>
+</li>
+<li><code>gui_stop_tracking()</code>:<ul>
+<li>Stops a view from tracking a vehicle.<br><br></li>
+</ul>
+</li>
+<li><code>get_gui_views()</code>:<ul>
+<li>Returns a list of all views added to the GUI.<br><br></li>
+</ul>
+</li>
+<li><code>add_gui_view()</code>:<ul>
+<li>Adds a new GUI view.<br><br></li>
+</ul>
+</li>
+<li><code>remove_gui_view()</code>:<ul>
+<li>Removes a specific GUI view.<br><br></li>
+</ul>
+</li>
+<li><code>get_view_boundaries()</code>:<ul>
+<li>Returns the bounds of a specific view.<br><br></li>
+</ul>
+</li>
+<li><code>get_view_zoom()</code>:<ul>
+<li>Returns the zoom level of a specific view.<br><br></li>
+</ul>
+</li>
+</ul>
+<p><img alt="Tracked vehicle" src="../img/track_vehicle.gif" /></p>
+<div class="highlight"><pre><span></span><code><span class="k">while</span> <span class="n">my_sim</span><span class="o">.</span><span class="n">curr_step</span> <span class="o">&lt;</span> <span class="mi">500</span><span class="p">:</span>
+
+    <span class="n">my_sim</span><span class="o">.</span><span class="n">step_through</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">my_sim</span><span class="o">.</span><span class="n">curr_step</span> <span class="o">==</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="c1"># Set the default/main view boundaries to (min_x: 0, max_x: 200, min_y: 0, max_y: 200) and zoom to 500%</span>
+        <span class="n">my_sim</span><span class="o">.</span><span class="n">set_view</span><span class="p">(</span><span class="n">bounds</span><span class="o">=</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">)),</span> <span class="n">zoom</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+
+        <span class="c1"># Take a screenshot of the current view settings and save it to &quot;images/screenshot.png&quot;</span>
+        <span class="n">my_sim</span><span class="o">.</span><span class="n">take_screenshot</span><span class="p">(</span><span class="s2">&quot;images/screenshot.png&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">my_sim</span><span class="o">.</span><span class="n">curr_step</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+        <span class="c1"># Set the default view/main to follow &quot;car_0&quot; as it travels through the network</span>
+        <span class="n">my_sim</span><span class="o">.</span><span class="n">gui_track_vehicle</span><span class="p">(</span><span class="n">vehicle_id</span><span class="o">=</span><span class="s2">&quot;car_0&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">my_sim</span><span class="o">.</span><span class="n">curr_step</span> <span class="o">==</span> <span class="mi">300</span><span class="p">:</span>
+        <span class="c1"># Set the default view/main to stop following &quot;car_0&quot;</span>
+        <span class="n">my_sim</span><span class="o">.</span><span class="n">gui_stop_tracking</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="recording-videos">Recording Videos</h2>
+<p>The <code>Recorder</code> class can be used to record videos of the GUI through 2 functions; <code>Recorder.record_network()</code> and <code>Recorder.record_vehicle()</code>. Videos are then saved using <code>Recorder.save_recording()</code>. The GUI must be active to record videos.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">tud_sumo.videos</span><span class="w"> </span><span class="kn">import</span> <span class="n">Recorder</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tud_sumo.simulation</span><span class="w"> </span><span class="kn">import</span> <span class="n">Simulation</span>
+
+<span class="n">my_sim</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span><span class="n">scenario_name</span><span class="o">=</span><span class="s2">&quot;example&quot;</span><span class="p">,</span> <span class="n">scenario_desc</span><span class="o">=</span><span class="s2">&quot;Example simulation.&quot;</span><span class="p">)</span>
+<span class="n">my_sim</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s2">&quot;example_scenario.sumocfg&quot;</span><span class="p">,</span> <span class="n">gui</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">recorder</span> <span class="o">=</span> <span class="n">Recorder</span><span class="p">(</span><span class="n">my_sim</span><span class="p">)</span>
+</code></pre></div>
+<p>Recordings are defined by a unique recording ID, which allows for multiple recordings to be made at the same time on different views. Videos are made by taking screenshots at each time step, which can then be joined together to create the final video. The frames are saved to a file called <code>{recording_id}_frames</code>, although this can be changed using the <code>frames_loc</code> parameter. The file is always created when the video is started, and is deleted by default, along with the individual frames, once the recording is over.</p>
+<p>Multiple recordings can be done simultaneously, although they should begin at the same time as each requires a new view to be created. Adding new views changes the aspect ratio of already existing views, which prevents the final video from being created.</p>
+<p>To record a static recording of a specific part of the network, use <code>Recorder.record_network()</code>. This is based on a <code>bounds</code> and <code>zoom</code> parameter, as shown below. <code>speed</code> can also be changed. By default, videos are real-time when <code>speed = 1</code>, although increasing this value acts as a multiplier on the FPS (<code>FPS = speed / step_length</code>).</p>
+<div class="highlight"><pre><span></span><code><span class="n">recording_id</span> <span class="o">=</span> <span class="s2">&quot;network_test&quot;</span>
+
+<span class="k">while</span> <span class="n">my_sim</span><span class="o">.</span><span class="n">curr_step</span> <span class="o">&lt;</span> <span class="mi">500</span><span class="p">:</span>
+
+    <span class="n">my_sim</span><span class="o">.</span><span class="n">step_through</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">my_sim</span><span class="o">.</span><span class="n">curr_step</span> <span class="o">==</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="c1"># At t=100, start recording a video with boundaries (min_x: 0, max_x: 200,</span>
+        <span class="c1"># min_y: 0, max_y: 200) and zoom 500%. The frames will be saved to a directory</span>
+        <span class="c1"># named &#39;frames&#39; instead of the default &#39;network_test_frames&#39;</span>
+        <span class="n">recorder</span><span class="o">.</span><span class="n">record_network</span><span class="p">(</span><span class="n">recording_id</span> <span class="o">=</span> <span class="n">recording_id</span><span class="p">,</span>
+                                <span class="n">bounds</span> <span class="o">=</span> <span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">)),</span> 
+                                <span class="n">zoom</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span>
+                                <span class="n">speed</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span>
+                                <span class="n">frames_loc</span> <span class="o">=</span> <span class="s2">&quot;frames&quot;</span>
+                               <span class="p">)</span>
+</code></pre></div>
+<p>To finish the recording and save the final video, use <code>Recorder.save_recording()</code> as below. This will delete the frame files and save the video. By default, the video is called <code>{recording_id}.mp4</code>. Videos can currently be created in an '<em>.mp4</em>', '<em>.avi</em>' or '<em>.gif</em>' format and must be at least 3 time steps long. </p>
+<div class="highlight"><pre><span></span><code>    <span class="k">if</span> <span class="n">my_sim</span><span class="o">.</span><span class="n">curr_step</span> <span class="o">==</span> <span class="mi">300</span><span class="p">:</span>
+        <span class="n">recorder</span><span class="o">.</span><span class="n">save_recording</span><span class="p">(</span><span class="n">recording_id</span><span class="p">,</span> <span class="n">video_filename</span><span class="o">=</span><span class="s2">&quot;video.mp4&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="Network Video" src="../img/network_video.gif" /></p>
+<p>Alternatively, to record a vehicle as it travels through the network, use <code>Recorder.record_vehicle()</code> as below. By default, the recording will finish once the vehicle leaves the network, although it can be ended early using <code>Recorder.save_recording()</code>. The video filename used can be defined at the start of the recording.</p>
+<div class="highlight"><pre><span></span><code><span class="n">recording_id</span> <span class="o">=</span> <span class="s2">&quot;vehicle_test&quot;</span>
+
+<span class="k">while</span> <span class="n">my_sim</span><span class="o">.</span><span class="n">curr_step</span> <span class="o">&lt;</span> <span class="mi">500</span><span class="p">:</span>
+
+    <span class="n">my_sim</span><span class="o">.</span><span class="n">step_through</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">my_sim</span><span class="o">.</span><span class="n">curr_step</span> <span class="o">==</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="c1"># At t=100, start recording a video of &quot;car_0&quot;, with zoom 1200%. The</span>
+        <span class="c1"># frames will be saved to a directory named &#39;frames&#39; instead of the</span>
+        <span class="c1"># default &#39;vehicle_test_frames&#39;</span>
+        <span class="n">recorder</span><span class="o">.</span><span class="n">record_vehicle</span><span class="p">(</span><span class="n">recording_id</span> <span class="o">=</span> <span class="n">recording_id</span><span class="p">,</span>
+                                <span class="n">video_filename</span> <span class="o">=</span> <span class="s2">&quot;video.avi&quot;</span><span class="p">,</span>
+                                <span class="n">vehicle_id</span> <span class="o">=</span> <span class="s2">&quot;car_0&quot;</span><span class="p">,</span> 
+                                <span class="n">zoom</span> <span class="o">=</span> <span class="mi">1200</span><span class="p">,</span>
+                                <span class="n">speed</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
+                                <span class="n">frames_loc</span> <span class="o">=</span> <span class="s2">&quot;frames&quot;</span>
+                               <span class="p">)</span>
+</code></pre></div>
+<p><img alt="Tracked vehicle" src="../img/vehicle_video.gif" /></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
