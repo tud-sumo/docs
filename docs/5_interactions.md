@@ -52,11 +52,11 @@ All data collected throughout the simulation is stored in the `sim_data` diction
   - `get_tts()`:
     - Returns the Total Time Spent (TTS) by vehicles in the simulation during the last step (in seconds).<br><br>
   - `get_twt()`:
-    - Returns the Total Waiting Time (TWT) by vehicles in the simulation during the last step (in seconds).<br><br>
+    - Returns the Total Waiting Time (TWT) by vehicles in the simulation during the last step, where waiting vehicles are those with a speed less than 0.1<sup>2</sup> (in seconds).<br><br>
   - `get_to_depart()`:
     - Returns total number of vehicles waiting to enter the simulation during the last step.<br><br>
   - `get_delay()`:
-    - Returns total vehicle delay in seconds during the last simulation step (calculated as the number of vehicles where speed < 0.1m/s<sup>2</sup>, multiplied by the simulation step length).<br><br>
+    - Returns total vehicle delay in seconds during the last simulation step (calculated using current vehicle speeds and maximum allowed speed on network lanes).<br><br>
   - `get_interval_network_data(data_keys, n_steps, interval_end, get_avg)`:
     - Returns aggregated, network-wide vehicle data during the time range (`curr_step - n_steps - interval_end`, `curr_step - interval_end`). Supported data keys are '_no\_vehicles_', '_no_waiting_', '_tts_', '_twt_', '_to_depart_' and '_delay_'.
     - By default, all returned values are totalled over the interval. `get_avg` denotes whether to return the step average delay instead of the total.
