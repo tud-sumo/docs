@@ -40,6 +40,8 @@ bn_parameters = {"bottleneck":
                          }
                     }
                 }
+
+my_sim.add_events(bn_parameters)
 ```
 
 !!! warning
@@ -57,13 +59,15 @@ rp_parameters = {"bottleneck_reaction":
                          "actions": {"max_speed": 40}
                          "effect_duration": 100,
                          "effect_probability": 1,
-                         "remove_vehicles": False,
+                         "remove_affected_vehicles": False,
                          "speed_safety_checks": False,
                          "lc_safety_checks": False,
                          "highlight": "#FF0000"
                         }
                     }
                 }
+
+my_sim.add_events(rp_parameters)
 ```
 
 Event parameters are stored in the `sim_data` dictionary under '_data/events/{status}/{event_id}_'. The status can either be '_scheduled_', '_active_' or '_completed_'.
