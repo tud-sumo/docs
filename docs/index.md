@@ -32,7 +32,7 @@ The main features of TUD-SUMO include:
   - Simplified interface to interact with and control the simulation in complex ways.
   - Traffic signal control logic.
   - Extendable controllers already implemented (ramp metering, route guidance and variable speed limits).
-  - An event system with dynamic or scheduled incidents.
+  - A weather & event system with dynamic or scheduled incidents.
   - Plotting functions for a wide range of applications.
   - Videos for recording the network or specific vehicles during the simulation.
   - And _more in the future! ..._
@@ -48,54 +48,47 @@ The main features of TUD-SUMO include:
 
 ## Latest Version
 
-The Latest version of TUD-SUMO is _v3.2.3_, and was released on 30/04/2025. All previous versions and their change notes can be found on [GitHub](https://github.com/DAIMoNDLab/tud-sumo/releases) or [PyPI](https://pypi.org/project/tud-sumo/#history). This documentation was last updated on {{ git.date.strftime("%d/%m/%Y") }}.
+The Latest version of TUD-SUMO is _v3.3.0_, and was released on 01/10/2025. All previous versions and their change notes can be found on [GitHub](https://github.com/DAIMoNDLab/tud-sumo/releases) or [PyPI](https://pypi.org/project/tud-sumo/#history). This documentation was last updated on {{ git.date.strftime("%d/%m/%Y") }}.
 
 The most recent change notes are:
 
-### Demand Profiles & Plotting Improvements
-
-!!! Warning
-    
-    Replacing v3.2.2 release due to error at import.
+### Weather & Events Update
 
 #### Additions
+- Added `Simulation.add_weather()` to simulate weather effects using the event system.
+- Added `Simulation.[stop|resume]_vehicle()`.
+- Added `Simulation.[get|remove]_events()` to get and remove events from the simulation.
+- Added `Event.terminate()` to end active events early.
+- Added `EventScheduler.[get|remove]_event()` function.
+- Added `"next_edge_id"` to `Simulation.get_vehicle_vals()` to return next edge in a vehicle's route.
+- Added `"stop"` to `Simulation.set_vehicle_vals()` to stop a vehicle randomly along its next edge.
+- Added desired time headway (tau), imperfection (sigma) and speed factor to `Simulation.[get|set]_vehicle_vals()`.
+- Added imperfection to `Simulation.[get|set]_vehicle_type_vals()` and `DemandProfile.add_vehicle_type()`.
+- Added `max_[ac|de]celeration` in vehicle (type) getters/setters, as distinct from current `acceleration`.
+- Added last step flow, density, delay and TTS to geometry data.
+- Added option to include insertion delay in network-wide delay calculations.
 
-  - Added `DemandProfile` class.
-  - Added ability to save profiles with `DemandProfiles.save()` and added to `Simulation.save_objects()`.
-  - Added ability to load profiles with `Simulation.load_demand_profiles()` and `Simulation.load_objects()`.
-  - Added `Simulation.gui_is_tracking()` to return whether a GUI view is tracking a vehicle.
-  - Added `Simulation.get_[twt|to_depart]()` functions.
-  - Added `"twt"` and `"to_depart"` to `Simulation.get_interval_network_data()`.
-  - Added several view functions (`[add|remove]_gui_view()`, `get_gui_views()`, `get_view_[boundaries|zoom]()`)
-  - Added verbose option to Simulation initialisation.
-  - Added ability to plot regression line on fundamental diagrams.
-  - Added ability to plot labels at specific distances along trajectory diagrams and space-time diagrams.
-  - Added `MultiPlotter.plot_rm_queue_length()`
-  - Added `"max_queue"` to metered junctions.
-  - Added ability to plot queue length as a percent of capacity in `Plotter.plot_rm_queuing()`.
-  - Added `Simulation.[get|set]_vehicle_type_vals()` to get and change vehicle type characteristics.
-
-#### Changes & Improvements
-  - Added version to simulation start/data.
-  - Changed `recording_name` to `recording_id`.
-  - Can now create mp4/avi/gif files.
-  - Allowed for `video_filename` to be defined separately to `recording_id` in `Recorder.record_[network|vehicle]()`.
-  - Changed all GUI functions to use the main view ("View #0") by default.
-  - `Simulation.gui_stop_tracking()` will now throw an error if the view is not tracking a vehicle.
-  - Removed traCI calls from `Recorder` class.
-  - Changed `Recorder.save_recording()` to only save single recordings (not by a list of IDs).
-  - Replaced `Plotter.plot_od_demand()` with updated `Plotter.plot_demand()` that works with `DemandProfile` objects.
-  - Updated ramp meter queue calculation to only include stopped vehicles.
-  - Updated ramp meter delay calculation to be based on vehicle speed and free-flow speed - similarly to network statistics (now also requires `ramp_edges` and not `queue_detector`).
-  - Maximum queue length added to `Plotter.plot_rm_queuing()`.
-  - Removed ability to measure queue spill back.
-  - (Temporarily) removed mass from custom vehicle types.
-  - `Simulation.add_tracked_junctions()` now returns `TrackedJunction` object(s).
+#### Changes
+- Weather events can now be displayed on plots in green.
+- Added `”r_effects”`, `”location_only”` and `”force_end”` options to events to apply relative effects, ensure effects are only active in the specified location and immediately remove any effects at the end of the event, respectively.
+- Event vehicle effects no longer require a set of actions.
+- Incident duration is now in seconds, not steps.
+- Updated ramp metering delay calculation.
+- Removed requirement for edge or vehicle actions in events.
+- Changed matplotlib stylesheet from default to 'seaborn-v0_8-whitegrid'.
+- Updated function definition formatting.
 
 #### Bug Fixes
-  - Fixed major error in v3.2.2 causing syntax error at import.
-  - Fixed error when getting current travel time in `Simulation.get_geometry_vals()` (divide by zero error when average speed == 0).
-  - Fixed `Simulation.is_running()` not returning false if no demand profiles have been added.
+- Fixed `Simulation.cause_incidents()`,  where vehicles would still move. Vehicles now stop on the next edge in their route.
+- Fixed geometry average vehicle speed calculation (changed to use vehicle speeds instead of TraCI calls due to inconsistent values).
+- Fixed changing vehicle type maximum lateral speed using wrong function.
+- Fixed error in `Simulation._get_all_vehicle_data()` when vehicles pass over multiple internal lanes consecutively.
+- Fixed `KeyError` in `DemandProfile.add_vehicle_type()`.
+- Fixed event effect probability by permanently ignoring unaffected vehicles.
+- Fixed syntax error in error handling within `utils.test_input_dict()`.
+- Fixed string formatting error.
+- Fixed `random.choices()` argument error.
+- Fixed attribute error in `Plotter.plot_tl_colours()`.
 
 ## Contact
 

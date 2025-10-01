@@ -27,11 +27,13 @@ plt.plot_cumulative_curve(time_range=[3, 6], show_events="bottleneck")
 
 ![Time range/events example](img/plots/range_event_ex.png)
 
-### Colours
+### Colours & Style Sheets
 
 Certain functions use a `plt_colour` parameter that can be used to set the line colour when plotting graphs. All matplotlib colours are valid parameters. By default, TUD-SUMO uses the [TU Delft colour palette](https://www.tudelft.nl/huisstijl/bouwstenen/kleur) as below, and so these colours are also valid parameters.
 
 ![TU Delft colour palette](img/palette.png)
+
+Both `Plotter`s and `MultiPlotter`s include a `stylesheet` parameter that can be used to change the overall styling of all graphs plotted using the object. Any valid [Matplotlib style sheet](https://matplotlib.org/stable/gallery/style_sheets/style_sheets_reference.html) can be used. The default style sheet for TUD-SUMO (as of _v3.3.0_) is '_seaborn-v0_8-whitegrid_'.
 
 ### Display & Saving Graphs
 

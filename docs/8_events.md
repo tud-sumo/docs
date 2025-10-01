@@ -22,6 +22,10 @@ All events require a '_start_time_'/'_start_step_' and '_end_time_'/'_end_step_'
     - The '_highlight_' parameter can be used to colour affected vehicles in the GUI.
     - If '_remove_affected_vehicles_' is given and when set to `True`, affected vehicles are removed from the simulation once the effect is over.
     - Both '_speed_safety_checks_' and '_lc_safety_checks_' are boolean parameters that can be used to disable vehicle safety checks when changing lanes or speed. This may be useful when directing vehicles to make unsafe movements as these checks are enabled in SUMO by default.
+    - If '_location_only_' is set to `True` and a set of locations has been given, vehicles are only affected when in these locations. ie. vehicle effects from impacted vehicles are immediately removed once they leave the impacted area.
+    - If '_force_end_' is set to `True`, vehicles impacted by the event immediately have any effects removed at the scheduled end of the event. This overrides '_effect_duration_' for individual vehicles and ensures all event effects stop at the end of the event.
+
+A '_r_effects_' parameter can also be used for both vehicle and edge effects. If set to true, all effects are made relative to the values at the start of the event. For example, setting `r_effects=True` and having a vehicle action `max_acceleration=0.5` will reduce each vehicle's maximum acceleration by 50% from their individual baselines.
 
 !!! tip
 
@@ -76,7 +80,7 @@ Event parameters are stored in the `sim_data` dictionary under '_data/events/{st
 
 Incidents on the network can be dynamically simulated using the `Simulation.cause_incident()` function. This creates an event that starts in the next simulation step, where a set of vehicles stop in the road for a set duration. After the incident, these vehicles are removed. Dynamically causing incidents may be useful when training or evaluating incident-responsive traffic management systems.
 
-The only required parameter is `duration`, denoting the duration of the incident in steps. Otherwise, the vehicles chosen can be either specified by the user or completely random. Below is an example of an incident lasting 100s that involves two specific vehicles, '_car_1_', '_lorry_1_'. By default, the edges that the vehicles are on have their speed limits reduced to 15kmph (or 10mph) to simulate vehicles driving cautiously around the incident. This can be disabled by setting `edge_speed` to `None`.
+The only required parameter is `duration`, denoting the duration of the incident in seconds. Otherwise, the vehicles chosen can be either specified by the user or completely random. Below is an example of an incident lasting 100s that involves two specific vehicles, '_car_1_', '_lorry_1_'. By default, the edges that the vehicles are on have their speed limits reduced to 15kmph (or 10mph) to simulate vehicles driving cautiously around the incident. This can be disabled by setting `edge_speed` to `None`.
 
 ```python
 my_sim.cause_incident(duration=100, vehicle_ids=["car_1", "lorry_1"])
@@ -110,3 +114,51 @@ success = my_sim.cause_incident(duration=100,
     Error: Answered with error to command 0xa4: Vehicle 'vehicle_0' is not known.
     Error! Vehicle 'vehicle_0' is not known.
     ```
+
+## Interacting with Events
+
+There are several functions designed for interacting with or querying events. Firstly, `Simulation.get_event_ids()` and `Simulation.event_exists()` can be used to fetch all event IDs (optionally only those with a given status) and query whether an event exists to return its current status, respectively. Otherwise, `Simulation.get_event()` will return a specific `Event` object according to its ID.
+
+An event can be terminated before its scheduled end using either `Simulation.remove_events()` and `Event.terminate()`. If the event is currently active, all of its effects are immediately removed. If the event is scheduled, but has not started, the event is simply deleted and will not occur.
+
+## Simulating Weather
+
+Both network-wide and localised weather effects can be simulated using the `Simulation.add_weather()` function. These effects start in the following time step and are then active for a given duration, either effecting all vehicles in the network if no location is given, or it will only effect vehicles on given edges/lanes. An example of `Simulation.add_weather()` is shown below. Vehicle effects are immediately removed if a vehicle leaves the affected area or the weather event ends. `Simulation.get_active_weather()` can be used to fetch the IDs of any active weather events.
+
+```python
+# Add network-wide weather effects lasting 100 seconds.
+my_sim.add_weather(duration=100)
+
+# Add weather effects to 'edge_1', 'edge_2' and 'lane_1'
+my_sim.add_weather(duration=100, locations=['edge_1', 'edge_2', 'lane_1'])
+
+# Returns ("weather_1", "weather_2")
+weather_ids = my_sim.get_active_weather()
+```
+
+There are 5 parameters changed for vehicles in an area with active weather effects, as outlined in the table below for a default `strength` of 0.2. Note that some are increased whilst others are decreased. Firstly, the desired minimum time headway ($\tau$) is increased, growing the space between vehicles, and driver imperfection ($\sigma$) is increased, which adds noise to drivers' acceleration/deceleration. Acceleration and deceleration are reduced according to the same amount, both only affecting their maximum values. Vehicle speed factor is also reduced, which impacts how fast drivers travel in relation to the speed limit. 
+
+|        SUMO Parameter        |   Unit  | `add_weather()` Parameter | Default Value | Weather Impacted Value |
+|:----------------------------:|:-------:|:------------------------------------:|:-------------:|:----------------------:|
+| Desired minimum time headway | _seconds_ |          `headway_increase`          |      1.0      |           1.2          |
+|      [Driver imperfection](https://sumo.dlr.de/docs/Definition_of_Vehicles%2C_Vehicle_Types%2C_and_Routes.html#car-following_model_parameters)     |    -    |        `imperfection_increase`       |      0.5      |           0.6          |
+| Maximum vehicle acceleration |  _m/s<sup>2</sup>_  |       `acceleration_reduction`       |      2.60     |          2.08          |
+| Maximum vehicle deceleration |  _m/s<sup>2</sup>_  |       `acceleration_reduction`       |      4.50     |           3.6          |
+|     [Vehicle speed factor](https://sumo.dlr.de/docs/Definition_of_Vehicles%2C_Vehicle_Types%2C_and_Routes.html#speed_distributions)     |    -    |          `speed_f_reduction`         |      1.0      |           0.8          |
+
+The strength of weather effects can either be changed using the `strength` parameter, or by individually changing `[headway|imperfection]_increase` and `[speed_f|acceleration]_reduction`. `strength`, which defaults to 0.2, is used as the default for each of these 4 other parameters if not given. In the below example, desired headway and imperfection are increased by 30%, whilst acceleration and speed factor are both reduced by 10% (defined using `strength`). 
+
+```python
+my_sim.add_weather(duration=100,
+                   strength=0.1,
+                   headway_increase=0.3,
+                   imperfection_increase=0.3)
+```
+
+Each weather event is given an ID (`"weather_[n]"`, where `n` is the number of the weather event), which can be used to stop any effects before its scheduled end and for plotting. The ID can also be set manually using the `weather_id` parameter. To end the weather event early, use `Simulation.remove_events(weather_id)`. When plotting, the ID can be used with the `show_events` parameter to show the duration of the weather event. If the ID contains the word '_weather_', the event will show in green to distinguish them from regular events.
+
+```python
+plt.plot_vehicle_data("delay", show_events="Weather Event", fig_title="Vehicle Delay in Adverse Weather")
+```
+
+![Example weather plot](img/plots/weather_delay.png)

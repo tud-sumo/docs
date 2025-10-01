@@ -98,9 +98,9 @@ To query routes and paths in the network, use the functions below.
 
 ### Advanced Getters
 
-Vehicles, detectors and geometries all use a `Simulation.get_[x]_vals()` function, which allow you to very easily get a set of values for multiple objects. All 3 use the same structure, with the same type of parameters:
+Vehicles, vehicle types, detectors and geometries all use a `Simulation.get_[x]_vals()` function, which allow you to very easily get a set of values for multiple objects. All 4 use the same structure, with the same type of parameters:
 
-  1. `vehicle_ids`/`detector_ids`/`geometry_ids`: A single ID (string) or list of IDs (list/tuple)
+  1. `vehicle_ids`/`vehicle_types`/`detector_ids`/`geometry_ids`: A single ID (string) or list of IDs (list/tuple)
   2. `data_keys`: A single data key (string) or list of data keys (list/tuple)
 
 If one data key is given, the raw value is returned, otherwise, a dictionary is returned containing the values separated by data key. Similarly, if one object ID is given, the raw data value/dictionary is returned, otherwise, a dictionary is returned containing the data separated by vehicle ID. For example:
@@ -127,22 +127,45 @@ Subscriptions and static vehicle data are used whenever possible to reduce TraCI
     - '_speed_': Current vehicle speed
     - '_is_stopped_': Bool denoting whether the vehicle is stopped
     - '_max_speed_': Vehicle maximum speed
+    - '_allowed_speed_': Current vehicle's maximum allowed speed, based on its location & type
+    - '_speed_factor_': Vehicle's individual speed factor, used to calculate speed based on location & type
+    - '_headway_': Vehicle's minimum desired time headway (tau) in seconds
+    - '_imperfection_': Driver imperfection (sigma), used to add noise to acceleration/deceleration
     - '_acceleration_': Current vehicle acceleration
+    - '_max_acceleration_': Vehicle's maximum allowed acceleration
+    - '_max_deceleration_': Vehicle's maximum allowed deceleration
     - '_position_': Current vehicle coordinates
     - '_altitude_': Current vehicle altitude
     - '_heading_': Current vehicle heading
-    - '_departure_': Vehicle departure time
     - '_edge_id_': Current vehicle's edge ID
     - '_lane_id_': Current vehicle's lane ID
     - '_lane_idx_': Index of the vehicle's current lane
-    - '_origin_': Departure edge ID of the vehicle
-    - '_destination_': Current destination edge ID of the vehicle
+    - '_next_edge_id_': ID of the next edge in the vehicle's route
+    - '_leader_id_': Returns the ID of the leading vehicle (returns `None` if no leading vehicle within 100m)
+    - '_leader_dist_': Returns the distance to the leading vehicle (returns `None` if no leading vehicle within 100m)
     - '_route_id_': Current vehicle route ID
     - '_route_idx_': The index of the vehicle's edge on its route
     - '_route_edges_': The list of edges that the vehicle's route consists of
-    - '_allowed_speed_': Current vehicle's maximum allowed speed, based on its location & type
-    - '_leader_id_': Returns the ID of the leading vehicle (returns `None` if no leading vehicle within 100m)
-    - '_leader_dist_': Returns the distance to the leading vehicle (returns `None` if no leading vehicle within 100m)
+    - '_departure_': Vehicle departure time
+    - '_origin_': Departure edge ID of the vehicle
+    - '_destination_': Current destination edge ID of the vehicle
+  - `get_vehicle_type_vals()`:
+    - '_vehicle_class_': Vehicle class ID
+    - '_colour_': Vehicle colour in RGBA
+    - '_length_': Vehicle length in metres/feet
+    - '_width_': Vehicle width in metres/feet
+    - '_height_': Vehicle height in metres/feet
+    - '_headway_': Desired minimum time headway (tau) in seconds
+    - '_imperfection_': Driver imperfection (sigma) (0 denotes perfect driving)
+    - '_max_speed_': Vehicle max speed in km/h or mph
+    - '_speed_factor_': Vehicle speed multiplier
+    - '_speed_dev_': Vehicle deviation from speed factor
+    - '_min_gap_': Minimum gap behind leader
+    - '_max_acceleration_': Maximum vehicle acceleration
+    - '_max_deceleration_': Maximum vehicle deceleration
+    - '_max_lateral_speed_': Maximum lateral speed when lane changing
+    - '_emission_class_': Vehicle emissions class ID
+    - '_gui_shape_': Vehicle shape in GUI
   - `get_detector_vals()`:
     - '_type_': Detector type ('mutlientryexit' or 'inductionloop')
     - '_position_': Detector coordinates
@@ -180,7 +203,7 @@ Subscriptions and static vehicle data are used whenever possible to reduce TraCI
 
 ## Setting Values
 
-Both vehicle and geometries (edges/lanes) also allow for dynamically setting variables with the `Simulation.set_vehicle_vals()` and `Simulation.set_geometry_vals()` functions. Both use the same types of parameters:
+Vehicles, vehicle types and geometries (edges/lanes) also allow for dynamically setting variables with the `Simulation.set_vehicle_vals()`, `Simulation.set_vehicle_type_vals()` and `Simulation.set_geometry_vals()` functions. Both use the same types of parameters:
 
   1. `vehicle_ids`/`geometry_ids`: A single ID (string) or list of IDs (list/tuple). If multiple IDs are given, the values are set for all objects.
   2. `data_keys`: Unlike the `get_[x]_vals()` functions, data_keys are used as arguments. There is no limit on the number of data keys given.
@@ -200,13 +223,36 @@ The valid data keys and their accepted data type are listed below. Note that the
     - `highlight`: Sets vehicle highlighting (boolean)
     - `speed`: Sets a new speed value for the vehicle (integer or float)
     - `max_speed`: Sets a new maximum speed for the vehicle (integer or float)
+    - `speed_factor`: Sets a new speed factor, used to calculate speed based on vehicle type & location
+    - `headway`: Sets a new minimum desired time headway (tau) in seconds
+    - `imperfection`: Sets a new driver imperfection (sigma), used in the car following model
     - `acceleration`: Sets a new acceleration for a given duration (list/tuple containing speed value and duration)
+    - `max_acceleration`: Sets a new maximum allowed acceleration
+    - `max_deceleration`: Sets a new maximum allowed deceleration
     - `lane_idx`: Sets a vehicle to try and change lane index for a given duration (list/tuple containing lane index and duration)
     - `destination`: Sets a new destination by edge ID (string)
     - `route_id`: Sets the vehicle to another route by its ID (string)
     - `route_edges`: Sets the vehicle to a new route by edge IDs (list of strings)
     - `speed_safety_checks`: Indefinitely sets whether speed/acceleration safety constraints are followed when setting speed - can be boolean to turn on/off all checks or [bitset](https://sumo.dlr.de/docs/TraCI/Change_Vehicle_State.html#lane_change_mode_0xb6) (boolean/int)
     - `lc_safety_checks`: Indefinitely sets whether lane changing safety constraints are followed when changing lane - can be boolean to turn on/off all checks or [bitset](https://sumo.dlr.de/docs/TraCI/Change_Vehicle_State.html#speed_mode_0xb3) (boolean/int)
+    - `stop`: If `True`, will indefinitely stop the vehicle on its following edge, otherwise, it will resume a stopped vehicle.
+  - `set_vehicle_type_vals()`:
+    - `vehicle_class`: Vehicle class ID
+    - `colour`: Vehicle colour, either hex code, list of rgb/rgba values or valid SUMO colour string
+    - `length`: Vehicle length in metres/feet
+    - `width`: Vehicle width in metres/feet
+    - `height`: Vehicle height in metres/feet
+    - `headway`: Desired minimum time headway (tau) in seconds
+    - `imperfection`: Driver imperfection (sigma) (0 denotes perfect driving)
+    - `max_speed`: Vehicle max speed in km/h or mph
+    - `speed_factor`: Vehicle speed multiplier
+    - `speed_dev`: Vehicle deviation from speed factor
+    - `min_gap`: Minimum gap behind leader
+    - `max_acceleration`: Maximum vehicle acceleration
+    - `max_deceleration`: Maximum vehicle deceleration
+    - `max_lateral_speed`: Maximum lateral speed when lane changing
+    - `emission_class`: Vehicle emissions class ID
+    - `gui_shape`: Vehicle shape in GUI
   - `set_geometry_vals()`:
     - `max_speed`: Set a new maximum speed/speed limit (lane or for all contained lanes) (integer or float)
     - `allowed`: Set a new list of allowed vehicle types, with an empty list allowing all (list of strings) _(lane only)_
@@ -284,6 +330,36 @@ When repeatedly adding new vehicles, it may be useful to create a new route that
     - `route_id`: (Unique) route ID. If this is not given, the ID is generated using the origin and destination edge IDs.
     - `assert_new_id`: If true, an error is thrown for duplicate route IDs.
 
+## Stopping Vehicles
+
+Vehicles can be stopped along the following edge on their route using the `Simulation.stop_vehicle()` function as below. Vehicles can be stopped permanently or can be stopped for a set amount of time, defined using `duration` in seconds. Vehicles will always try to stop in the same lane they are in when the function is called, but if this is not possible (ie. in the case of lane reduction), vehicles will otherwise stop in the outermost lane. This can changed using the `lane_idx` parameter, but note that it may not always be possible for a vehicle to cross over to a given lane. They will also stop at a random point along the following edge which can either be chosen randomly or set using the `pos` parameter.
+
+It is also possible to stop vehicles using the `Simulation.set_vehicle_vals()` function using the `stop` parameter as below.
+
+```python
+# Stop 'vehicle_1' indefinitely.
+my_sim.stop_vehicle("vehicle_1")
+
+# Stop 'vehicle_2' indefinitely.
+my_sim.set_vehicle_vals("vehicle_2", stop=True)
+
+# Stop 'vehicle_3' for 100s.
+my_sim.stop_vehicle("vehicle_3", duration=100)
+
+# Stop 'vehicle_4' for 100s in the second lane.
+my_sim.stop_vehicle("vehicle_4", duration=100, lane_idx=1)
+
+# Stop 'vehicle_5' for 100s, 50% of the distance along the following edge.
+my_sim.stop_vehicle("vehicle_5", duration=100, pos=0.5)
+```
+
+Vehicles can then be allowed to continue their route using the `Simulation.resume_vehicle()` function. Warnings will be thrown if the vehicle has not stopped yet or has not been made to stop. They can also be resumed using `Simulation.set_vehicle_vals()`.
+
+```python
+my_sim.resume_vehicle("vehicle_1")
+my_sim.set_vehicle_vals("vehicle_2", stop=False)
+```
+
 ## Custom Vehicle Types
 
 Instead of solely using vehicle types defined in netedit and '_.rou.xml_' files, new vehicle types can be created dynamically using the `Simulation.add_vehicle_type()` function. Its parameters are shown below, with more information in the [SUMO documentation](https://sumo.dlr.de/docs/Definition_of_Vehicles%2C_Vehicle_Types%2C_and_Routes.html#available_vehicle_attributes).
@@ -294,14 +370,16 @@ Instead of solely using vehicle types defined in netedit and '_.rou.xml_' files,
   - `length`: Length of vehicle in metres/feet.
   - `width`: Width of vehicle in metres/feet.
   - `height`: Height of vehicle in metres/feet.
-  - `mass`: Mass of vehicle in kilograms.
+  - `max_speed`: Maximum possible speed in km/h or mph.
   - `speed_factor`: Vehicle type multiplier for lane speed limits.
   - `speed_dev`: Vehicle type deviation of the speed factor.
   - `min_gap`: Minimum gap after leader (_m_).
-  - `acceleration`: Vehicle type acceleration ability (_m/s<sup>2</sup>_).
-  - `deceleration`: Vehicle type deceleration ability (_m/s<sup>2</sup>_).
-  - `tau`: Car following model parameter.
+  - `max_acceleration`: Vehicle type maximum acceleration ability (_m/s<sup>2</sup>_).
+  - `max_deceleration`: Vehicle type maximum deceleration ability (_m/s<sup>2</sup>_).
+  - `headway`: Desired minimum time headway in seconds.
+  - `imperfection`: Driver imperfection (0 denotes perfect driving).
   - `max_lateral_speed`: Maximum lateral speed (_m/s_).
+  - `emission_class`: Vehicle emissions class ID.
   - `gui_shape`: Vehicle shape in GUI (defaults to vehicle class name).
 
 ```python
