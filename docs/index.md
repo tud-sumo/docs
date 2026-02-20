@@ -18,6 +18,10 @@
   <a href="https://github.com/DAIMoNDLab/tud-sumo/commits/main/">
     <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/DAIMoNDLab/tud-sumo?style=for-the-badge&logo=github&label=Commits&color=%2300A6D6"/>
   </a>
+    <a href="https://pypi.org/project/tud-sumo/">
+      <img alt="PyPI" src="https://img.shields.io/pypi/dm/tud-sumo?style=for-the-badge&logo=pypi&logoColor=%23FFFFFF&label=Downloads&color=%2300A6D6&cacheSeconds=3600
+      "/>
+  </a>
 </p>
 
 This is the documentation for the TUD-SUMO package, a research-oriented wrapper for SUMO<sup>[1]</sup>, developed for the DAIMoND lab at the Technische Universiteit Delft (TUD), the Netherlands. 
