@@ -19,14 +19,14 @@ To then start the simulation and create the connection to SUMO through TraCI, us
 ```python
 my_sim.start("example_scenario.sumocfg",
              gui=True,
-             get_individual_vehicle_data=False,
+             get_fc_data=False,
              units="metric",
              suppress_pbar=False,
              seed=1
             )
 ```
 
-The `get_individual_vehicle_data` is an important parameter denoting whether to collect and save dynamic information for all vehicles (ie. position, speed, acceleration etc.) at each step. This can be useful for small scenarios where this data may be required and computation time is less of an issue, such as single intersections, however, this should be set to false for large scenarios, such as large motorway networks.
+The `get_fc_data` is an important parameter denoting whether to collect and save dynamic information for all vehicles (ie. position, speed, acceleration etc.) at each step. This can be useful for small scenarios where this data may be required and computation time is less of an issue, such as single intersections, however, this should be set to false for large scenarios, such as large motorway networks.
 
 3 unit settings are supported '_metric_' (km/kmph), '_imperial_' (mi/mph) and '_UK_' (km/mph). All data collected and saved are in these units, and this setting cannot be changed later.
 
@@ -119,7 +119,7 @@ One of the major advantages of TUD-SUMO is the automatic data collection. This i
             "demand": {},
             "trips": {},
             "events": {},
-            "all_vehicles": {}
+            "fc_data": {}
         },
     "start": 0,
     "end": 1000,
@@ -139,7 +139,7 @@ Demand is only included when dynamically adding demand, ie. not when demand is s
 
 Trip data will contain data for incomplete and completed trips. This is stored under '_data/trips_' and then either '_incomplete_' or '_completed_'. Each trip will store the '_route_id_', '_vehicle_type_', '_departure_', '_arrival_' (or removal), '_origin_' and '_destination_'.
 
-Junction, edge, controller and event data are only included when necessary. The `all_vehicles` data will contain all the individual vehicle data at each time step, so it is only included when `get_individual_vehicle_data` is set to true when starting the simulation.
+Junction, edge, controller and event data are only included when necessary. `fc_data` (floating car data) will contain all the individual vehicle data at each time step, so it is only included when `get_fc_data` is set to true when starting the simulation.
 
 The `sim_data` dictionary can be reset at any point using the `Simulation.reset_data()` function.
 
@@ -149,11 +149,17 @@ my_sim.reset_data()
 
 ## Saving & Summarising Data
 
-All the data collected throughout the simulation can be saved at any point using the `Simulation.save_data()` function. This will save the `sim_data` dictionary as a file in the specified directory. Either JSON or pickle files are supported, simply denoted by a '_.json_' or '_.pkl_' extension in the filename.
+All the data collected throughout the simulation can be saved at any point using the `Simulation.save_data()` function. This will save the `sim_data` dictionary as a file in the specified directory. Either JSON or pickle files are supported, simply denoted by a '_.json_' or '_.pkl_' extension in the filename. By default, binary pickle files are used.
 
 ```python
 my_sim.save_data("data/example_data.json")
 my_sim.save_data("data/example_data.pkl")
+```
+
+To save only floating car data, use the `Simulation.save_fc_data()`. This is an optimised version of the `fc_data` created when saving `Simulation.save_data()`.
+
+```python
+my_sim.save_fc_data("data/fc_data.pkl")
 ```
 
 All data saved by a simulation or a simulation data file can be summarised using the `Simulation.print_summary()` or `print_summary()` functions. This will print a summary of the collected data (ie. number of vehicles, TTS, controllers, events etc.), as well as some information about the simulation itself (ie. scenario name/description, runtime, seed etc.). This summary can be saved to a '_.txt_' file using the `save_file` parameter. An example summary is shown below.
@@ -168,7 +174,7 @@ print_summary("data/example_data.pkl")
 
 ```
  *============================================================*
- |                      TUD-SUMO v3.2.2                       | 
+ |                      TUD-SUMO v3.3.1                       | 
  *============================================================*
  |                          A20_ITCS                          | 
  *============================================================*
@@ -176,8 +182,8 @@ print_summary("data/example_data.pkl")
  |   Example traffic controllers, with 2 ramp meters, 1 VSL   | 
  |        controller and 1 route guidance controller.         | 
  *============================================================*
- |                 Simulation Run: 25/03/2025                 | 
- |               17:13:43 - 17:13:58 (0:00:15)                | 
+ |                 Simulation Run: 26/02/2026                 | 
+ |               16:48:54 - 16:49:09 (0:00:15)                | 
  *------------------------------------------------------------*
  | Number of Steps:                               500 (0-500) | 
  | Step Length:                                          1.0s | 
@@ -190,34 +196,34 @@ print_summary("data/example_data.pkl")
  |                        Vehicle Data                        | 
  *------------------------------------------------------------*
  |                       No. Vehicles:                        | 
- | Average:                                            736.24 | 
- | Peak:                                                 1211 | 
- | Final:                                                1211 | 
- | Overall TTS:                                       368118s | 
+ | Average:                                            728.49 | 
+ | Peak:                                                 1189 | 
+ | Final:                                                1188 | 
+ | Overall TTS:                                       364244s | 
  * ---------------------------------------------------------- *
  |                   No. Waiting Vehicles:                    | 
- | Average:                                             23.43 | 
- | Peak:                                                   69 | 
- | Final:                                                  55 | 
- | Overall TWT:                                        11713s | 
+ | Average:                                             23.31 | 
+ | Peak:                                                   72 | 
+ | Final:                                                  41 | 
+ | Overall TWT:                                        11654s | 
  * ---------------------------------------------------------- *
  |                       Vehicle Delay:                       | 
- | Average:                                           392.71s | 
- | Peak:                                              788.69s | 
- | Final:                                              783.1s | 
- | Cumulative Delay:                               196352.73s | 
+ | Average:                                           366.25s | 
+ | Peak:                                              763.99s | 
+ | Final:                                             762.97s | 
+ | Cumulative Delay:                               183126.51s | 
  * ---------------------------------------------------------- *
  |                    Vehicles to Depart:                     | 
- | Average:                                           1063.27 | 
- | Peak:                                                 2227 | 
- | Final:                                                2227 | 
+ | Average:                                            1076.7 | 
+ | Peak:                                                 2252 | 
+ | Final:                                                2252 | 
  * ---------------------------------------------------------- *
- | Individual Data:                                        No | 
+ | Floating Car Data:                                      No | 
  *------------------------------------------------------------*
  |                         Trip Data                          | 
  *------------------------------------------------------------*
- | Incomplete Trips:                            1213 (65.18%) | 
- | Completed Trips:                               648 (34.8%) | 
+ | Incomplete Trips:                            1188 (64.71%) | 
+ | Completed Trips:                               648 (35.3%) | 
  *------------------------------------------------------------*
  |                         Detectors                          | 
  *------------------------------------------------------------*
@@ -254,7 +260,7 @@ print_summary("data/example_data.pkl")
  |                    Event IDs & Statuses                    | 
  *------------------------------------------------------------*
  |                 Active: incident_response                  | 
- |             Completed: incident_1, bottleneck              | 
+ |      Completed: incident_1, Weather Event, bottleneck      | 
  *------------------------------------------------------------*
 ```
 

@@ -12,11 +12,11 @@ if __name__ == "__main__":
     # Add "-seed {x}" to the command line to set a seed for the simulation
     sim_seed = "1" if "-seed" not in sys.argv[:-1] else sys.argv[sys.argv.index("-seed")+1]
     seed(int(sim_seed))
-    
+
     # Start the simulation, defining the sumo config files. Add "-gui" to the command line to run with the GUI.
-    my_sim.start("a20_scenario/a20.sumocfg", get_individual_vehicle_data=False, gui="-gui" in sys.argv,
+    my_sim.start("a20_scenario/a20.sumocfg", get_fc_data=False, gui="-gui" in sys.argv,
                  seed=sim_seed, units="metric") # Units can either be metric (km,kmph)/imperial (mi,mph)/UK (km,mph). All data collected is in these units.
-    
+
     # Add demand from a '.csv' file.
     # my_sim.load_demand("a20_scenario/demand.csv")
 
@@ -30,7 +30,7 @@ if __name__ == "__main__":
     phases = {"phases": {1: ["G", "y", "r"], 2: ["r", "G", "y"]},
               "times":  {1: [ 27,  3,   20], 2: [ 30,  17,  3]},
               "masks":  {1: "1100",          2: "0011"}}
-    
+
     my_sim.set_m_phases({"utsc": phases})
 
     # This is equivalent to: my_sim.set_phases({"utsc": {"phases": ["GGrr", "yyrr", "rrGG", "rryy"], "times": [27, 3, 17, 3]}})
@@ -38,7 +38,7 @@ if __name__ == "__main__":
     # Add a ramp meter to the junction with ID "crooswijk_meter". The junc_params dict can be used to
     # define meter specifc parameters (min/max rate, ramp edges or queue detectors) and flow specific
     # parameters (inflow/outflow detectors used to calculate in/out flow).
-    crooswijk_meter = my_sim.add_tracked_junctions({"crooswijk_meter": {'meter_params': {'min_rate': 200, 'max_rate': 2000, 'ramp_edges': ["crooswijk_in", "crooswijk_in_2"]},
+    crooswijk_meter = my_sim.add_tracked_junctions({"crooswijk_meter": {'meter_params': {'min_rate': 200, 'max_rate': 2000, 'ramp_edges': ["crooswijk_in"]},
                                                     'flow_params': {'inflow_detectors': ["cw_ramp_inflow", "cw_rm_upstream"], 'outflow_detectors': ["cw_rm_downstream"]}}})
 
     # Add a second ramp meter to the junction with ID "a13_meter", done the same way as above.
@@ -89,7 +89,7 @@ if __name__ == "__main__":
     my_sim.add_vehicle_in_functions(add_to_vehicle_arr, parameters={"arr": vehicle_ids})
 
     n, sim_dur, warmup = 1, 500 / my_sim.step_length, 0 / my_sim.step_length
-    
+
     if warmup > 0:
         my_sim.step_through(n_steps=warmup, pbar_max_steps=sim_dur+warmup, keep_data=False)
 
@@ -99,7 +99,7 @@ if __name__ == "__main__":
         if my_sim.curr_step % 50 / my_sim.step_length == 0:
             crooswijk_meter.set_metering_rate(metering_rate=randint(1200, 2000))
             a13_meter.set_metering_rate(metering_rate=randint(1200, 2000))
-        
+
         # Step through n seconds.
         my_sim.step_through(n_seconds=n, pbar_max_steps=sim_dur+warmup)
 

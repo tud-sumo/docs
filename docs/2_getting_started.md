@@ -20,6 +20,7 @@ Python 3.10 or later is required to run TUD-SUMO, otherwise, the required depend
   - `requests`
   - `tqdm`
   - `moviepy`
+  - `scipy`
 
 ## Creating an Environment
 

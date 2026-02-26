@@ -203,6 +203,21 @@ Subscriptions and static vehicle data are used whenever possible to reduce TraCI
 
 ## Setting Values
 
+### Closing Roads
+
+To open or close roads, use the functions `Simulation.open_road()` or `Simulation.close_road()` respectively. These will indefinitely disallow all vehicles from a given set of edges and/or lanes. Using these functions is equivalent to changing the `allowed` and `disallowed` vehicle type lists with `Simulation.set_geometry_vals()`.
+
+```python
+my_sim.close_road("edge_1")
+my_sim.close_road(["edge_2", "edge_3"])
+
+my_sim.step_through(n_steps=100)
+
+my_sim.open_road(["edge 1", "edge 2", "edge 3"])
+```
+
+### Advanced Setters
+
 Vehicles, vehicle types and geometries (edges/lanes) also allow for dynamically setting variables with the `Simulation.set_vehicle_vals()`, `Simulation.set_vehicle_type_vals()` and `Simulation.set_geometry_vals()` functions. Both use the same types of parameters:
 
   1. `vehicle_ids`/`geometry_ids`: A single ID (string) or list of IDs (list/tuple). If multiple IDs are given, the values are set for all objects.

@@ -18,10 +18,6 @@
   <a href="https://github.com/DAIMoNDLab/tud-sumo/commits/main/">
     <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/DAIMoNDLab/tud-sumo?style=for-the-badge&logo=github&label=Commits&color=%2300A6D6"/>
   </a>
-    <a href="https://pypi.org/project/tud-sumo/">
-      <img alt="PyPI" src="https://img.shields.io/pypi/dm/tud-sumo?style=for-the-badge&logo=pypi&logoColor=%23FFFFFF&label=Downloads&color=%2300A6D6&cacheSeconds=3600
-      "/>
-  </a>
 </p>
 
 This is the documentation for the TUD-SUMO package, a research-oriented wrapper for SUMO<sup>[1]</sup>, developed for the DAIMoND lab at the Technische Universiteit Delft (TUD), the Netherlands. 
@@ -52,47 +48,22 @@ The main features of TUD-SUMO include:
 
 ## Latest Version
 
-The Latest version of TUD-SUMO is _v3.3.0_, and was released on 01/10/2025. All previous versions and their change notes can be found on [GitHub](https://github.com/DAIMoNDLab/tud-sumo/releases) or [PyPI](https://pypi.org/project/tud-sumo/#history). This documentation was last updated on {{ git.date.strftime("%d/%m/%Y") }}.
+The Latest version of TUD-SUMO is _v3.3.1_, and was released on 26/02/2025. All previous versions and their change notes can be found on [GitHub](https://github.com/DAIMoNDLab/tud-sumo/releases) or [PyPI](https://pypi.org/project/tud-sumo/#history). This documentation was last updated on {{ git.date.strftime("%d/%m/%Y") }}.
 
 The most recent change notes are:
 
-### Weather & Events Update
+### Floating Car Data, Closing Roads & Fixes
 
-#### Additions
-- Added `Simulation.add_weather()` to simulate weather effects using the event system.
-- Added `Simulation.[stop|resume]_vehicle()`.
-- Added `Simulation.[get|remove]_events()` to get and remove events from the simulation.
-- Added `Event.terminate()` to end active events early.
-- Added `EventScheduler.[get|remove]_event()` function.
-- Added `"next_edge_id"` to `Simulation.get_vehicle_vals()` to return next edge in a vehicle's route.
-- Added `"stop"` to `Simulation.set_vehicle_vals()` to stop a vehicle randomly along its next edge.
-- Added desired time headway (tau), imperfection (sigma) and speed factor to `Simulation.[get|set]_vehicle_vals()`.
-- Added imperfection to `Simulation.[get|set]_vehicle_type_vals()` and `DemandProfile.add_vehicle_type()`.
-- Added `max_[ac|de]celeration` in vehicle (type) getters/setters, as distinct from current `acceleration`.
-- Added last step flow, density, delay and TTS to geometry data.
-- Added option to include insertion delay in network-wide delay calculations.
-
-#### Changes
-- Weather events can now be displayed on plots in green.
-- Added `”r_effects”`, `”location_only”` and `”force_end”` options to events to apply relative effects, ensure effects are only active in the specified location and immediately remove any effects at the end of the event, respectively.
-- Event vehicle effects no longer require a set of actions.
-- Incident duration is now in seconds, not steps.
-- Updated ramp metering delay calculation.
-- Removed requirement for edge or vehicle actions in events.
-- Changed matplotlib stylesheet from default to 'seaborn-v0_8-whitegrid'.
-- Updated function definition formatting.
-
-#### Bug Fixes
-- Fixed `Simulation.cause_incidents()`,  where vehicles would still move. Vehicles now stop on the next edge in their route.
-- Fixed geometry average vehicle speed calculation (changed to use vehicle speeds instead of TraCI calls due to inconsistent values).
-- Fixed changing vehicle type maximum lateral speed using wrong function.
-- Fixed error in `Simulation._get_all_vehicle_data()` when vehicles pass over multiple internal lanes consecutively.
-- Fixed `KeyError` in `DemandProfile.add_vehicle_type()`.
-- Fixed event effect probability by permanently ignoring unaffected vehicles.
-- Fixed syntax error in error handling within `utils.test_input_dict()`.
-- Fixed string formatting error.
-- Fixed `random.choices()` argument error.
-- Fixed attribute error in `Plotter.plot_tl_colours()`.
+  - Added `Simulation.[open|close]_road()` to indefinitely open/close road.
+  - Added `Simulation.save_fc_data()` to save all floating car data (vehicle position & speed).
+  - Added ability to smooth data in space-time diagrams using gaussian filtering. Requires tuning of `gf_sigma` parameter.
+  - Changed `individual_vehicle_data` to more accurate `fc_data` (floating car data).
+  - Changed default simulation data output format from '_.JSON_' to '_.pkl_'.
+  - Corrected docstring for `Simulation.cause_incident()`. Incident vehicles stop on the following edge, not current one.
+  - Fixed `position` parameter not being used in `Simulation.cause_incident()`.
+  - Fixed reduced speed on incorrect edge during an incident.
+  - Added missing grid to VSL plots.
+  - Added SciPy as a new dependency.
 
 ## Contact
 
