@@ -162,14 +162,14 @@ To save only floating car data, use the `Simulation.save_fc_data()`. This is an 
 my_sim.save_fc_data("data/fc_data.pkl")
 ```
 
-All data saved by a simulation or a simulation data file can be summarised using the `Simulation.print_summary()` or `print_summary()` functions. This will print a summary of the collected data (ie. number of vehicles, TTS, controllers, events etc.), as well as some information about the simulation itself (ie. scenario name/description, runtime, seed etc.). This summary can be saved to a '_.txt_' file using the `save_file` parameter. An example summary is shown below.
+All data saved by a simulation or a simulation data file can be summarised using the `print_summary()` function. This will print a summary of the collected data (ie. number of vehicles, TTS, controllers, events etc.), as well as some information about the simulation itself (ie. scenario name/description, runtime, seed etc.). This summary can be saved to a '_.txt_' file using the `save_file` parameter. The function can either be called from a `Simulation` object or imported from the `helpers` module as shown below.
 
 ```python
 my_sim.print_summary(save_file="data/example_summary.txt")
 
 # Print summary without creating a Simulation object
-from tud_sumo.simulation import print_summary
-print_summary("data/example_data.pkl")
+from tud_sumo.helpers import print_summary
+print_summary("data/example_data.pkl", save_file="data/example_data.pkl")
 ```
 
 ```
@@ -264,7 +264,7 @@ print_summary("data/example_data.pkl")
  *------------------------------------------------------------*
 ```
 
-The structure of a simulation data file can also be printed using the `Simulation.print_sim_data_struct()` or `print_sim_data_struct()` functions. This will print the structure of the `sim_data` dictionary as a tree, allowing you to see the exact keys and data types used in the data. An example of the output of `print_sim_data_struct()` is shown below.
+The structure of a simulation data file can also be printed using the `print_sim_data_struct()` function. This will print the structure of the `sim_data` dictionary as a tree, allowing you to see the exact keys and data types used in the data. Similarly to `print_summary()`, this can either be called from a `Simulation` object or from the `helpers` module. An example usage and output of `print_sim_data_struct()` is shown below.
 
 Note that the dimensions of array are only displayed up to 2D. If an array has a higher dimension, this is denoted by a '_+_'. If the array is inhomogeneous (ie. its dimensions are inconsistent), this is denoted by a '_*_' and the array's maximum size is shown.
 
@@ -272,7 +272,7 @@ Note that the dimensions of array are only displayed up to 2D. If an array has a
 my_sim.print_sim_data_struct()
 
 # Print structure without creating a Simulation object
-from tud_sumo.simulation import print_sim_data_struct
+from tud_sumo.helpers import print_sim_data_struct
 print_sim_data_struct("data/example_data.pkl")
 ```
 

@@ -33,6 +33,7 @@ The most basic getter functions in the `Simulation` class return the IDs of obje
 |                Function                |                                      Return Value                                                           |
 |----------------------------------------|-------------------------------------------------------------------------------------------------------------|
 | `get_vehicle_ids(vehicle_types)`       | All vehicle IDs, or those of specific type(s).                                                              |
+| `get_vehicle_type_ids(vehicle_types)`       | All valid vehicle type IDs                                                              |
 | `get_detector_ids(detector_types)`     | All detector IDs, or those of specific type(s) - '_multientryexit_' or '_inductionloop_'.         |
 | `get_controller_ids(controller_types)` | All controller IDs, or those of specific type(s) - '_VSLController_' or '_RGController_'.         |
 | `get_event_ids(event_statuses)`        | All event IDs, or those of specific status(es) - '_scheduled_', '_active_' or '_completed_'. |

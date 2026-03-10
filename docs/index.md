@@ -48,11 +48,11 @@ The main features of TUD-SUMO include:
 
 ## Latest Version
 
-The Latest version of TUD-SUMO is _v3.3.1_, and was released on 26/02/2025. All previous versions and their change notes can be found on [GitHub](https://github.com/DAIMoNDLab/tud-sumo/releases) or [PyPI](https://pypi.org/project/tud-sumo/#history). This documentation was last updated on {{ git.date.strftime("%d/%m/%Y") }}.
+The Latest version of TUD-SUMO is _v3.3.2_, and was released on 10/03/2026. All previous versions and their change notes can be found on [GitHub](https://github.com/DAIMoNDLab/tud-sumo/releases) or [PyPI](https://pypi.org/project/tud-sumo/#history). This documentation was last updated on {{ git.date.strftime("%d/%m/%Y") }}.
 
-The most recent change notes are:
+The change notes for v3.3.1 and v3.3.2 are:
 
-### Floating Car Data, Closing Roads & Fixes
+### Floating Car Data, Closing Roads & Fixes (v3.3.1)
 
   - Added `Simulation.[open|close]_road()` to indefinitely open/close road.
   - Added `Simulation.save_fc_data()` to save all floating car data (vehicle position & speed).
@@ -64,6 +64,11 @@ The most recent change notes are:
   - Fixed reduced speed on incorrect edge during an incident.
   - Added missing grid to VSL plots.
   - Added SciPy as a new dependency.
+
+### Code Restructuring (v3.3.2)
+
+  - Restructured and reordered functions in the main Simulation class for maintainability and readability.
+  - Moved `print_summary()` and `print_sim_data_struct()` to new helpers module.
 
 ## Contact
 
