@@ -79,8 +79,8 @@ If you decide to use TUD-SUMO in your projects, please cite the current preprint
 
 ```bibtex
 @misc{evans_tud_sumo_2026,
-	title = {{TUD}-{SUMO}: {A} {Research}-oriented {SUMO} {Wrapper} for {Traffic} {Simulation} in {Python}},
-	shorttitle = {{TUD}-{SUMO}},
+	title = {TUD-SUMO: A Research-oriented SUMO Wrapper for Traffic Simulation in Python},
+	shorttitle = {TUD-SUMO},
 	doi = {10.2139/ssrn.6549528},
 	publisher = {Social Science Research Network},
 	author = {Evans, Callum Done and Rinaldi, Marco and Taale, Henk and Hoogendoorn, Serge},
