@@ -45,6 +45,7 @@ The main features of TUD-SUMO include:
 2. TUD-SUMO source code (GitHub): [DAIMoNDLab/tud-sumo](https://github.com/DAIMoNDLab/tud-sumo)
 3. TUD-SUMO PyPI distribution: [project/tud-sumo](https://pypi.org/project/tud-sumo/)
 4. TUD-SUMO example (GitHub): [DAIMoNDLab/tud-sumo-examples](https://github.com/DAIMoNDLab/tud-sumo-examples)
+5. TUD-SUMO preprint software publication: [dx.doi.org/10.2139/ssrn.6549528](http://dx.doi.org/10.2139/ssrn.6549528)
 
 ## Latest Version
 
@@ -70,14 +71,29 @@ The change notes for v3.3.1 and v3.3.2 are:
   - Restructured and reordered functions in the main Simulation class for maintainability and readability.
   - Moved `print_summary()` and `print_sim_data_struct()` to new helpers module.
 
-## Contact
+## Using TUD-SUMO
 
 TUD-SUMO is developed in the DAIMoND lab of TU Delft. For any questions or feedback, please contact Callum Evans at <span class="highlight">_c.evans@tudelft.nl_</span>. Bug reports can be created in the GitHub repository: [github.com/DAIMoNDLab/tud-sumo](https://github.com/DAIMoNDLab/tud-sumo/).
+
+If you decide to use TUD-SUMO in your projects, please cite the current preprint software publication using:
+
+```bibtex
+@misc{evans_tud_sumo_2026,
+	title = {{TUD}-{SUMO}: {A} {Research}-oriented {SUMO} {Wrapper} for {Traffic} {Simulation} in {Python}},
+	shorttitle = {{TUD}-{SUMO}},
+	doi = {10.2139/ssrn.6549528},
+	publisher = {Social Science Research Network},
+	author = {Evans, Callum Done and Rinaldi, Marco and Taale, Henk and Hoogendoorn, Serge},
+	month = apr,
+	year = {2026},
+	keywords = {Adaptive Traffic Control, Python, SUMO, Traffic Simulation},
+}
+```
 
 ## Acknowledgements
 
 TUD-SUMO is part of the research under the project "_AI in Network Management_," funded by Rijkswaterstaat, grant agreement nr. 31179439, under the label of ITS Edulab.
 
-## Citations
+## References
 
   1. "_Microscopic Traffic Simulation using SUMO_"; Pablo Alvarez Lopez, Michael Behrisch, Laura Bieker-Walz, Jakob Erdmann, Yun-Pang Flötteröd, Robert Hilbrich, Leonhard Lücken, Johannes Rummel, Peter Wagner, and Evamarie Wießner. _IEEE Intelligent Transportation Systems Conference (ITSC)_, 2018.
