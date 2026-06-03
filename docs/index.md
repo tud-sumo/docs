@@ -80,6 +80,7 @@ If you decide to use TUD-SUMO in your projects, please cite the [SoftwareX paper
 ```bibtex
 @article{evans_tud_sumo_2026,
 	title = {TUD-SUMO: A Research-oriented SUMO Wrapper for Traffic Simulation in Python},
+	author = {Evans, Callum and Rinaldi, Marco and Taale, Henk and Hoogendoorn, Serge P.},
 	shorttitle = {TUD-SUMO},
 	doi = {10.1016/j.softx.2026.102745},
 	journal = {SoftwareX},
