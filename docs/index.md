@@ -78,7 +78,7 @@ TUD-SUMO is developed in the DAIMoND lab of TU Delft. For any questions or feedb
 If you decide to use TUD-SUMO in your projects, please cite the [SoftwareX paper](https://doi.org/10.1016/j.softx.2026.102745) with the reference information:
 
 ```bibtex
-@misc{evans_tud_sumo_2026,
+@article{evans_tud_sumo_2026,
 	title = {TUD-SUMO: A Research-oriented SUMO Wrapper for Traffic Simulation in Python},
 	shorttitle = {TUD-SUMO},
 	doi = {10.1016/j.softx.2026.102745},
