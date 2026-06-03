@@ -14,7 +14,7 @@
   </a>
 </p>
 <p align="center">
-  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/DAIMoNDLab/tud-sumo?style=for-the-badge&logo=github&color=%2300A6D6"/>
+  <!--<img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/DAIMoNDLab/tud-sumo?style=for-the-badge&logo=github&color=%2300A6D6"/>-->
   <a href="https://github.com/DAIMoNDLab/tud-sumo/commits/main/">
     <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/DAIMoNDLab/tud-sumo?style=for-the-badge&logo=github&label=Commits&color=%2300A6D6"/>
   </a>
@@ -75,18 +75,20 @@ The change notes for v3.3.1 and v3.3.2 are:
 
 TUD-SUMO is developed in the DAIMoND lab of TU Delft. For any questions or feedback, please contact Callum Evans at <span class="highlight">_c.evans@tudelft.nl_</span>. Bug reports can be created in the GitHub repository: [github.com/DAIMoNDLab/tud-sumo](https://github.com/DAIMoNDLab/tud-sumo/).
 
-If you decide to use TUD-SUMO in your projects, please cite the current preprint software publication using:
+If you decide to use TUD-SUMO in your projects, please cite the [SoftwareX paper](https://doi.org/10.1016/j.softx.2026.102745) with the reference information:
 
 ```bibtex
 @misc{evans_tud_sumo_2026,
 	title = {TUD-SUMO: A Research-oriented SUMO Wrapper for Traffic Simulation in Python},
 	shorttitle = {TUD-SUMO},
-	doi = {10.2139/ssrn.6549528},
-	publisher = {Social Science Research Network},
-	author = {Evans, Callum Done and Rinaldi, Marco and Taale, Henk and Hoogendoorn, Serge},
-	month = apr,
+	doi = {10.1016/j.softx.2026.102745},
+	journal = {SoftwareX},
+	publisher = {Elsevier},
+	volume = {34},
+	pages = {102745},
+	month = jun,
 	year = {2026},
-	keywords = {Adaptive Traffic Control, Python, SUMO, Traffic Simulation},
+	keywords = {Adaptive Traffic Control, Python, SUMO, Traffic Simulation}
 }
 ```
 
