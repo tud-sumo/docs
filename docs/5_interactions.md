@@ -307,8 +307,8 @@ The valid data keys for each object type and respective function are listed belo
     - '_vehicle_ids_'
     - '_lsm_speed_'
     - '_halting_no_'
-    - '_lsm_speed_'
     - '_last_detection_'
+    - '_lsm_occupancy_'
 
   - `add_geometry_subscriptions()`/`remove_geometry_subscriptions()`:
     - '_vehicle_count_'
