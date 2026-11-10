@@ -14,7 +14,7 @@
   </a>
 </p>
 <p align="center">
-  <!--<img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/DAIMoNDLab/tud-sumo?style=for-the-badge&logo=github&color=%2300A6D6"/>-->
+  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/DAIMoNDLab/tud-sumo?style=for-the-badge&logo=github&color=%2300A6D6"/>
   <a href="https://github.com/DAIMoNDLab/tud-sumo/commits/main/">
     <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/DAIMoNDLab/tud-sumo?style=for-the-badge&logo=github&label=Commits&color=%2300A6D6"/>
   </a>
@@ -49,27 +49,21 @@ The main features of TUD-SUMO include:
 
 ## Latest Version
 
-The Latest version of TUD-SUMO is _v3.3.2_, and was released on 10/03/2026. All previous versions and their change notes can be found on [GitHub](https://github.com/DAIMoNDLab/tud-sumo/releases) or [PyPI](https://pypi.org/project/tud-sumo/#history). This documentation was last updated on {{ git.date.strftime("%d/%m/%Y") }}.
+The Latest version of TUD-SUMO is _v3.3.3_, and was released on 10/11/2026. All previous versions and their change notes can be found on [GitHub](https://github.com/DAIMoNDLab/tud-sumo/releases) or [PyPI](https://pypi.org/project/tud-sumo/#history). This documentation was last updated on {{ git.date.strftime("%d/%m/%Y") }}.
 
-The change notes for v3.3.1 and v3.3.2 are:
+The change notes for v3.3.3 are:
 
-### Floating Car Data, Closing Roads & Fixes (v3.3.1)
+### Bug Fixes
 
-  - Added `Simulation.[open|close]_road()` to indefinitely open/close road.
-  - Added `Simulation.save_fc_data()` to save all floating car data (vehicle position & speed).
-  - Added ability to smooth data in space-time diagrams using gaussian filtering. Requires tuning of `gf_sigma` parameter.
-  - Changed `individual_vehicle_data` to more accurate `fc_data` (floating car data).
-  - Changed default simulation data output format from '_.JSON_' to '_.pkl_'.
-  - Corrected docstring for `Simulation.cause_incident()`. Incident vehicles stop on the following edge, not current one.
-  - Fixed `position` parameter not being used in `Simulation.cause_incident()`.
-  - Fixed reduced speed on incorrect edge during an incident.
-  - Added missing grid to VSL plots.
-  - Added SciPy as a new dependency.
-
-### Code Restructuring (v3.3.2)
-
-  - Restructured and reordered functions in the main Simulation class for maintainability and readability.
-  - Moved `print_summary()` and `print_sim_data_struct()` to new helpers module.
+  - Fixed `Simulation.remove_vehicle_[in|out]_functions()`.
+  - Fixed GUI setting in `Simulation.start()` by correcting command line arguments when passing in files.
+  - Fixed AttributeError when saving any active recordings during `Simulation.end()`.
+  - Fixed `DemandProfile` AttributeError when creating object.
+  - Fixed `DemandProfile.create_route_file()`, now ensuring all variables converted to strings before creating file.
+  - Added missing 'max_speed', 'width' and 'imperfection' keys in SUMO attribute mapping.
+  - Fixed TypeError  in `Plotter.plot_rm_rate()` when plotting metering rate after only setting rate once.
+  - Fixed `Recorder.record_network()` where bounds were discarded when no zoom passed.
+  - Fixed ValueError when plotting ungrouped simulations with `MultiPlotter`.
 
 ## Using TUD-SUMO
 
